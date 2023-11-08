@@ -4,13 +4,13 @@
 
 @media (max-width: 1023px) {
         p {
-            max-width: 600px;
+            max-width: 400px;
         }
 	}
 
 @media (max-width: 767px) {
 		p {
-            max-width: 400px;
+            max-width: 200px;
         }
 		
 	}
@@ -23,4 +23,6 @@ p {
     border: 1px solid black;
     display: flex;
     align-items: center;
+    text-align: center;
+    font-size: large;
 }
