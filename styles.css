@@ -2,8 +2,25 @@
     box-sizing: border-box;
 }
 
+@media (max-width: 1023px) {
+        p {
+            max-width: 600px;
+        }
+	}
+
+@media (max-width: 767px) {
+		p {
+            max-width: 400px;
+        }
+		
+	}
+
+
+
 /* FUN TEMP STYLING */
 
 p {
     border: 1px solid black;
+    display: flex;
+    align-items: center;
 }
