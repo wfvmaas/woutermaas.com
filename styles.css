@@ -1,0 +1,9 @@
+* {
+    box-sizing: border-box;
+}
+
+/* FUN TEMP STYLING */
+
+p {
+    border: 1px solid black;
+}
