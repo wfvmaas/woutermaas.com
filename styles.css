@@ -37,3 +37,8 @@ h1 {
     font-size: large;
     font-family: Raleway, sans-serif;
 }
+
+main {
+    display: grid;
+    grid-template-columns: 1f 6fr 1fr;
+}
