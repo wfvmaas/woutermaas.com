@@ -26,18 +26,49 @@ html {
 		
 	}
 
+/***********/
+/*   NAV   */
+/***********/
 
+nav {
+    height: 5vh;
+    width: 100vw;
+    background-color: black;
+    color: white;
+    display: grid;
+    grid-template-columns: 4fr 1fr 1fr;
+}
+.nav-element {
+    padding: auto;
+    margin: auto;
+}
 
-/* FUN TEMP STYLING */
+.nav-element:hover {
+    color: red;
+}
+.nav-element::selection{
+    color: red;
 
+}
+
+/***********/
+/*   MAIN  */
+/***********/
 h1 {
     margin-left: auto;
     margin-right: auto;
     text-align: center;
-    font-size: 15vw;
+    font-size: large;
 }
+
+
+.title {
+    margin-top: 2vh;
+}
+
 
 main {
     display: grid;
     grid-template-columns: 1f 6fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
 }
