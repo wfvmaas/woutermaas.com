@@ -1,78 +1,124 @@
 /* Normalize the styling of all elements */
-*, ::before, ::after {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: Helvetica, sans-serif;
-  }
+*,
+::before,
+::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Helvetica, sans-serif;
+}
 
-  
+
 html {
-    font-size: 62.5%; /* This sets the default font size for your web page to 10px (the browser default is 16px). This makes it easier to work with rem units later, as 2rem would be 20px. */
-    
-  }
-  
+  font-size: 62.5%;
+  /* This sets the default font size for your web page to 10px (the browser default is 16px). This makes it easier to work with rem units later, as 2rem would be 20px. */
 
-@media (max-width: 1023px) {
-        p {
-            max-width: 400px;
-        }
-	}
+}
 
-@media (max-width: 767px) {
-		p {
-            max-width: 200px;
-        }
-		
-	}
+:root {
+  --header1-color: #AD2626;
+}
+
+/***************/
+/*   GENERAL   */
+/***************/
+
+
+
+a:hover {
+  cursor: pointer;
+}
 
 /***********/
 /*   NAV   */
 /***********/
 
-nav {
-    height: 5vh;
-    width: 100vw;
-    background-color: black;
-    color: white;
-    display: grid;
-    grid-template-columns: 4fr 1fr 1fr;
-}
-.nav-element {
-    padding: auto;
-    margin: auto;
+.navbar {
+  background-color: black;
+  position: relative;
+  z-index: 1;
 }
 
-.nav-element:hover {
-    color: red;
+.navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
 }
-.nav-element::selection{
-    color: white;
+
+.navbar li {
+  margin: auto;
+  min-width: 5rem;
+  max-width: 8vw;
+  line-height: 0;
+}
+
+@media screen and (max-width: 600px) {
+  .navbar li {
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (min-width: 600px) and (max-width: 900px) {
+  .navbar li {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .navbar li {
+    font-size: 1.7rem;
+  }
 
 }
 
-/***********/
-/*   MAIN  */
-/***********/
+.navbar a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  /*removes underlines */
+  padding: auto;
+}
+
+.navbar a:hover {
+  color: var(--header1-color);
+}
+
+.logo {
+  height: 100%;
+  width: 100%;
+}
+
+.logo:hover {
+  background-color: var(--header1-color);
+  cursor: pointer;
+}
+
+/*******************/
+/*   HERO SECTION  */
+/*******************/
+
+.background-image-container {
+  position: relative;
+  height: 100vh;
+}
+
+.background-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 h1 {
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    font-size: large;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  font-size: 10vw;
+  font-family: Gentium Book Basic;
+  font-weight: bold;
+  color: var(--header1-color);
 }
 
 
-.title {
-    margin-top: 2vh;
-}
 
-
-main {
-    display: grid;
-    grid-template-columns: 1f 6fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-}
-
-a {
-    color: white;
-}
+/* TEST CODE */
