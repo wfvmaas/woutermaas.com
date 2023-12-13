@@ -5,13 +5,14 @@ Thumbs.db
 # Ignore .vscode settings
 .vscode/
 
+# Ignore node modules
+node_modules/
+
+# Ignore build files
+dist/
+build/
+
 # Ignore test files
 test.html
 test-styles.css
-
-# Ignore node modules (if you use them in the future)
-node_modules/
-
-# Ignore build files (if you use them in the future)
-dist/
-build/
+resources/circle.svg
