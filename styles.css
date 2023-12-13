@@ -116,8 +116,13 @@ h1 {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-  font-size: 10vw;
+  font-size: 8vw;
   font-family: Gentium Book Basic;
   font-weight: bold;
   color: var(--header1-color);
+}
+
+
+body {
+  background-color: black;
 }
