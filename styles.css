@@ -23,11 +23,14 @@ html {
 /*   GENERAL   */
 /***************/
 
-
-
 a:hover {
   cursor: pointer;
 }
+
+body {
+  background-color: black;
+}
+
 
 /***********/
 /*   NAV   */
@@ -99,30 +102,40 @@ a:hover {
 /*******************/
 
 .hero-img-container {
-  display: flex;
-  justify-content: center;
   position: relative;
-  width: 100%;  
+  width: 100%;
+}
+
+.hero-img-div {
+  width: 100%;
+  height: 2px;
+  position: absolute;
+  z-index: 2;
   background-color: black;
 }
 
 .hero-img {
-  max-width: 1300px;
-
+  width: 100%;
 }
 
+.hero-img-mask {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-img-mask>rect {
+  fill: black;
+}
 
 h1 {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
   font-size: 8vw;
-  font-family: Gentium Book Basic;
+  font-family: Helvetica, sans-serif;
   font-weight: bold;
   color: var(--header1-color);
-}
-
-
-body {
-  background-color: black;
 }
