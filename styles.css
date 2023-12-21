@@ -117,6 +117,7 @@ body {
 
 .hero-img-container {
   position: relative;
+  overflow-y: hidden;
 }
 
 .hero-img-extra-top-line {
