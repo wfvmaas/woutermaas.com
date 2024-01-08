@@ -18,6 +18,7 @@ html {
   --header1-color: #AD2626;
   --background-color: black;
   --navbar-text-color: white;
+  --computer-green-text-color: #008000;
   --standard-text-color: white;
   --standard-text-font: Helvetica, sans-serif;
 }
@@ -97,7 +98,13 @@ body {
 
 .logo {
   height: 100%;
-  width: 100%;
+  background-color: var(--navbar-text-color);
+}
+
+@media screen and (max-width: 600px) {
+  .logo {
+    width: 60%;
+  }
 }
 
 .logo:hover {
@@ -176,7 +183,7 @@ body {
 }
 
 .qualities-text-section {
-  color: #008000;
+  color: var(--computer-green-text-color);
   font-family: courier;
   text-align: center;
   width: 90%;
@@ -217,8 +224,6 @@ body {
     font-weight: 300;
   }
 }
-
-
 
 .typing-text-container {
   position: relative;
