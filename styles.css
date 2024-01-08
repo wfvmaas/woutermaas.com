@@ -31,10 +31,6 @@ a:hover {
   cursor: pointer;
 }
 
-body {
-  background-color: var(--background-color);
-}
-
 .general-text-section {
   margin: auto;
   color: var(--standard-text-color);
@@ -114,6 +110,15 @@ body {
 
 .navbar a:hover {
   color: var(--header1-color);
+}
+
+
+/*******************/
+/*   INDEX PAGE  */
+/*******************/
+
+.index-body {
+  background-color: var(--background-color);
 }
 
 /*******************/
@@ -232,7 +237,7 @@ body {
 .typing-text-container {
   position: relative;
   width: 100%;
-  margin-top: 1%;
+  margin-top: 3%;
 }
 
 .text_1 {
@@ -355,3 +360,9 @@ body {
     opacity: 1;
   }
 }
+
+/********************/
+/**** HIKES PAGE ****/
+/********************/
+
+
