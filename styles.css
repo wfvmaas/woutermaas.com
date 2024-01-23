@@ -386,18 +386,8 @@ h1 {
   font-weight: bold;
   word-break: break-all;
   text-decoration: none;
+  color: inherit;
 
-}
-
-.philo-hover a:visited, .philo-hover a:focus, .philo-hover a:active {
-  text-decoration: none;
-  color: inherit; 
-}
-
-.philo-hover a:hover {
-  /* color: var(--header1-color); */
-  cursor: pointer;
-  text-decoration: none;
 }
 
 @media screen and (max-width: 600px) {
