@@ -35,6 +35,13 @@ a:hover {
   margin: auto;
   color: var(--standard-text-color);
   font-size: 1.6rem;
+  font-family: var(--standard-text-font);
+}
+
+h1 {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 10rem;
+  font-weight: 500;
 }
 
 /***********/
@@ -366,3 +373,47 @@ a:hover {
 /********************/
 
 
+/*********************/
+/** PHILOSOPHY PAGE **/
+/*********************/
+
+.philosophy-body {
+  background-color: var(--background-color);
+}
+
+.philosophy-text-section a {
+  text-transform: uppercase;
+  font-weight: bold;
+  word-break: break-all;
+  text-decoration: none;
+
+}
+
+.philo-hover a:visited, .philo-hover a:focus, .philo-hover a:active {
+  text-decoration: none;
+  color: inherit; 
+}
+
+.philo-hover a:hover {
+  /* color: var(--header1-color); */
+  cursor: pointer;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 600px) {
+  .philosophy-text-section {
+    font-size: 5rem;
+  }
+}
+
+@media screen and (min-width: 600px) and (max-width: 900px) {
+  .philosophy-text-section {
+    font-size: 6rem;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .philosophy-text-section {
+    font-size: 8rem;
+  }
+}
