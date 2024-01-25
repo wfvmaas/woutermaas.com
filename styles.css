@@ -46,6 +46,25 @@ h1 {
   font-weight: 500;
 }
 
+@media screen and (max-width: 600px) {
+  h1 {
+    font-size: 5rem;
+  }
+}
+
+@media screen and (min-width: 600px) and (max-width: 900px) {
+  h1 {
+    font-size: 7.5rem;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  h1 {
+    font-size: 10rem;
+  }
+
+}
+
 /***********/
 /*   NAV   */
 /***********/
@@ -66,7 +85,8 @@ h1 {
 
 .navbar li {
   margin: auto;
-  width: max-content;  /* sets the width to the max width of the content inside */
+  width: max-content;
+  /* sets the width to the max width of the content inside */
   line-height: 0;
   font-family: var(--standard-text-font);
   display: flex;
@@ -87,6 +107,7 @@ h1 {
   .navbar li {
     font-size: 1.2rem;
   }
+
   .logo {
     width: 4rem;
   }
@@ -96,6 +117,7 @@ h1 {
   .navbar li {
     font-size: 1.35rem;
   }
+
   .logo {
     width: 5rem;
   }
@@ -105,6 +127,7 @@ h1 {
   .navbar li {
     font-size: 1.5rem;
   }
+
   .logo {
     width: 6rem;
   }
@@ -212,7 +235,7 @@ h1 {
     font-size: 3rem;
     font-weight: 500;
   }
-  
+
   .qualities-text-section h2 {
     font-size: 2.4rem;
     font-weight: 300;
@@ -224,7 +247,7 @@ h1 {
     font-size: 5rem;
     font-weight: 500;
   }
-  
+
   .qualities-text-section h2 {
     font-size: 4rem;
     font-weight: 300;
@@ -236,7 +259,7 @@ h1 {
     font-size: 5rem;
     font-weight: 500;
   }
-  
+
   .qualities-text-section h2 {
     font-size: 4rem;
     font-weight: 300;
@@ -387,7 +410,8 @@ h1 {
   width: 95%;
 }
 
-.philosophy-text-section a, .philosophy-text-section p {
+.philosophy-text-section a,
+.philosophy-text-section p {
   text-transform: uppercase;
   font-weight: bold;
   word-break: break-all;
@@ -427,7 +451,24 @@ h1 {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
+}
+
+.kapitalisme {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 80%;
+  margin: auto;
+}
+
+.kapitalisme h1 {
+  margin-top: 10%;
+}
+
+.kapitalisme p{
+  margin-top: 20px;
 }
