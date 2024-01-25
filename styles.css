@@ -16,6 +16,8 @@ html {
 
 :root {
   --header1-color: #AD2626;
+  /* --header2-color: #1fb6c1; */
+  --header2-color: #d415ca;
   --background-color: black;
   --navbar-text-color: white;
   --computer-green-text-color: #008000;
@@ -381,6 +383,10 @@ h1 {
   background-color: var(--background-color);
 }
 
+#scrollable-container {
+  width: 95%;
+}
+
 .philosophy-text-section a, .philosophy-text-section p {
   text-transform: uppercase;
   font-weight: bold;
@@ -388,6 +394,10 @@ h1 {
   text-decoration: none;
   color: inherit;
   display: inline;
+}
+
+.wouter-hover:hover {
+  color: var(--header2-color);
 }
 
 @media screen and (max-width: 600px) {
@@ -405,5 +415,19 @@ h1 {
 @media screen and (min-width: 900px) {
   .philosophy-text-section {
     font-size: 8rem;
+  }
+}
+
+.fade-in {
+  opacity: 0;
+  animation: textFadeIn 3s ease-in-out forwards;
+}
+
+@keyframes textFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
