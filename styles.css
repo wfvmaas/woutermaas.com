@@ -21,6 +21,7 @@ html {
   --background-color: black;
   --navbar-text-color: white;
   --computer-green-text-color: #008000;
+  --computer-font: 'Courier New', Courier, monospace;
   --standard-text-color: white;
   --standard-text-font: Helvetica, sans-serif;
 }
@@ -40,8 +41,17 @@ a:hover {
   font-family: var(--standard-text-font);
 }
 
+.center-align {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 80%;
+  margin: auto;
+}
+
 h1 {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: var(--computer-font);
   font-size: 10rem;
   font-weight: 500;
 }
@@ -63,6 +73,10 @@ h1 {
     font-size: 10rem;
   }
 
+}
+
+.black-body {
+  background-color: var(--background-color);
 }
 
 /***********/
@@ -149,9 +163,7 @@ h1 {
 /*   INDEX PAGE  */
 /*******************/
 
-.index-body {
-  background-color: var(--background-color);
-}
+
 
 /*******************/
 /*   HERO SECTION  */
@@ -225,7 +237,7 @@ h1 {
 
 .qualities-text-section {
   color: var(--computer-green-text-color);
-  font-family: courier;
+  font-family: var(--computer-font);
   text-align: center;
   width: 90%;
 }
@@ -402,10 +414,6 @@ h1 {
 /** PHILOSOPHY PAGE **/
 /*********************/
 
-.philosophy-body {
-  background-color: var(--background-color);
-}
-
 #scrollable-container {
   width: 95%;
 }
@@ -457,18 +465,77 @@ h1 {
   }
 }
 
-.kapitalisme {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  width: 80%;
-  margin: auto;
-}
-
-.kapitalisme h1 {
+#kapitalisme h1 {
   margin-top: 10%;
 }
 
-.kapitalisme p{
+#kapitalisme p {
   margin-top: 20px;
+}
+
+/***************/
+/*** CONTACT ***/
+/***************/
+
+#contact-p-container button {
+  font-family: var(--computer-font);
+}
+
+@media screen and (max-width: 600px) {
+  #contact-p-container {
+    margin-top: 25%;
+  }
+  #contact-p-container button {
+    font-size: 2.5rem;
+    width: 50%;
+  }
+  #contact-p-container > *{
+    margin: 5% 0;
+  }
+  #contact-p-container > p {
+    font-size: 1.3rem;
+    width: 80%;
+  }
+}
+
+@media screen and (min-width: 600px) and (max-width: 900px) {
+  #contact-p-container {
+    margin-top: 10%;
+  }
+  #contact-p-container button {
+    font-size: 3rem;
+    width: 50%;
+    margin-top: 9%;
+  }
+  #contact-p-container > *{
+    margin: 1% 0;
+  }
+  #contact-p-container > p {
+    font-size: 1.5rem;
+    width: 80%;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  #contact-p-container {
+    margin-top: 8%;
+  }
+  #contact-p-container button {
+    font-size: 3.5rem;
+    width: 50%;
+    max-width: 300px;
+    margin-top: 3%;
+  }
+  #contact-p-container > *{
+    margin: 1% 0;
+  }
+  #contact-p-container > p {
+    font-size: 1.5rem;
+    width: 80%;
+  }
+}
+
+#contact-p-container a {
+  text-decoration: none;
+  color: var(--background-color);
 }
