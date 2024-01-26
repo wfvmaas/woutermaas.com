@@ -99,8 +99,6 @@ h1 {
 
 .navbar li {
   margin: auto;
-  /* width: max-content; */
-  /* sets the width to the max width of the content inside */
   line-height: 0;
   font-family: var(--standard-text-font);
   display: flex;
@@ -125,11 +123,11 @@ h1 {
 .logo-box::before {
   content: '';
   position: absolute;
-  top: 0px; /* Adjust the overlap distance */
-  left: 0px; /* Adjust the overlap distance */
-  right: 0px; /* Adjust the overlap distance */
-  bottom: 0px; /* Adjust the overlap distance */
-  border: 1px solid var(--background-color); /* Set the border color */
+  top: 0px;
+  left: 0px;
+  right: 0px; 
+  bottom: 0px; 
+  border: 1px solid var(--background-color);
 }
 
 @media screen and (max-width: 600px) {
@@ -479,6 +477,10 @@ h1 {
     opacity: 1;
   }
 }
+
+
+
+/* capitalism poem page */
 
 #kapitalisme h1 {
   margin-top: 10%;
