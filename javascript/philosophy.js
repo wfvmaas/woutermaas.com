@@ -19,7 +19,6 @@ function clearHover(className) {
 
 document.addEventListener('DOMContentLoaded', function () {
     loadMoreContent();
-    loadMoreContent();
 });
 
 // Function to check if the user has scrolled to the bottom
