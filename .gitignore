@@ -15,4 +15,6 @@ build/
 # Ignore test files
 test.html
 test-styles.css
+test.js
 resources/circle.svg
+
