@@ -1,6 +1,8 @@
+// Define colors for hover effects
 let header1Color = '#AD2626';
 let header2Color = 'white';
 
+// Function to apply hover effect on elements with a certain className
 function classHoverEffect(className) {
     let elements = document.getElementsByClassName(className);
 
@@ -9,6 +11,7 @@ function classHoverEffect(className) {
     }
 }
 
+// Function to clear hover effect on elements with a certain className
 function clearHover(className) {
     let elements = document.getElementsByClassName(className);
 
@@ -17,18 +20,13 @@ function clearHover(className) {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    loadMoreContent();
-});
-
-// Function to check if the user has scrolled to the bottom
+// Function to check if the user has scrolled to the bottom of the page
 function isBottom() {
     return window.innerHeight + window.scrollY >= document.body.offsetHeight;
 }
 
 // Function to fetch and append new content
 function loadMoreContent() {
-    // Show loader
     document.getElementById('loader').style.display = 'block';
 
     // Create a div container to hold the new spans
@@ -101,17 +99,21 @@ function loadMoreContent() {
         setTimeout(() => {
 
             document.getElementById('scrollable-container').appendChild(span);
-        }, index * 300); // Adjust the delay (in milliseconds) based on your preference
+        }, index * 300); // Current delay per element is 300 milliseconds
     });
 
-    // Hide loader after adding spans
     document.getElementById('loader').style.display = 'none';
 }
 
-// Event listener for scroll events
+// Event listener for scroll events, adds more HTML to the page when the user scrolls down.
 window.addEventListener('scroll', () => {
-    // Check if the user has scrolled to the bottom
+    // Check if the user has scrolled to the bottom, if so load more content
     if (isBottom()) {
         loadMoreContent();
     }
+});
+
+// Event listener to execute when the DOM content is loaded, adds the first HTML code to the page.
+document.addEventListener('DOMContentLoaded', function () {
+  loadMoreContent();
 });
