@@ -63,25 +63,25 @@ const spanElements = [
 
 // Function to apply hover effect on elements with a certain className
 function classHoverEffect(className) {
-    let elements = document.getElementsByClassName(className);
+  let elements = document.getElementsByClassName(className);
 
-    for (let i = 0; i < elements.length; i++) {
-        elements[i].style.color = header1Color;
-    }
+  for (let i = 0; i < elements.length; i++) {
+    elements[i].style.color = header1Color;
+  }
 }
 
 // Function to clear hover effect on elements with a certain className
 function clearHover(className) {
-    let elements = document.getElementsByClassName(className);
+  let elements = document.getElementsByClassName(className);
 
-    for (let i = 0; i < elements.length; i++) {
-        elements[i].style.color = header2Color;
-    }
+  for (let i = 0; i < elements.length; i++) {
+    elements[i].style.color = header2Color;
+  }
 }
 
 // Function to check if the user has scrolled to the bottom of the page
 function isBottom() {
-    return window.innerHeight + window.scrollY >= document.body.offsetHeight - 10;
+  return window.innerHeight + window.scrollY >= document.body.offsetHeight - 10;
 }
 
 function loadMoreContent(numberOfElements) {
@@ -92,20 +92,19 @@ function loadMoreContent(numberOfElements) {
 
   // Append new content to the container
   for (let i = 0; i < numberOfElements; i++) {
-      if (nextElementIndex >= spanElements.length) {
-        nextElementIndex = 0
-      }
-      newContentContainer.innerHTML += spanElements[nextElementIndex];
-      nextElementIndex++
-
+    if (nextElementIndex >= spanElements.length) {
+      nextElementIndex = 0
+    }
+    newContentContainer.innerHTML += spanElements[nextElementIndex];
+    nextElementIndex++
   }
 
   // Append each span with fade-in class to the scrollable container
   const spans = newContentContainer.querySelectorAll('.fade-in');
   spans.forEach((span, index) => {
-      setTimeout(() => {
-          document.getElementById('scrollable-container').appendChild(span);
-      }, index * 300); // Current delay per element is 300 milliseconds
+    setTimeout(() => {
+      document.getElementById('scrollable-container').appendChild(span);
+    }, index * 300); // Current delay per element is 300 milliseconds
   });
 
   document.getElementById('loader').style.display = 'none';
@@ -113,15 +112,14 @@ function loadMoreContent(numberOfElements) {
 
 // Event listener for scroll events, adds more HTML to the page when the user scrolls down.
 window.addEventListener('scroll', () => {
-    // Check if the user has scrolled to the bottom, if so load more content
-    if (isBottom()) {
-      console.log('bottom')  
-      loadMoreContent(5);
-        
-    }
+  // Check if the user has scrolled to the bottom, if so load more content
+  if (isBottom()) {
+    console.log('bottom')
+    loadMoreContent(5);
+  }
 });
 
 // Event listener to execute when the DOM content is loaded, adds the first HTML code to the page.
-document.addEventListener('DOMContentLoaded',  () => {
+document.addEventListener('DOMContentLoaded', () => {
   loadMoreContent(20);
 });
