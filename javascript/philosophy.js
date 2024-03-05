@@ -84,6 +84,11 @@ function isBottom() {
   return window.innerHeight + window.scrollY >= document.body.offsetHeight - 10;
 }
 
+// Function to check if the user has scrolled to the bottom of the page
+function isTop() {
+  return window.scrollY === 0;
+}
+
 function loadMoreContent(numberOfElements) {
   document.getElementById('loader').style.display = 'block';
 
@@ -114,12 +119,13 @@ function loadMoreContent(numberOfElements) {
 window.addEventListener('scroll', () => {
   // Check if the user has scrolled to the bottom, if so load more content
   if (isBottom()) {
-    console.log('bottom')
     loadMoreContent(5);
+  }
+  if (isTop()) {
   }
 });
 
-// Event listener to execute when the DOM content is loaded, adds the first HTML code to the page.
+// Event listener to execute when the DOM content is loaded, adds the first HTML code to the page (there are 20 elements in the array).
 document.addEventListener('DOMContentLoaded', () => {
   loadMoreContent(20);
 });
