@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+    <script src="javascript/hikes.js" defer></script>
+    <title>WouterMaas.com</title>
+    <script>
+        !function (t, e) { var o, n, p, r; e.__SV || (window.posthog = e, e._i = [], e.init = function (i, s, a) { function g(t, e) { var o = e.split("."); 2 == o.length && (t = t[o[0]], e = o[1]), t[e] = function () { t.push([e].concat(Array.prototype.slice.call(arguments, 0))) } } (p = t.createElement("script")).type = "text/javascript", p.async = !0, p.src = s.api_host + "/static/array.js", (r = t.getElementsByTagName("script")[0]).parentNode.insertBefore(p, r); var u = e; for (void 0 !== a ? u = e[a] = [] : a = "posthog", u.people = u.people || [], u.toString = function (t) { var e = "posthog"; return "posthog" !== a && (e += "." + a), t || (e += " (stub)"), e }, u.people.toString = function () { return u.toString(1) + ".people (stub)" }, o = "capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "), n = 0; n < o.length; n++)g(u, o[n]); e._i.push([i, s, a]) }, e.__SV = 1) }(document, window.posthog || []);
+        posthog.init('phc_wKmO81oD4cg0TA0oqYQL1QoA7T99zrGohgfbMRPQMGm', { api_host: 'https://eu.posthog.com' })
+    </script>
+</head>
+
+<body class="white-body">
+    <header>
+        <nav class="navbar">
+            <ul>
+                <li class="nav-item">
+                    <a href="index.html">
+                        <div class="logo-box">
+                            <svg version="1.1" class="logo" id="logo" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 728.6 396.5"
+                                style="enable-background:new 0 0 728.6 396.5;" xml:space="preserve">
+                                <style type="text/css">
+                                    .st0 {
+                                        stroke: #000000;
+                                        stroke-miterlimit: 10;
+                                    }
+                                </style>
+                                <g>
+                                    <polygon class="st0" points="620.2,396.4 728.6,396.4 728.6,0 	" />
+                                    <path class="st0"
+                                        d="M473.3,157.6l-49.1,189.2l-10.9,49.6h111.2L483,206.7C479.4,190.8,475.9,172.1,473.3,157.6z" />
+                                </g>
+                                <g>
+                                    <path class="st0"
+                                        d="M157.1,264.5h1.1c0,0,10.5-54.2,19.4-94L214.7,0.7H99l39.8,165.9C147.7,204.7,157.1,264.5,157.1,264.5z" />
+                                    <path class="st0" d="M364.1,255.2c0-0.3,8.2-44.9,17-84.6c0.3-1.8,0.7-3.5,1.1-5.1L421.5,0.7H305.4l42.1,167
+                       C354.1,196,361,236.4,364.1,255.2z" />
+                                    <path class="st0"
+                                        d="M569.9,265.5h1.1c0,0,11.1-59.7,19.9-99L630.4,0.7H513.8l37.3,169.7C559.9,210.7,569.9,265.5,569.9,265.5z" />
+                                    <polygon class="st0" points="0,397.2 108.7,397.2 0,0.7 	" />
+                                    <path class="st0"
+                                        d="M310.5,372l-55.3-214c-2.5,14.4-5.8,32.8-9.1,48.5l-41.8,190.7H316L310.5,372z" />
+                                </g>
+                            </svg>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item"><a href="philosophy.html">Philosophy</a></li>
+                <li class="nav-item"><a href="https://huureendm.nl/">D&D</a></li>
+                <li class="nav-item"><a href="hikes.html">Hikes</a></li>
+                <li class="nav-item"><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <div class="photo-gallery">
+                <div class="left-column">
+                    <div class="img-container">
+                        <div id="IMG_4300" class="blurred-img">                            
+                            <img src="/resources/photos/il_sentiero_compressed/IMG_4300.jpg" alt="Photo 1"
+                                loading="lazy" onclick="toggleIMG(this)">
+                            <div class="cross" onclick="toggleIMG(this)">
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="text-container">
+                            <p>Valle d'Aosta, August</p>
+                        </div>
+                    </div>
+                    <div class="img-container">
+                        <div id="IMG_4317" class="blurred-img">
+                            <img src="/resources/photos/il_sentiero_compressed/IMG_4317.jpg" alt="Photo 1"
+                                loading="lazy" onclick="toggleIMG(this)">
+                        </div>
+                        <div class="text-container">
+                            <p>Valle d'Aosta, August</p>
+                        </div>
+                    </div>
+                    <div class="img-container">
+                        <div id="IMG_4318" class="blurred-img">
+                            <img src="/resources/photos/il_sentiero_compressed/IMG_4318.jpg" alt="Photo 1"
+                                loading="lazy" onclick="toggleIMG(this)">
+                        </div>
+                        <div class="text-container">
+                            <p>Valle d'Aosta, August</p>
+                        </div>
+                    </div>
+                    <div id="header-container">
+                        <h1>Il Sentiero</h1>
+                        <p>August 2023 - November 2023</p>
+                    </div>
+                </div>
+                <div class="right-column">
+                    <div id="header-container">
+                        <h1>Il Sentiero</h1>
+                        <p class="">August 2023 - November 2023</p>
+                    </div>
+                    <div class="img-container">
+                        <div id="IMG_4323" class="blurred-img">
+                            <img src="/resources/photos/il_sentiero_compressed/IMG_4323.jpg" alt="Photo 1"
+                                loading="lazy" onclick="toggleIMG(this)">
+                        </div>
+                        <div class="text-container">
+                            <p>Valle d'Aosta, August</p>
+                        </div>
+                    </div>
+                    <div class="img-container">
+                        <div id="IMG_4345" class="blurred-img">
+                            <img src="/resources/photos/il_sentiero_compressed/IMG_4345.jpg" alt="Photo 1"
+                                loading="lazy" onclick="toggleIMG(this)">
+                        </div>
+                        <div class="text-container">
+                            <p>Valle d'Aosta, August</p>
+                        </div>
+                    </div>
+                    <div class="img-container">
+                        <div id="IMG_4349" class="blurred-img">
+                            <img src="/resources/photos/il_sentiero_compressed/IMG_4349.jpg" alt="Photo 1"
+                                loading="lazy" onclick="toggleIMG(this)">
+                        </div>
+                        <div class="text-container">
+                            <p>Valle d'Aosta, August</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="full-size-img-div" class="hidden">
+                    <div class="full-size-img-container">
+                        <div class="full-size-img">
+                            <img onclick="toggleIMG(this)">
+                        </div>
+                        <div class="text-container">
+                            <p>Valle d'Aosta, August</p>
+                        </div>
+                    </div>
+                </div>
+        </section>
+    </main>
+</body>
+
+</html>
