@@ -4,6 +4,7 @@ const fullSizeImagesPath = "/resources/photos/il_sentiero_full-size/"
 const placeHolderImagesPath = "/resources/photos/il_sentiero_placeholders/"
 
 const blurredImageDivs = document.querySelectorAll(".gallery__blurred-img")
+
 blurredImageDivs.forEach(div => {
     const id = div.parentElement.id
     const img = div.querySelector("img")
@@ -21,10 +22,11 @@ blurredImageDivs.forEach(div => {
 });
 
 function toggleIMG(element) {
-    const id = element.parentElement.parentElement.parentElement.id;
-    const couterContainerDiv = document.querySelector(`#${id}`)
-    const img = couterContainerDiv.querySelector("img")
+    const id = element.parentElement.parentElement.parentElement.parentElement.id;
+    const outerContainerDiv = document.querySelector(`#${id}`)
+    const img = outerContainerDiv.querySelector("img")
+    const innerContainerDiv = img.parentElement.parentElement
     const newPath = `${fullSizeImagesPath}${id}.jpg`
     img.src = newPath
-    img.parentElement.classList.toggle("gallery__container--scale-up-center")
+    innerContainerDiv.classList.toggle("gallery__container--scale-up")
 }

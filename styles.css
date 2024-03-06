@@ -443,11 +443,15 @@ h1 {
   gap: 6vw;
 }
 
-.gallery__img {
-  width: 100%;
-  height: auto;
-  border-radius: 2px;
+.gallery__container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
+
+/* GALLERY ITEMS TEXT STYLING */
 
 .gallery__container--header {
   display: flex;
@@ -464,86 +468,15 @@ h1 {
   font-family: Helvetica, sans-serif;
 }
 
-.gallery_p {
+.gallery__p {
   font-size: 2vw;
   color: black;
   font-family: Helvetica, sans-serif;
 }
 
-.gallery__container--outer {
-  width: 40vw;
-  height: 30vw;
-}
-
-.gallery__container--scale-up-center {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 2;
-  /* background-color: rgba(255, 255, 255, 1); */
-  display: flex;
-  flex-direction: column-reverse;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-}
-
-.scale-up-center .blurred-img {
-  width: 60vw;
-  height: auto;
-  cursor: pointer;
-}
-
-.gallery__container--scale-up-center .gallery__cross {
-  position: absolute;
-  top: 10px;
-  right: 5px;
-  z-index: 3;
-
-	width: 26px;
-	height: 19px;
-	cursor: pointer;
-	background: none;
-	outline: none;
-	border: none;
-	padding: unset;
-	line-height: unset;
-	font-size: unset;
-	transition: 0.35s all ease-in-out;
-}
-.gallery__container--scale-up-center .gallery__cross span {
-  display: block;
-	position: absolute;
-	height: 2px;
-	background: var(--header1-color);
-	width: 100%;
-	transition: 0.35s all ease-in-out;
-}
-
-.gallery__container--scale-up-center .gallery__cross span:first-child {
-	transform: rotate(45deg);
-	position: absolute;
-	top: 8px;
-	width: 100%;
-}
-
-.gallery__container--scale-up-center .gallery__cross span:last-child {
-	transform: rotate(-45deg);
-	position: absolute;
-	top: 8px;
-	width: 100%;
-}
-
-.scale-up-center .gallery__container--text {
-  width: 50vw;
-  height: 10vw;
-}
-
 .gallery__container--text {
   width: 95%;
-  height: 0vw;
+  height: 4vw;
 }
 
 .gallery__container--text p {
@@ -554,25 +487,31 @@ h1 {
   margin-top: 1%;
 }
 
+/* GALLERY IMG STYLING */
+
+.gallery__img {
+  width: 100%;
+  height: auto;
+  border-radius: 2px;
+}
+
 .gallery__blurred-img {
-  position: relative;
   width: 100%;
   height: 100%;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-
 .gallery__blurred-img::before {
   content: "";
   position: absolute;
   inset: 0;
   opacity: 0;
-  animation: pulse 2.5s infinite;
+  animation: gallery__blurred-img--pulse 2.5s infinite;
   background-color: white;
 }
 
-@keyframes pulse {
+@keyframes gallery__blurred-img--pulse {
   0% {
     opacity: 0;
   }
@@ -584,18 +523,87 @@ h1 {
   }
 }
 
-.gallery__blurred-img--loaded::before {
-  animation: none;
-  content: none;
-}
-
 .gallery__blurred-img .gallery__img {
   opacity: 0;
   transition: opacity 250ms ease-in-out;
 }
 
+.gallery__blurred-img--loaded::before {
+  animation: none;
+  content: none;
+}
+
 .gallery__blurred-img--loaded .gallery__img {
   opacity: 1;
+}
+
+.gallery__container--outer {
+  width: 40vw;
+  height: 30vw;
+}
+
+.gallery__container--scale-up {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
+  background-color: rgba(255, 255, 255, 1);
+
+}
+
+.gallery__container--scale-up .gallery__img {
+  width: auto;
+  height: 70vw;
+  max-height: 90vh;
+  cursor: pointer;
+}
+
+.gallery__container--scale-up .gallery__container--text {
+  width: 50vw;
+  height: 10vw;
+}
+
+/* STYLING FOR THE CANCEL CROSS */
+
+.gallery__container--scale-up .gallery__cross {
+  position: absolute;
+  top: -25px;
+  right: 0;
+  z-index: 3;
+	width: 26px;
+	height: 19px;
+	cursor: pointer;
+	background: none;
+	outline: none;
+	border: none;
+	padding: unset;
+	line-height: unset;
+	font-size: unset;
+	transition: 0.35s all ease-in-out;
+}
+.gallery__container--scale-up .gallery__cross span {
+  display: block;
+	position: absolute;
+	height: 2px;
+	background: gray;
+	width: 100%;
+	transition: 0.35s all ease-in-out;
+}
+
+.gallery__container--scale-up .gallery__cross span:first-child {
+	transform: rotate(45deg);
+	position: absolute;
+	top: 8px;
+	width: 100%;
+}
+
+.gallery__container--scale-up .gallery__cross span:last-child {
+	transform: rotate(-45deg);
+	position: absolute;
+	top: 8px;
+	width: 100%;
 }
 
 
