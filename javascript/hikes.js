@@ -8,7 +8,7 @@ const blurredImageDivs = document.querySelectorAll(".gallery__blurred-img")
 blurredImageDivs.forEach(div => {
     const id = div.parentElement.id
     const img = div.querySelector("img")
-    div.style.backgroundImage = `url(${placeHolderImagesPath}${id}.jpg)`
+    div.style.backgroundImage = `url(${placeHolderImagesPath}${id}.JPG)`
     
     function loaded() {
         div.classList.add("gallery__blurred-img--loaded")
@@ -26,7 +26,7 @@ function toggleIMG(element) {
     const outerContainerDiv = document.querySelector(`#${id}`)
     const img = outerContainerDiv.querySelector("img")
     const innerContainerDiv = img.parentElement.parentElement
-    const newPath = `${fullSizeImagesPath}${id}.jpg`
+    const newPath = `${fullSizeImagesPath}${id}.JPG`
     img.src = newPath
     innerContainerDiv.classList.toggle("gallery__container--scale-up")
 }
