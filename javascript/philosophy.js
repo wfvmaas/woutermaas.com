@@ -127,5 +127,5 @@ window.addEventListener('scroll', () => {
 
 // Event listener to execute when the DOM content is loaded, adds the first HTML code to the page (there are 20 elements in the array).
 document.addEventListener('DOMContentLoaded', () => {
-  loadMoreContent(20);
+  loadMoreContent(30);
 });
