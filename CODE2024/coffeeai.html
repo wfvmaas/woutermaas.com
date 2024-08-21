@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CoffeeAI</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+
+    <link rel="stylesheet" href="coffeeai.css" />
+    <link rel="stylesheet" href="terminal.css" />
+
+    <script type="module" src="coffeeai.js"></script>
+
+    <script src="libs/three/v112/three.min.js"></script>
+
+    <!-- JEEFACEFILTER API (required by HeadControls.js) -->
+    <script src="dist/jeelizFaceFilter.js"></script>
+
+    <!-- HeadControls script -->
+    <script src="helpers/HeadControls.js"></script>
+
+    <!-- HeadControls Wrapper (provides THREE.HeadControls) -->
+    <script src="ThreeHeadControls.js"></script>
+
+    <!-- Main script: -->
+    <script src="./facefilter.js"></script>
+  </head>
+
+  <body id="index_body">
+
+    <div class="coffeeai">
+      <div class="coffeeai__header-container">
+        <h1 class="coffeeai__header coffeeai__header--h1">ESPRESSO EXPOSE</h1>
+        <h2 id="would-you-like-to-order" class="coffeeai__header coffeeai__header--h2">WHAT DRINK WOULD YOU LIKE TO ORDER?</h2>
+      </div>
+
+      <div id="coffeeai__body-container" class="coffeeai__body-container">
+
+        <div class="coffeeai__options">
+          <div id="espresso" class="coffeeai__option">
+            <img class="coffeeai__option-img" src="assets/images/espresso.png" alt="espresso" />
+            <div class="coffeeai__option-name">ESPRESSO</div>
+            <div class="coffeeai__option-description"></div>
+          </div>
+
+          <div id="cappuccino" class="coffeeai__option">
+            <img class="coffeeai__option-img" src="assets/images/cappuccino.png" alt="cappuccino" />
+            <div class="coffeeai__option-name">CAPPUCCINO</div>
+            <div class="coffeeai__option-description">STEAMED MILK + ESPRESSO</div>
+          </div>
+
+          <div id="latte" class="coffeeai__option">
+            <img class="coffeeai__option-img" src="assets/images/latte.png" alt="latte" />
+            <div class="coffeeai__option-name">LATTE</div>
+            <div class="coffeeai__option-description">WARM MILK + COFFEE</div>
+          </div>
+
+          <div id="macchiato" class="coffeeai__option">
+            <img class="coffeeai__option-img" src="assets/images/latte.png" alt="MACCHIATO" />
+            <div class="coffeeai__option-name">MACCHIATO</div>
+            <div class="coffeeai__option-description">SPLASH OF MILK + COFFEE</div>
+          </div>
+
+          <div id="decaf" class="coffeeai__option">
+            <img
+              class="coffeeai__option-img"
+              src="assets/images/medium-fill.png"
+              alt="DECCAFINATED coffee"
+            />
+            <div class="coffeeai__option-name">DECCAFINATED COFFEE</div>
+            <div class="coffeeai__option-description"></div>
+          </div>
+
+          <div id="chocolate" class="coffeeai__option">
+            <img class="coffeeai__option-img" src="assets/images/mocha.png" alt="hot chocolate" />
+            <div class="coffeeai__option-name">HOT CHOCOLATE</div>
+            <div class="coffeeai__option-description"></div>
+          </div>
+
+          <div id="tea" class="coffeeai__option">
+            <img class="coffeeai__option-img" src="assets/images/tea.png" alt="tea" />
+            <div class="coffeeai__option-name">TEA</div>
+            <div class="coffeeai__option-description">HOT WATER</div>
+          </div>
+
+          <div id="london" class="coffeeai__option">
+            <img
+              class="coffeeai__option-img"
+              src="assets/images/glass-of-water.png"
+              alt="london frog"
+            />
+            <div class="coffeeai__option-name">LONDON FROG</div>
+            <div class="coffeeai__option-description">STEAMED MILK + HOT WATER</div>
+          </div>
+        </div>
+
+        <div class="coffeeai__upload-data coffeeai__upload-data--hidden">
+          <button id="button__upload" class="coffeeai__button coffeeai__button--upload coffeeai__button--not-selectable">
+            UPLOAD
+          </button>
+          <button id="button__dont-upload" class="coffeeai__button coffeeai__button--cancel coffeeai__button--not-selectable">
+            don't upload
+          </button>
+        </div>
+  
+        <div class="coffeeai__ai-box">
+          <img class="coffeeai__stars" src="assets/images/stars/stars.png" alt="stars" />
+          <div class="coffeeai__soundbar">
+            <div class="coffeeai__soundbar-bar"></div>
+            <div class="coffeeai__soundbar-bar"></div>
+            <div class="coffeeai__soundbar-bar"></div>
+            <div class="coffeeai__soundbar-bar"></div>
+            <div class="coffeeai__soundbar-bar"></div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="terminal terminal--hidden">
+      <div class="terminal__loading-video-container">
+        <video class="terminal__loading-video" preload="auto">
+          <source src="assets/videos/old_tv_off_animation.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div class="terminal__content">
+        
+      </div>
+    </div>
+
+    <div id="coffeeai__facefilter-container" class="coffeeai__facefilter-container coffeeai__facefilter-container--start">
+      <div style="display: none" id="container"></div>
+
+      <!-- This canvas will be used to display the head tracking: // -->
+      <canvas id="headControlsCanvas"></canvas>
+
+      <div id="pointer">...</div>
+    </div>
+
+    <button id="coffeeai__button--pause" class="coffeeai__button coffeeai__button--pause coffeeai__button--hidden">
+      <img src="assets/images/red_pause_button.png" class="">
+    </button>
+
+    <div class="voices-audio"></div>
+    
+  </body>
+</html>
