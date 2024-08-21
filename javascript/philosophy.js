@@ -3,6 +3,7 @@ let header1Color = '#AD2626';
 let header2Color = 'white';
 // Next index for the array to be called.
 let nextElementIndex = 0;
+
 // Array to store HTML content for each span element
 const spanElements = [
   `<span class="philo-hover derrida-hover fade-in" onmouseover="classHoverEffect('derrida-hover')" onmouseout="clearHover('derrida-hover')">
