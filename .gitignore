@@ -9,7 +9,6 @@ Thumbs.db
 node_modules/
 
 # Ignore build files
-dist/
 build/
 
 # Ignore test files
