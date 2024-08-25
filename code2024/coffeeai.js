@@ -158,10 +158,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Initialize the interface
-  // initialize_first_scene()
+  initialize_first_scene()
   // initialize_initial_hacked_scene()
   // initialize_final_scene()
-  initialize_upload_data_hacked_scene()
+  // initialize_upload_data_hacked_scene()
 
   // Track if a user has been registered by checking if the text inside of the div #pointer_div has changed.
   function initialize_storyline() {
