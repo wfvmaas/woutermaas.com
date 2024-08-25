@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "21-if-no.mp3": 16000,
     "22-dating-profile.mp3": 14000,
     "23-system-compromised.mp3": 17000,
-    "glitch-sounds.mp4": 3800
+    "glitch-sounds.mp4": 3800,
   }
   const audio_assets_path = "assets/audio/"
   const hacker_scene_terminal_lines = [
@@ -159,9 +159,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Initialize the interface
-  // initialize_first_scene()
+  initialize_first_scene()
   // initialize_initial_hacked_scene()
-  initialize_final_scene()
+  // initialize_final_scene()
 
   // Track if a user has been registered by checking if the text inside of the div #pointer_div has changed.
   function initialize_storyline() {
@@ -228,15 +228,6 @@ document.addEventListener("DOMContentLoaded", () => {
       soundbar.classList.remove("coffeeai__soundbar-bar--animated")
       soundbar.style.animationPlayState = ""
       soundbar.style.animationIterationCount = ""
-
-      // bar.classList.add("coffeeai__soundbar-bar--short-animation")
-      // const htmlBar = bar
-      // setTimeout(() => {
-      //   htmlBar.classList.remove("coffeeai__soundbar-bar--short-animation")
-      //   htmlBar.classList.remove("coffeeai__soundbar-bar--animated")
-      //   htmlBar.style.animationPlayState = ""
-      //   htmlBar.style.animationIterationCount = ""
-      // }, 2000)
     })
   }
 
@@ -376,7 +367,10 @@ document.addEventListener("DOMContentLoaded", () => {
       audio_assets_path + "glitch-sounds.mp4",
     ])
 
-    const total_audio_duration = audio_files_durations["23-system-compromised.mp3"] + audio_files_durations["10-something-wrong.mp3"] + audio_files_durations["glitch-sounds.mp4"]
+    const total_audio_duration =
+      audio_files_durations["23-system-compromised.mp3"] +
+      audio_files_durations["10-something-wrong.mp3"] +
+      audio_files_durations["glitch-sounds.mp4"]
 
     setTimeout(() => {
       const final_glitch_container = document.querySelector("#final-glitch-container")
@@ -386,13 +380,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
       setTimeout(() => {
         final_glitch_container.classList.add("final-glitch-container--hidden")
-      }, 4000);
+      }, 4000)
     }, total_audio_duration - 2500)
 
     setTimeout(() => {
       set_view_to_terminal()
       qr_code.src = "assets/images/qr-code-rubber-ducky.png"
-
     }, total_audio_duration - 2500)
   }
 
@@ -432,9 +425,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Upload data button
         upload_data_button.addEventListener("click", () => {
-          upload_data_button.style.pointerEvents = "none"
           upload_data_button.removeEventListener("click", () => {})
-          dont_upload_data_button.style.pointerEvents = "none"
           dont_upload_data_button.removeEventListener("click", () => {})
 
           play_audio([
@@ -455,9 +446,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Dont upload data button
         dont_upload_data_button.addEventListener("click", () => {
-          upload_data_button.style.pointerEvents = "none"
           upload_data_button.removeEventListener("click", () => {})
-          dont_upload_data_button.style.pointerEvents = "none"
           dont_upload_data_button.removeEventListener("click", () => {})
 
           play_audio([
@@ -537,7 +526,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
           // Disable all cards immediately after one has been clicked
           coffee_options_cards.forEach((card) => {
-            card.style.pointer_divEvents = "none"
             card.removeEventListener("click", () => {})
           })
         }
@@ -668,9 +656,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Add event listeners to the buttons
         upload_data_button.addEventListener("click", () => {
-          upload_data_button.style.pointerEvents = "none"
           upload_data_button.removeEventListener("click", () => {})
-          dont_upload_data_button.style.pointerEvents = "none"
           dont_upload_data_button.removeEventListener("click", () => {})
 
           play_audio([
@@ -689,9 +675,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         dont_upload_data_button.addEventListener("click", () => {
           // Disable the buttons after one has been clicked and remove click event listeners
-          upload_data_button.style.pointerEvents = "none"
           upload_data_button.removeEventListener("click", () => {})
-          dont_upload_data_button.style.pointerEvents = "none"
           dont_upload_data_button.removeEventListener("click", () => {})
 
           play_audio([
@@ -705,7 +689,7 @@ document.addEventListener("DOMContentLoaded", () => {
             1000
           setTimeout(() => {
             initialize_booting_scene()
-          }, total_audio_duration)
+          }, total_audio_duration - 500)
         })
       }, left_over_time)
     }, timeout_duration)
@@ -766,9 +750,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
           initialize_upload_data_scene(total_audio_duration, 14000)
 
-          // Disable all cards immediately after one has been clicked
+          // Remove the event listeners from the cards
           coffee_options_cards.forEach((card) => {
-            card.style.pointer_divEvents = "none"
+            card.removeEventListener("click", () => {})
           })
         }
       })
@@ -824,4 +808,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
     displayNextLine()
   }
+
+  let inactivityTimeout;
+
+  function resetInactivityTimeout() {
+    // Clear the existing timeout
+    clearTimeout(inactivityTimeout);
+  
+    // Set a new timeout to reload the page after 8 minutes (480000 ms) of inactivity
+    inactivityTimeout = setTimeout(() => {
+      // Remove event listeners before reloading the page
+      activityEvents.forEach((event) => {
+        document.removeEventListener(event, resetInactivityTimeout, false);
+      });
+      location.reload(); // Reload the page
+    }, 60000 * 4.5); 
+  }
+  
+  // List of events that reset the inactivity timer
+  const activityEvents = ["mousemove", "mousedown", "keypress", "touchstart", "click"];
+  
+  // Attach event listeners to reset the inactivity timer on any of the above events
+  activityEvents.forEach((event) => {
+    document.addEventListener(event, resetInactivityTimeout, false);
+  });
+  
+  // Initialize the inactivity timeout when the page loads
+  resetInactivityTimeout();
 })
