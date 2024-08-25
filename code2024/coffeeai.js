@@ -2,9 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   console.log("DOM fully loaded and parsed")
 
   // Global variables
-  let soundbar_animation_is_playing = false
-  let story_has_started = false
-  let hacked_story_has_started = false
+  let story_stage = 'initial'
   const audio_files_durations = {
     "1-hey-there.mp3": 5000,
     "2-fast-caffeinated.mp3": 13000,
@@ -46,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ]
   const hacker_scene_2_terminal_lines = [
     [">>> Warning: CyberNinja v3.8 detected - Initiating counter-hack protocol...", false],
-    ["sudo ./initiate_cyber_ninja --protocol=counter-hack", true],
+    ["sudo ./initiate_cyber_ninja --protocol=counter-hack", true, "FreddyZiggs@localhost:~$ "],
     [">>> Scanning for potential threats... Found 42 vulnerabilities.", false],
     [">>> Deploying countermeasures... CyberNinja engaged.", false],
     ["./run_RubberDucky_scripts.sh", true, "FreddyZiggs@localhost:~$ "],
@@ -104,6 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ],
   ]
   const hacked_upload_data_scene_terminal_lines = [
+    ["init face_analysis", true, ["CoffeeAI@localhost:~$ "]],
     [
       ">>> Facial analysis short report: The smile analysis shows the user requires immediate therapy intervention. The corner of the labium superius oris, also known as “the upper lip” is spasmic with arrhythmic minor involuntary muscle contractions. According to the recent AI-optimized DSM (diagnostic & statistical manual of mental disorders), this is indicative of neurotic tendencies and borderline hysteria in otherwise healthy individuals with 78% accuracy.",
       false,
@@ -159,24 +158,24 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Initialize the interface
-  initialize_first_scene()
+  // initialize_first_scene()
   // initialize_initial_hacked_scene()
   // initialize_final_scene()
+  initialize_upload_data_hacked_scene()
 
   // Track if a user has been registered by checking if the text inside of the div #pointer_div has changed.
   function initialize_storyline() {
     start_of_interaction_time = new Date().getTime()
-    if (story_has_started && hacked_story_has_started) {
-      play_audio([audio_assets_path + "14-prompt.mp3"])
-      return
-    }
-    if (!hacked_story_has_started && !story_has_started) {
+    console.log(story_stage)
+    if (story_stage === 'initial') {
       play_audio([audio_assets_path + "1-hey-there.mp3"])
+      return
+    } else if (story_stage === 'hacked') {
+      play_audio([audio_assets_path + "14-prompt.mp3"])
       return
     } else {
       return
     }
-    // initialize_first_scene(true)
   }
 
   // Creates an audio element and plays the voice file
@@ -252,11 +251,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const options = document.querySelector(".coffeeai__options")
     options.classList.remove("coffeeai__options--hidden")
 
-    const coffee_options_cards = document.querySelectorAll(".coffeeai__option")
-    coffee_options_cards.forEach((card) => {
-      card.removeEventListener("click", () => {})
-    })
-
     const would_you_like_header = document.querySelector("#would-you-like-to-order")
     would_you_like_header.classList.remove("coffeeai__header--hidden")
 
@@ -288,18 +282,16 @@ document.addEventListener("DOMContentLoaded", () => {
         set_view_to_terminal(true)
       })
     } else {
-      hacked_story_has_started = false
-      story_has_started = false
-
+      story_stage = 'initial'
       terminal_loading_video.classList.remove("terminal__loading-video-container--hidden")
       terminal__training_videos.classList.add("terminal__training-videos--hidden")
       terminal__content.classList.add("terminal__content--no-video")
 
       pause_button.classList.add("coffeeai__button--hidden")
       pause_button.classList.remove("coffeeai__button--pause-left")
-      pause_button.removeEventListener("click", () => {
-        set_view_to_terminal(false)
-      })
+      // pause_button.removeEventListener("click", () => {
+      //   set_view_to_terminal(false)
+      // })
     }
   }
 
@@ -390,7 +382,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function initialize_upload_data_hacked_scene(total_audio_duration, timeout_duration) {
-    hacked_story_has_started = true
     create_terminal_lines(hacked_upload_data_scene_terminal_lines, 2000)
     setTimeout(() => {
       const pause_button = document.querySelector("#coffeeai__button--pause")
@@ -416,17 +407,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
       setTimeout(() => {
         const upload_data_button = document.querySelector("#button__upload")
-        upload_data_button.classList.remove("coffeeai__button--not-selectable")
-
         const dont_upload_data_button = document.querySelector("#button__dont-upload")
+
+        upload_data_button.classList.remove("coffeeai__button--not-selectable")
         dont_upload_data_button.classList.remove("coffeeai__button--not-selectable")
 
-        // Add event listeners to the buttons
-
-        // Upload data button
-        upload_data_button.addEventListener("click", () => {
-          upload_data_button.removeEventListener("click", () => {})
-          dont_upload_data_button.removeEventListener("click", () => {})
+        // Define the event handler functions
+        function handleUploadClick() {
+          upload_data_button.removeEventListener("click", handleUploadClick)
+          dont_upload_data_button.removeEventListener("click", handleDontUploadClick)
 
           play_audio([
             audio_assets_path + "20-if-yes.mp3",
@@ -442,12 +431,11 @@ document.addEventListener("DOMContentLoaded", () => {
           setTimeout(() => {
             initialize_final_scene()
           }, total_audio_duration - 500)
-        })
+        }
 
-        // Dont upload data button
-        dont_upload_data_button.addEventListener("click", () => {
-          upload_data_button.removeEventListener("click", () => {})
-          dont_upload_data_button.removeEventListener("click", () => {})
+        function handleDontUploadClick() {
+          upload_data_button.removeEventListener("click", handleUploadClick)
+          dont_upload_data_button.removeEventListener("click", handleDontUploadClick)
 
           play_audio([
             audio_assets_path + "21-if-no.mp3",
@@ -463,74 +451,85 @@ document.addEventListener("DOMContentLoaded", () => {
           setTimeout(() => {
             initialize_final_scene()
           }, total_audio_duration)
-        })
+        }
+
+        // Add event listeners to the buttons
+        upload_data_button.addEventListener("click", handleUploadClick)
+        dont_upload_data_button.addEventListener("click", handleDontUploadClick)
       }, left_over_time)
     }, timeout_duration)
   }
 
   function initialize_initial_hacked_scene() {
-    reset_whole_interface(true)
+    reset_whole_interface(true);
 
-    createPointerObserver()
-
-    setTimeout(() => create_terminal_lines(intitial_hacked_scene_terminal_lines, 0), 500)
-
-    const coffee_options_cards = document.querySelectorAll(".coffeeai__option")
-    let clickOccurred = false
-
-    coffee_options_cards.forEach((card) => {
-      card.addEventListener("click", () => {
-        if (!clickOccurred) {
-          clickOccurred = true
-
-          let caffeinated = false
-          if (
-            card.id === "espresso" ||
-            card.id === "latte" ||
-            card.id === "cappuccino" ||
-            card.id === "macchiato"
-          )
-            caffeinated = true
-
-          const current_time = new Date().getTime()
-          let fast = false
-          // Fast: if the user clicks on a card before 7 seconds have passed
-          if (start_of_interaction_time + 7000 > current_time) fast = true
-          let audio_files = []
-          let total_audio_duration = 0
-          if (caffeinated && fast) {
-            audio_files = [audio_assets_path + "15-fast-caffeinated.mp3"]
-            total_audio_duration = audio_files_durations["15-fast-caffeinated.mp3"]
-          }
-
-          if (caffeinated && !fast) {
-            audio_files = [audio_assets_path + "16-slow-caffeinated.mp3"]
-            total_audio_duration = audio_files_durations["16-slow-caffeinated.mp3"]
-          }
-
-          if (!caffeinated && fast) {
-            audio_files = [audio_assets_path + "17-fast-decaf.mp3"]
-            total_audio_duration = audio_files_durations["17-fast-decaf.mp3"]
-          }
-
-          if (!caffeinated && !fast) {
-            audio_files = [audio_assets_path + "18-slow-decaf.mp3"]
-            total_audio_duration = audio_files_durations["18-slow-decaf.mp3"]
-          }
-
-          audio_files.push(audio_assets_path + "19-at-this-point.mp3")
-          total_audio_duration += audio_files_durations["19-at-this-point.mp3"]
-          play_audio(audio_files)
-
-          initialize_upload_data_hacked_scene(total_audio_duration, 14000)
-
-          // Disable all cards immediately after one has been clicked
-          coffee_options_cards.forEach((card) => {
-            card.removeEventListener("click", () => {})
-          })
+    story_stage = 'hacked'
+  
+    createPointerObserver();
+  
+    setTimeout(() => create_terminal_lines(intitial_hacked_scene_terminal_lines, 0), 500);
+  
+    const coffee_options_cards = document.querySelectorAll(".coffeeai__option");
+    let clickOccurred = false;
+  
+    // Define the event handler function
+    function handleCardClick(event) {
+      if (!clickOccurred) {
+        clickOccurred = true;
+  
+        let caffeinated = false;
+        const card = event.currentTarget;
+        if (
+          card.id === "espresso" ||
+          card.id === "latte" ||
+          card.id === "cappuccino" ||
+          card.id === "macchiato"
+        )
+          caffeinated = true;
+  
+        const current_time = new Date().getTime();
+        let fast = false;
+        // Fast: if the user clicks on a card before 7 seconds have passed
+        if (start_of_interaction_time + 7000 > current_time) fast = true;
+        let audio_files = [];
+        let total_audio_duration = 0;
+        if (caffeinated && fast) {
+          audio_files = [audio_assets_path + "15-fast-caffeinated.mp3"];
+          total_audio_duration = audio_files_durations["15-fast-caffeinated.mp3"];
         }
-      })
-    })
+  
+        if (caffeinated && !fast) {
+          audio_files = [audio_assets_path + "16-slow-caffeinated.mp3"];
+          total_audio_duration = audio_files_durations["16-slow-caffeinated.mp3"];
+        }
+  
+        if (!caffeinated && fast) {
+          audio_files = [audio_assets_path + "17-fast-decaf.mp3"];
+          total_audio_duration = audio_files_durations["17-fast-decaf.mp3"];
+        }
+  
+        if (!caffeinated && !fast) {
+          audio_files = [audio_assets_path + "18-slow-decaf.mp3"];
+          total_audio_duration = audio_files_durations["18-slow-decaf.mp3"];
+        }
+  
+        audio_files.push(audio_assets_path + "19-at-this-point.mp3");
+        total_audio_duration += audio_files_durations["19-at-this-point.mp3"];
+        play_audio(audio_files);
+  
+        initialize_upload_data_hacked_scene(total_audio_duration, 14000);
+  
+        // Remove the event listeners from the cards
+        coffee_options_cards.forEach((card) => {
+          card.removeEventListener("click", handleCardClick);
+        });
+      }
+    }
+  
+    // Add event listeners to the cards
+    coffee_options_cards.forEach((card) => {
+      card.addEventListener("click", handleCardClick);
+    });
   }
 
   function initialize_hacker_talking_scene() {
@@ -627,7 +626,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function initialize_upload_data_scene(total_audio_duration, timeout_duration) {
-    story_has_started = true
+    story_stage = 'upload_data'
     setTimeout(() => {
       const options = document.querySelector(".coffeeai__options")
       options.classList.add("coffeeai__options--hidden")
@@ -649,15 +648,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
       setTimeout(() => {
         const upload_data_button = document.querySelector("#button__upload")
-        upload_data_button.classList.remove("coffeeai__button--not-selectable")
-
         const dont_upload_data_button = document.querySelector("#button__dont-upload")
+
+        upload_data_button.classList.remove("coffeeai__button--not-selectable")
         dont_upload_data_button.classList.remove("coffeeai__button--not-selectable")
 
-        // Add event listeners to the buttons
-        upload_data_button.addEventListener("click", () => {
-          upload_data_button.removeEventListener("click", () => {})
-          dont_upload_data_button.removeEventListener("click", () => {})
+        // Define the event handler functions
+        function handleUploadClick() {
+          upload_data_button.removeEventListener("click", handleUploadClick)
+          dont_upload_data_button.removeEventListener("click", handleDontUploadClick)
 
           play_audio([
             audio_assets_path + "7-if-yes.mp3",
@@ -671,12 +670,11 @@ document.addEventListener("DOMContentLoaded", () => {
           setTimeout(() => {
             initialize_booting_scene()
           }, total_audio_duration - 500)
-        })
+        }
 
-        dont_upload_data_button.addEventListener("click", () => {
-          // Disable the buttons after one has been clicked and remove click event listeners
-          upload_data_button.removeEventListener("click", () => {})
-          dont_upload_data_button.removeEventListener("click", () => {})
+        function handleDontUploadClick() {
+          upload_data_button.removeEventListener("click", handleUploadClick)
+          dont_upload_data_button.removeEventListener("click", handleDontUploadClick)
 
           play_audio([
             audio_assets_path + "8-if-no.mp3",
@@ -690,12 +688,16 @@ document.addEventListener("DOMContentLoaded", () => {
           setTimeout(() => {
             initialize_booting_scene()
           }, total_audio_duration - 500)
-        })
+        }
+
+        // Add event listeners to the buttons
+        upload_data_button.addEventListener("click", handleUploadClick)
+        dont_upload_data_button.addEventListener("click", handleDontUploadClick)
       }, left_over_time)
     }, timeout_duration)
   }
 
-  // Transition from terminal to the coffeeAI front-end
+  /// Transition from terminal to the coffeeAI front-end
   function initialize_first_scene() {
     reset_whole_interface(false)
 
@@ -704,58 +706,63 @@ document.addEventListener("DOMContentLoaded", () => {
     const coffee_options_cards = document.querySelectorAll(".coffeeai__option")
     let clickOccurred = false
 
-    coffee_options_cards.forEach((card) => {
-      card.addEventListener("click", () => {
-        if (!clickOccurred) {
-          clickOccurred = true
+    // Define the event handler function
+    function handleCardClick(event) {
+      if (!clickOccurred) {
+        clickOccurred = true
 
-          let caffeinated = false
-          if (
-            card.id === "espresso" ||
-            card.id === "latte" ||
-            card.id === "cappuccino" ||
-            card.id === "macchiato"
-          )
-            caffeinated = true
+        let caffeinated = false
+        const card = event.currentTarget
+        if (
+          card.id === "espresso" ||
+          card.id === "latte" ||
+          card.id === "cappuccino" ||
+          card.id === "macchiato"
+        )
+          caffeinated = true
 
-          const current_time = new Date().getTime()
-          let fast = false
-          // Fast: if the user clicks on a card before 7 seconds have passed
-          if (start_of_interaction_time + 7000 > current_time) fast = true
-          let audio_files = []
-          let total_audio_duration = 0
-          if (caffeinated && fast) {
-            audio_files = [audio_assets_path + "2-fast-caffeinated.mp3"]
-            total_audio_duration = audio_files_durations["2-fast-caffeinated.mp3"]
-          }
-
-          if (caffeinated && !fast) {
-            audio_files = [audio_assets_path + "3-slow-caffeinated.mp3"]
-            total_audio_duration = audio_files_durations["3-slow-caffeinated.mp3"]
-          }
-
-          if (!caffeinated && fast) {
-            audio_files = [audio_assets_path + "4-fast-decaf.mp3"]
-            total_audio_duration = audio_files_durations["4-fast-decaf.mp3"]
-          }
-
-          if (!caffeinated && !fast) {
-            audio_files = [audio_assets_path + "5-slow-decaf.mp3"]
-            total_audio_duration = audio_files_durations["5-slow-decaf.mp3"]
-          }
-
-          audio_files.push(audio_assets_path + "6-upload-your-data.mp3")
-          total_audio_duration += audio_files_durations["6-upload-your-data.mp3"]
-          play_audio(audio_files)
-
-          initialize_upload_data_scene(total_audio_duration, 14000)
-
-          // Remove the event listeners from the cards
-          coffee_options_cards.forEach((card) => {
-            card.removeEventListener("click", () => {})
-          })
+        const current_time = new Date().getTime()
+        let fast = false
+        // Fast: if the user clicks on a card before 7 seconds have passed
+        if (start_of_interaction_time + 7000 > current_time) fast = true
+        let audio_files = []
+        let total_audio_duration = 0
+        if (caffeinated && fast) {
+          audio_files = [audio_assets_path + "2-fast-caffeinated.mp3"]
+          total_audio_duration = audio_files_durations["2-fast-caffeinated.mp3"]
         }
-      })
+
+        if (caffeinated && !fast) {
+          audio_files = [audio_assets_path + "3-slow-caffeinated.mp3"]
+          total_audio_duration = audio_files_durations["3-slow-caffeinated.mp3"]
+        }
+
+        if (!caffeinated && fast) {
+          audio_files = [audio_assets_path + "4-fast-decaf.mp3"]
+          total_audio_duration = audio_files_durations["4-fast-decaf.mp3"]
+        }
+
+        if (!caffeinated && !fast) {
+          audio_files = [audio_assets_path + "5-slow-decaf.mp3"]
+          total_audio_duration = audio_files_durations["5-slow-decaf.mp3"]
+        }
+
+        audio_files.push(audio_assets_path + "6-upload-your-data.mp3")
+        total_audio_duration += audio_files_durations["6-upload-your-data.mp3"]
+        play_audio(audio_files)
+
+        initialize_upload_data_scene(total_audio_duration, 14000)
+
+        // Remove the event listeners from the cards
+        coffee_options_cards.forEach((card) => {
+          card.removeEventListener("click", handleCardClick)
+        })
+      }
+    }
+
+    // Add event listeners to the cards
+    coffee_options_cards.forEach((card) => {
+      card.addEventListener("click", handleCardClick)
     })
   }
 
@@ -809,30 +816,30 @@ document.addEventListener("DOMContentLoaded", () => {
     displayNextLine()
   }
 
-  let inactivityTimeout;
+  let inactivityTimeout
 
   function resetInactivityTimeout() {
     // Clear the existing timeout
-    clearTimeout(inactivityTimeout);
-  
+    clearTimeout(inactivityTimeout)
+
     // Set a new timeout to reload the page after 8 minutes (480000 ms) of inactivity
     inactivityTimeout = setTimeout(() => {
       // Remove event listeners before reloading the page
       activityEvents.forEach((event) => {
-        document.removeEventListener(event, resetInactivityTimeout, false);
-      });
-      location.reload(); // Reload the page
-    }, 60000 * 4.5); 
+        document.removeEventListener(event, resetInactivityTimeout, false)
+      })
+      location.reload() // Reload the page
+    }, 60000 * 3.5)
   }
-  
+
   // List of events that reset the inactivity timer
-  const activityEvents = ["mousemove", "mousedown", "keypress", "touchstart", "click"];
-  
+  const activityEvents = ["mousemove", "mousedown", "keypress", "touchstart", "click"]
+
   // Attach event listeners to reset the inactivity timer on any of the above events
   activityEvents.forEach((event) => {
-    document.addEventListener(event, resetInactivityTimeout, false);
-  });
-  
+    document.addEventListener(event, resetInactivityTimeout, false)
+  })
+
   // Initialize the inactivity timeout when the page loads
-  resetInactivityTimeout();
+  resetInactivityTimeout()
 })
