@@ -109,6 +109,10 @@ document.addEventListener("DOMContentLoaded", () => {
     ],
   ]
   let start_of_interaction_time = new Date().getTime()
+  const play_button = document.querySelector("#coffeeai__button--play")
+  play_button.addEventListener("click", () => {
+    set_view_to_coffeeai(true)
+  })
 
   // const pointer_div = document.querySelector("#pointer")
   // const coordinates_change_observer = new MutationObserver(
@@ -149,8 +153,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Initialize the interface
-  // initialize_first_scene()
-  initialize_initial_hacked_scene()
+  initialize_first_scene()
+  // initialize_initial_hacked_scene()
 
   // Track if a user has been registered by checking if the text inside of the div #pointer_div has changed.
   function initialize_storyline() {
@@ -180,6 +184,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const audio = document.createElement("audio")
       audio.src = files[index]
+      audio.muted = false; 
       voices_audio_container.appendChild(audio)
 
       audio.addEventListener("play", () => {
@@ -230,7 +235,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Function to reset the whole interface to its initial state
   function reset_whole_interface(pause_button_present) {
-    set_view_to_coffeeai()
+    set_view_to_coffeeai(pause_button_present)
 
     end_soundbar_animation()
 
@@ -254,36 +259,41 @@ document.addEventListener("DOMContentLoaded", () => {
     coffeeai_filter_container.classList.remove("coffeeai__facefilter-container--center")
     coffeeai_filter_container.classList.add("coffeeai__facefilter-container--start")
 
+    const pause_button = document.querySelector("#coffeeai__button--pause")
+    const terminal_loading_video = document.querySelector(".terminal__loading-video-container")
+    const terminal__training_videos = document.querySelector(".terminal__training-videos")
     const terminal__content = document.querySelector(".terminal__content")
     terminal__content.innerHTML = ""
 
-    const pause_button = document.querySelector("#coffeeai__button--pause")
-    const terminal_video_container = document.querySelector(".terminal__loading-video-container")
-
     if (pause_button_present) {
       create_terminal_lines(hacker_scene_3_terminal_lines, 0)
-      terminal_video_container.classList.add("terminal__loading-video-container--hidden")
+
+      terminal_loading_video.classList.add("terminal__loading-video-container--hidden")
+      terminal__training_videos.classList.remove("terminal__training-videos--hidden")
+      terminal__content.classList.remove("terminal__content--no-video")
 
       pause_button.classList.remove("coffeeai__button--hidden")
       pause_button.classList.remove("coffeeai__button--pause-left")
       pause_button.addEventListener("click", () => {
-        toggle_between_terminal_and_coffeeai()
+        set_view_to_terminal(true)
       })
     } else {
       hacked_story_has_started = false
       story_has_started = false
 
-      terminal_video_container.classList.remove("terminal__loading-video-container--hidden")
+      terminal_loading_video.classList.remove("terminal__loading-video-container--hidden")
+      terminal__training_videos.classList.add("terminal__training-videos--hidden")
+      terminal__content.classList.add("terminal__content--no-video")
 
       pause_button.classList.add("coffeeai__button--hidden")
       pause_button.classList.remove("coffeeai__button--pause-left")
       pause_button.removeEventListener("click", () => {
-        toggle_between_terminal_and_coffeeai()
+        set_view_to_terminal(false)
       })
     }
   }
 
-  function set_view_to_terminal() {
+  function set_view_to_terminal(pause_button_present) {
     const coffeeai_body = document.querySelector(".coffeeai")
     coffeeai_body.classList.add("coffeeai--hidden")
 
@@ -292,9 +302,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const coffeeai_filter_container = document.querySelector("#coffeeai__facefilter-container")
     coffeeai_filter_container.classList.add("coffeeai__facefilter-container--hidden")
+
+    const pause_button = document.querySelector("#coffeeai__button--pause")
+    pause_button.classList.add("coffeeai__button--hidden")
   }
 
-  function set_view_to_coffeeai() {
+  function set_view_to_coffeeai(pause_button_present) {
     const coffeeai_body = document.querySelector(".coffeeai")
     coffeeai_body.classList.remove("coffeeai--hidden")
 
@@ -303,6 +316,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const coffeeai_filter_container = document.querySelector("#coffeeai__facefilter-container")
     coffeeai_filter_container.classList.remove("coffeeai__facefilter-container--hidden")
+
+    if(pause_button_present) {
+      const pause_button = document.querySelector("#coffeeai__button--pause")
+      pause_button.classList.remove("coffeeai__button--hidden")
+    }
   }
 
   function toggle_between_terminal_and_coffeeai() {
@@ -319,6 +337,8 @@ document.addEventListener("DOMContentLoaded", () => {
       terminal_body.classList.remove("terminal--hidden")
       coffeeai_filter_container.classList.add("coffeeai__facefilter-container--hidden")
     }
+
+
   }
 
   function initialize_upload_data_hacked_scene(total_audio_duration, timeout_duration) {
@@ -540,13 +560,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const coffeeai_filter_container = document.querySelector("#coffeeai__facefilter-container")
     coffeeai_filter_container.classList.add("coffeeai__facefilter-container--hidden")
 
-    const terminal_video_container = document.querySelector(".terminal__loading-video-container")
-    terminal_video_container.classList.remove("terminal__loading-video-container--hidden")
+    const terminal_loading_video = document.querySelector(".terminal__loading-video-container")
+    terminal_loading_video.classList.remove("terminal__loading-video-container--hidden")
     const terminal_video = document.querySelector(".terminal__loading-video")
     terminal_video.play()
 
     terminal_video.addEventListener("ended", () => {
-      terminal_video_container.classList.add("terminal__loading-video-container--hidden")
+      terminal_loading_video.classList.add("terminal__loading-video-container--hidden")
 
       setTimeout(() => {
         const booting_sequence = 8000

@@ -388,7 +388,7 @@ table {
   transition: background-color 0.3s; /* Smooth transition on hover */
   text-decoration: none; /* Remove underline if using <a> */
 }
-.coffeeai__button--pause {
+.coffeeai__button--pause, .coffeeai__button--play {
   position: absolute;
   top: 70vh;
   left: 58vw;
@@ -403,6 +403,10 @@ table {
   transition: all 0.3s ease;
   transition: left 3s ease;
   transition: top 3s ease;
+}
+
+.coffeeai__button--play {
+  left: calc(75vw - 2vw);
 }
 
 .coffeeai__button--pause-left {
@@ -477,11 +481,10 @@ table {
   display: none;
 }
 
-.terminal__loading-video-container {
-}
-
-.terminal__loading-video-container--hidden {
-  display: none;
+.terminal__training-video{
+  width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 
 #info {

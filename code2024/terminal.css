@@ -48,7 +48,6 @@
       flex-direction: column;
       width: 100vw;
       height: 100vh;
-      padding: 15px 10px;
       overflow: hidden;
       position: relative;
       background-color: var(--background-color);
@@ -65,6 +64,13 @@
   }
   
   .terminal__content {
+    width: 60%;
+    height: 100%;
+    padding: 15px 10px;
+  }
+
+  .terminal__content--no-video {
+    width: 100%;
   }
   
   .terminal__line {}
@@ -73,8 +79,35 @@
     display: none;
   }
 
+  .terminal__loading-video-container {
+  }
+  
+  .terminal__loading-video-container--hidden {
+    display: none;
+  }
+
   .terminal__line--command-line {
       color: var(--secondary-color);
+  }
+
+  .terminal__content-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: start;
+  }
+
+  .terminal__training-videos {
+    width: 40%;
+    height: 100%;
+  }
+
+  .terminal__training-videos--hidden {
+    display: none;
+    width: 0;
+    height: 0;
   }
 
       
