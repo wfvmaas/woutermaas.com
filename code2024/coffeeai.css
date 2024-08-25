@@ -334,6 +334,7 @@ table {
   background-color: #242424;
   margin: 0 2px;
   border-radius: 70%;
+  transition: height 2s ease-in-out;
 }
 
 .coffeeai__soundbar-bar--animated {
@@ -408,7 +409,7 @@ table {
 
 .coffeeai__button--pause-left {
   top: 70vh;
-  left: 6vw;
+  left: 2vw;
 }
 
 .coffeeai__button:hover,

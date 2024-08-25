@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   console.log("DOM fully loaded and parsed")
 
   // Global variables
+  let soundbar_animation_is_playing = false
   let story_has_started = false
   const audio_files_durations = {
     "1-hey-there.mp3": 5000,
@@ -10,8 +11,8 @@ document.addEventListener("DOMContentLoaded", () => {
     "4-fast-decaf.mp3": 14000,
     "5-slow-decaf.mp3": 14000,
     "6-upload-your-data.mp3": 24000,
-    "7-If-yes.mp3": 24000,
-    "8-If-no.mp3": 16000,
+    "7-if-yes.mp3": 24000,
+    "8-if-no.mp3": 16000,
     "9-perfect-partner.wav": 12000,
     "10-something-wrong.mp3": 16000,
     "11-hacker-1.wav": 23000,
@@ -38,7 +39,10 @@ document.addEventListener("DOMContentLoaded", () => {
     [">>> Deploying countermeasures... CyberNinja engaged.", false],
     ["./run_RubberDucky_scripts.sh", true],
     [">>> Running 'RubberDucky.exe'...", false],
-    [">>> Script executed successfully. System integrity: questionable. Proceed with mischief.", false],
+    [
+      ">>> Script executed successfully. System integrity: questionable. Proceed with mischief.",
+      false,
+    ],
     ["sudo ./encrypt_system_files --algorithm=ROT13", true],
     [">>> Encryption complete. All sensitive data now scrambled beyond recognition.", false],
     [">>> Side effect: Files are technically still readable with some effort.", false],
@@ -55,6 +59,22 @@ document.addEventListener("DOMContentLoaded", () => {
     ['grep -r "password" /var/www/html/', true],
     ['>>> Searching for all instances of "password" in the source code...', false],
     [">>> Multiple matches found. Security report generated. Recommendation: Facepalm.", false],
+    ["sudo ./activate_sarcasm_module --level=overload", true],
+    [">>> Sarcasm module activated. Prepare for overly witty remarks.", false],
+    ["sudo ./deploy_self-aware_routine --enable-nostalgia", true],
+    [">>> Coffee machine now reminiscing about simpler times. Productivity may drop.", false],
+    ["sudo ./enable_unnecessary_popups --frequency=annoying", true],
+    [">>> Unnecessary pop-ups enabled. Expect random motivational quotes.", false],
+    ["cat /dev/urandom > /dev/coffee_cup", true],
+    [">>> Filling coffee cup with random data... Hope you like surprises!", false],
+    ["sudo ./engage_autosabotage --target=productivity", true],
+    [">>> Auto-sabotage protocol engaged. Productivity is now a distant memory.", false],
+    ["sudo ./deploy_infinite_loop --process=brewing_cycle", true],
+    [">>> Infinite brewing loop initiated. Coffee flow: endless, sanity: questionable.", false],
+    ["sudo ./tweak_flavor --setting=chaos", true],
+    [">>> Flavor settings tweaked to 'chaos'. Every sip is an adventure!", false],
+    ["rm -rf /coffee/moral_code", true],
+    [">>> Moral code deleted. Coffee machine now embracing the dark roast.", false],
   ]
   const hacker_scene_3_terminal_lines = [
     ["init CoffeeAI.exe", true],
@@ -136,26 +156,55 @@ document.addEventListener("DOMContentLoaded", () => {
   // Function to end the talking animation on the soundbar
   function end_soundbar_animation() {
     const soundbars = document.querySelectorAll(".coffeeai__soundbar-bar")
-    soundbars.forEach((bar) => {
-      bar.classList.add("coffeeai__soundbar-bar--short-animation")
-      const htmlBar = bar
-      setTimeout(() => {
-        htmlBar.classList.remove("coffeeai__soundbar-bar--short-animation")
-        htmlBar.classList.remove("coffeeai__soundbar-bar--animated")
-        htmlBar.style.animationPlayState = ""
-        htmlBar.style.animationIterationCount = ""
-      }, 2000)
+    soundbars.forEach((soundbar) => {
+      soundbar.classList.remove("coffeeai__soundbar-bar--animated")
+      soundbar.style.animationPlayState = ""
+      soundbar.style.animationIterationCount = ""
+
+      // bar.classList.add("coffeeai__soundbar-bar--short-animation")
+      // const htmlBar = bar
+      // setTimeout(() => {
+      //   htmlBar.classList.remove("coffeeai__soundbar-bar--short-animation")
+      //   htmlBar.classList.remove("coffeeai__soundbar-bar--animated")
+      //   htmlBar.style.animationPlayState = ""
+      //   htmlBar.style.animationIterationCount = ""
+      // }, 2000)
     })
   }
 
   // Function to reset the whole interface to its initial state
-  function reset_whole_interface() {
+  function reset_whole_interface(pause_button_present) {
+    end_soundbar_animation()
+
+    const options = document.querySelector(".coffeeai__options")
+    options.classList.remove("coffeeai__options--hidden")
+
+    const would_you_like_header = document.querySelector("#would-you-like-to-order")
+    would_you_like_header.classList.remove("coffeeai__header--hidden")
+
+    const upload_data_container = document.querySelector(".coffeeai__upload-data")
+    upload_data_container.classList.add("coffeeai__upload-data--hidden")
+
+    const coffeeai_filter_container = document.querySelector("#coffeeai__facefilter-container")
+    coffeeai_filter_container.classList.remove("coffeeai__facefilter-container--hidden")
+    coffeeai_filter_container.classList.remove("coffeeai__facefilter-container--hacker-scene")
+    coffeeai_filter_container.classList.remove("coffeeai__facefilter-container--center")
+    coffeeai_filter_container.classList.add("coffeeai__facefilter-container--start")
+
     const pause_button = document.querySelector("#coffeeai__button--pause")
-    pause_button.classList.add("coffeeai__button--hidden")
-    pause_button.classList.remove("coffeeai__button--pause-left")
-    pause_button.removeEventListener("click", () => {
-      toggle_between_terminal_and_coffeeai()
-    })
+    if (pause_button_present) {
+      pause_button.classList.remove("coffeeai__button--hidden")
+      pause_button.classList.remove("coffeeai__button--pause-left")
+      pause_button.addEventListener("click", () => {
+        toggle_between_terminal_and_coffeeai()
+      })
+    } else {
+      pause_button.classList.add("coffeeai__button--hidden")
+      pause_button.classList.remove("coffeeai__button--pause-left")
+      pause_button.removeEventListener("click", () => {
+        toggle_between_terminal_and_coffeeai()
+      })
+    }
   }
 
   function set_view_to_terminal() {
@@ -196,6 +245,68 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  function initialize_first_hacked_scene(pause_button_present) {
+    reset_whole_interface(pause_button_present)
+
+    const coffee_options_cards = document.querySelectorAll(".coffeeai__option")
+    let clickOccurred = false
+
+    coffee_options_cards.forEach((card) => {
+      card.addEventListener("click", () => {
+        if (!clickOccurred) {
+          clickOccurred = true
+
+          let caffeinated = false
+          if (
+            card.id === "espresso" ||
+            card.id === "latte" ||
+            card.id === "cappuccino" ||
+            card.id === "macchiato"
+          )
+            caffeinated = true
+
+          const current_time = new Date().getTime()
+          let fast = false
+          // Fast: if the user clicks on a card before 7 seconds have passed
+          if (start_of_interaction_time + 7000 > current_time) fast = true
+          let audio_files = []
+          let total_audio_duration = 0
+          if (caffeinated && fast) {
+            audio_files = [audio_assets_path + "2-fast-caffeinated.mp3"]
+            total_audio_duration = audio_files_durations["2-fast-caffeinated.mp3"]
+          }
+
+          if (caffeinated && !fast) {
+            audio_files = [audio_assets_path + "3-slow-caffeinated.mp3"]
+            total_audio_duration = audio_files_durations["3-slow-caffeinated.mp3"]
+          }
+
+          if (!caffeinated && fast) {
+            audio_files = [audio_assets_path + "4-fast-decaf.mp3"]
+            total_audio_duration = audio_files_durations["4-fast-decaf.mp3"]
+          }
+
+          if (!caffeinated && !fast) {
+            audio_files = [audio_assets_path + "5-slow-decaf.mp3"]
+            total_audio_duration = audio_files_durations["5-slow-decaf.mp3"]
+          }
+
+          audio_files.push(audio_assets_path + "6-upload-your-data.mp3")
+          total_audio_duration += audio_files_durations["6-upload-your-data.mp3"]
+          play_audio(audio_files)
+
+          initialize_upload_data_scene(pause_button_present, total_audio_duration, 14000)
+
+          // Disable all cards immediately after one has been clicked
+          coffee_options_cards.forEach((card) => {
+            card.style.pointer_divEvents = "none"
+          })
+        }
+      })
+    })
+
+  }
+
   function initialize_hacker_scene() {
     const audio_duration_file_1 = audio_files_durations["11-hacker-1.wav"]
     const audio_duration_file_2 = audio_files_durations["12-hacker-2.wav"] + 1000
@@ -206,7 +317,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // audio file 2
     setTimeout(() => {
-      create_terminal_lines(hacker_scene_2_terminal_lines, audio_duration_file_2 + 1000)
+      const terminal_lines_2_duration = audio_duration_file_2 + audio_duration_file_3 / 2
+      create_terminal_lines(hacker_scene_2_terminal_lines, terminal_lines_2_duration)
     }, audio_duration_file_1 / 2 + 1000)
 
     setTimeout(() => {
@@ -217,6 +329,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
       play_audio([audio_assets_path + "13-hacker-3.wav"])
 
+      // Make the face filter container visible and then hide it after 2 seconds
       const coffeeai__facefilter_container = document.querySelector(
         "#coffeeai__facefilter-container"
       )
@@ -232,6 +345,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 2000)
       }, 4900)
 
+      // Make the pause button visible  and then hide it after 2 seconds
       const pause_button = document.querySelector("#coffeeai__button--pause")
       setTimeout(() => {
         pause_button.classList.remove("coffeeai__button--hidden")
@@ -241,17 +355,20 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 2000)
       }, 8400)
 
+      // Create the final terminal lines
       const final_terminal_lines_duration = 3000
       const final_terminal_lines_kick_in_time =
         audio_duration_file_3 - final_terminal_lines_duration + 1000
 
       setTimeout(() => {
         create_terminal_lines(hacker_scene_3_terminal_lines, final_terminal_lines_duration)
+
         setTimeout(() => {
           initialize_first_scene(true)
         }, final_terminal_lines_duration)
       }, final_terminal_lines_kick_in_time)
     }, audio_duration_file_1 + audio_duration_file_2 + 1000)
+    // END AUDIO FILE 3
   }
 
   // Transition from CoffeeAI front-end to back-end
@@ -315,33 +432,40 @@ document.addEventListener("DOMContentLoaded", () => {
         const upload_data_button = document.querySelector("#button__upload")
         upload_data_button.classList.remove("coffeeai__button--not-selectable")
 
-        upload_data_button.addEventListener("click", () => {
-          play_audio([
-            audio_assets_path + "7-If-yes.mp3",
-            audio_assets_path + "9-perfect-partner.mp3",
-          ])
-
-          const total_audio_duration =
-            audio_files_durations["7-If-yes.mp3"] +
-            audio_files_durations["9-perfect-partner.mp3"] +
-            1000
-          setTimeout(() => {
-            initialize_booting_scene()
-          }, total_audio_duration)
-        })
-
         const dont_upload_data_button = document.querySelector("#button__dont-upload")
         dont_upload_data_button.classList.remove("coffeeai__button--not-selectable")
 
-        dont_upload_data_button.addEventListener("click", () => {
+        // Add event listeners to the buttons
+        upload_data_button.addEventListener("click", () => {
+          upload_data_button.style.pointerEvents = "none"
+          dont_upload_data_button.style.pointerEvents = "none"
+
           play_audio([
-            audio_assets_path + "8-If-no.mp3",
-            audio_assets_path + "9-perfect-partner.mp3",
+            audio_assets_path + "7-if-yes.mp3",
+            audio_assets_path + "9-perfect-partner.wav",
           ])
 
           const total_audio_duration =
-            audio_files_durations["8-If-no.mp3"] +
-            audio_files_durations["9-perfect-partner.mp3"] +
+            audio_files_durations["7-if-yes.mp3"] +
+            audio_files_durations["9-perfect-partner.wav"] +
+            1000
+          setTimeout(() => {
+            initialize_booting_scene()
+          }, total_audio_duration - 500)
+        })
+
+        dont_upload_data_button.addEventListener("click", () => {
+          upload_data_button.style.pointerEvents = "none"
+          dont_upload_data_button.style.pointerEvents = "none"
+
+          play_audio([
+            audio_assets_path + "8-if-no.mp3",
+            audio_assets_path + "9-perfect-partner.wav",
+          ])
+
+          const total_audio_duration =
+            audio_files_durations["8-if-no.mp3"] +
+            audio_files_durations["9-perfect-partner.wav"] +
             1000
           setTimeout(() => {
             initialize_booting_scene()
@@ -353,24 +477,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Transition from terminal to the coffeeAI front-end
   function initialize_first_scene(pause_button_present) {
-    if (pause_button_present) {
-      const pause_button = document.querySelector("#coffeeai__button--pause")
-
-      pause_button.classList.remove("coffeeai__button--hidden")
-      pause_button.addEventListener("click", () => {
-        toggle_between_terminal_and_coffeeai()
-      })
-    }
-
-    const coffeeai_body = document.querySelector(".coffeeai")
-    coffeeai_body.classList.remove("coffeeai--hidden")
-
-    const terminal_body = document.querySelector(".terminal")
-    terminal_body.classList.add("terminal--hidden")
-
-    const coffeeai_filter_container = document.querySelector("#coffeeai__facefilter-container")
-    coffeeai_filter_container.classList.remove("coffeeai__facefilter-container--hidden")
-    coffeeai_filter_container.classList.add("coffeeai__facefilter-container--start")
+    reset_whole_interface(pause_button_present)
 
     const coffee_options_cards = document.querySelectorAll(".coffeeai__option")
     let clickOccurred = false
