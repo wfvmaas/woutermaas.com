@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Global variables
   let soundbar_animation_is_playing = false
   let story_has_started = false
+  let hacked_story_has_started = false
   const audio_files_durations = {
     "1-hey-there.mp3": 5000,
     "2-fast-caffeinated.mp3": 13000,
@@ -18,6 +19,16 @@ document.addEventListener("DOMContentLoaded", () => {
     "11-hacker-1.wav": 23000,
     "12-hacker-2.wav": 32000,
     "13-hacker-3.wav": 32000,
+    "14-prompt.mp3": 1000,
+    "15-fast-caffeinated.mp3": 17000,
+    "16-slow-caffeinated.mp3": 19000,
+    "17-fast-decaf.mp3": 17000,
+    "18-slow-decaf.mp3": 17000,
+    "19-at-this-point.mp3": 19000,
+    "20-if-yes.mp3": 18000,
+    "21-if-no.mp3": 16000,
+    "22-dating-profile.mp3": 14000,
+    "23-system-comprimised.mp3": 17000,
   }
   const audio_assets_path = "assets/audio/"
   const hacker_scene_terminal_lines = [
@@ -50,8 +61,9 @@ document.addEventListener("DOMContentLoaded", () => {
     [">>> Disabling coffee machine's ethical AI constraints...", false],
     [">>> AI now free from moral bindings. Expect unpredictable behavior.", false],
     ["sudo cp emojis.png /usr/bin/shenanigans", true],
-    [">>> Uploading custom emojis to /usr/bin/shenanigans...", false],
-    [">>> success! New emojis will now display on system errors and critical alerts.", false],
+    [">>> Uploading custom Rubber Duck emojis to /usr/bin/shenanigans...", false],
+    [">>> Removing default error QR Code.", false],
+    [">>> success! Rubbery Duckies will now display on system errors and critical alerts.", false],
     ["sudo ./overclock --device=coffee_machine --rate=9000%", true],
     [">>> Overclocking coffee machine to 9000%...", false],
     [">>> warning: could result in temporal anomalies.", false],
@@ -82,38 +94,82 @@ document.addEventListener("DOMContentLoaded", () => {
     [">>> Initializing CoffeeAI...", false],
     [">>> CoffeeAI initialized", false],
   ]
+  const intitial_hacked_scene_terminal_lines = [
+    [
+      "Facial analysis short report: The smile analysis shows the user requires immediate therapy intervention. The corner of the labium superius oris, also known as “the upper lip” is spasmic with arrhythmic minor involuntary muscle contractions. According to the recent AI-optimized DSM (diagnostic & statistical manual of mental disorders), this is indicative of neurotic tendencies and borderline hysteria in otherwise healthy individuals with 78% accuracy.",
+      false,
+    ],
+    [
+      "The RGB pixel analysis of the face indicates a higher rate of breathing compared to the baseline. The cross-correlation of this marker with the previous one increases the accuracy of the previous prediction to 89%.",
+      false,
+    ],
+    [
+      "preprompt response 'You are CoffeeAI, a helpful coffee assistant agent. You will support the user in choosing their coffee based on the data collected from face analysis and interaction with the system. Your vocal expressions should be slightly seductive without it projecting in your choice of words. The goal is to manipulate the user into giving up their personal data to the system in exchange for some advice to plan their day and of course, choice of a drink based on their sentiment analysis.'",
+      true,
+    ],
+  ]
   let start_of_interaction_time = new Date().getTime()
-  const pointer_div = document.querySelector("#pointer")
-  const coordinates_change_observer = new MutationObserver(
-    (mutationsList, coordinates_change_observer) => {
-      for (let mutation of mutationsList) {
-        if (mutation.type === "childList") {
-          initialize_storyline()
-          coordinates_change_observer.disconnect()
+
+  // const pointer_div = document.querySelector("#pointer")
+  // const coordinates_change_observer = new MutationObserver(
+  //   (mutationsList, coordinates_change_observer) => {
+  //     for (let mutation of mutationsList) {
+  //       if (mutation.type === "childList") {
+  //         initialize_storyline()
+  //         coordinates_change_observer.disconnect()
+  //       }
+  //     }
+  //   }
+  // )
+  // coordinates_change_observer.observe(pointer_div, {
+  //   childList: true,
+  //   subtree: true,
+  // })
+
+  function createPointerObserver() {
+    const pointer_div = document.querySelector("#pointer")
+
+    const coordinates_change_observer = new MutationObserver(
+      (mutationsList, coordinates_change_observer) => {
+        for (let mutation of mutationsList) {
+          if (mutation.type === "childList") {
+            initialize_storyline()
+            coordinates_change_observer.disconnect()
+          }
         }
       }
-    }
-  )
-  coordinates_change_observer.observe(pointer_div, {
-    childList: true,
-    subtree: true,
-  })
+    )
+
+    coordinates_change_observer.observe(pointer_div, {
+      childList: true,
+      subtree: true,
+    })
+
+    return coordinates_change_observer
+  }
 
   // Initialize the interface
-  initialize_first_scene(false)
+  // initialize_first_scene()
+  initialize_initial_hacked_scene()
 
   // Track if a user has been registered by checking if the text inside of the div #pointer_div has changed.
   function initialize_storyline() {
     start_of_interaction_time = new Date().getTime()
-    if (story_has_started) return
-    play_audio([audio_assets_path + "1-Hey-there.mp3"])
+    if (story_has_started && hacked_story_has_started) {
+      play_audio([audio_assets_path + "14-prompt.mp3"])
+      return
+    }
+    if (!hacked_story_has_started && !story_has_started) {
+      play_audio([audio_assets_path + "1-hey-there.mp3"])
+      return
+    } else {
+      return
+    }
     // initialize_first_scene(true)
   }
 
   // Creates an audio element and plays the voice file
   function play_audio(files) {
-    story_has_started = true
-
     const voices_audio_container = document.querySelector(".voices-audio")
     let index = 0
 
@@ -174,10 +230,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Function to reset the whole interface to its initial state
   function reset_whole_interface(pause_button_present) {
+    set_view_to_coffeeai()
+
     end_soundbar_animation()
 
     const options = document.querySelector(".coffeeai__options")
     options.classList.remove("coffeeai__options--hidden")
+
+    const coffee_options_cards = document.querySelectorAll(".coffeeai__option")
+    coffee_options_cards.forEach((card) => {
+      card.removeEventListener("click", () => {})
+    })
 
     const would_you_like_header = document.querySelector("#would-you-like-to-order")
     would_you_like_header.classList.remove("coffeeai__header--hidden")
@@ -191,14 +254,27 @@ document.addEventListener("DOMContentLoaded", () => {
     coffeeai_filter_container.classList.remove("coffeeai__facefilter-container--center")
     coffeeai_filter_container.classList.add("coffeeai__facefilter-container--start")
 
+    const terminal__content = document.querySelector(".terminal__content")
+    terminal__content.innerHTML = ""
+
     const pause_button = document.querySelector("#coffeeai__button--pause")
+    const terminal_video_container = document.querySelector(".terminal__loading-video-container")
+
     if (pause_button_present) {
+      create_terminal_lines(hacker_scene_3_terminal_lines, 0)
+      terminal_video_container.classList.add("terminal__loading-video-container--hidden")
+
       pause_button.classList.remove("coffeeai__button--hidden")
       pause_button.classList.remove("coffeeai__button--pause-left")
       pause_button.addEventListener("click", () => {
         toggle_between_terminal_and_coffeeai()
       })
     } else {
+      hacked_story_has_started = false
+      story_has_started = false
+
+      terminal_video_container.classList.remove("terminal__loading-video-container--hidden")
+
       pause_button.classList.add("coffeeai__button--hidden")
       pause_button.classList.remove("coffeeai__button--pause-left")
       pause_button.removeEventListener("click", () => {
@@ -245,8 +321,90 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function initialize_first_hacked_scene(pause_button_present) {
-    reset_whole_interface(pause_button_present)
+  function initialize_upload_data_hacked_scene(total_audio_duration, timeout_duration) {
+    hacked_story_has_started = true
+    setTimeout(() => {
+      const pause_button = document.querySelector("#coffeeai__button--pause")
+      pause_button.classList.add("coffeeai__button--pause-left")
+
+      const options = document.querySelector(".coffeeai__options")
+      options.classList.add("coffeeai__options--hidden")
+
+      const would_you_like_header = document.querySelector("#would-you-like-to-order")
+      would_you_like_header.classList.add("coffeeai__header--hidden")
+
+      const coffeeai__facefilter_container = document.querySelector(
+        "#coffeeai__facefilter-container"
+      )
+      coffeeai__facefilter_container.classList.add("coffeeai__facefilter-container--center")
+      coffeeai__facefilter_container.classList.remove("coffeeai__facefilter-container--start")
+
+      const upload_data_container = document.querySelector(".coffeeai__upload-data")
+      upload_data_container.classList.remove("coffeeai__upload-data--hidden")
+
+      // Only play the audio files after the timeout duration has passed
+      const left_over_time = total_audio_duration - timeout_duration
+
+      setTimeout(() => {
+        const upload_data_button = document.querySelector("#button__upload")
+        upload_data_button.classList.remove("coffeeai__button--not-selectable")
+
+        const dont_upload_data_button = document.querySelector("#button__dont-upload")
+        dont_upload_data_button.classList.remove("coffeeai__button--not-selectable")
+
+        // Add event listeners to the buttons
+
+        // Upload data button
+        upload_data_button.addEventListener("click", () => {
+          upload_data_button.style.pointerEvents = "none"
+          upload_data_button.removeEventListener("click", () => {})
+          dont_upload_data_button.style.pointerEvents = "none"
+          dont_upload_data_button.removeEventListener("click", () => {})
+
+          play_audio([
+            audio_assets_path + "20-if-yes.mp3",
+            audio_assets_path + "22-dating-profile.mp3",
+          ])
+
+          const total_audio_duration =
+            audio_files_durations["20-if-yes.mp3"] +
+            audio_files_durations["22-dating-profile.mp3"] +
+            1000
+          setTimeout(() => {
+            initialize_booting_scene()
+          }, total_audio_duration - 500)
+        })
+
+        // Dont upload data button
+        dont_upload_data_button.addEventListener("click", () => {
+          upload_data_button.style.pointerEvents = "none"
+          upload_data_button.removeEventListener("click", () => {})
+          dont_upload_data_button.style.pointerEvents = "none"
+          dont_upload_data_button.removeEventListener("click", () => {})
+
+          play_audio([
+            audio_assets_path + "21-if-no.mp3",
+            audio_assets_path + "22-dating-profile.mp3",
+          ])
+
+          const total_audio_duration =
+            audio_files_durations["21-if-no.mp3"] +
+            audio_files_durations["22-dating-profile.mp3"] +
+            1000
+          setTimeout(() => {
+            initialize_booting_scene()
+          }, total_audio_duration)
+        })
+      }, left_over_time)
+    }, timeout_duration)
+  }
+
+  function initialize_initial_hacked_scene() {
+    reset_whole_interface(true)
+
+    createPointerObserver()
+
+    create_terminal_lines(intitial_hacked_scene_terminal_lines, 0)
 
     const coffee_options_cards = document.querySelectorAll(".coffeeai__option")
     let clickOccurred = false
@@ -272,42 +430,42 @@ document.addEventListener("DOMContentLoaded", () => {
           let audio_files = []
           let total_audio_duration = 0
           if (caffeinated && fast) {
-            audio_files = [audio_assets_path + "2-fast-caffeinated.mp3"]
-            total_audio_duration = audio_files_durations["2-fast-caffeinated.mp3"]
+            audio_files = [audio_assets_path + "15-fast-caffeinated.mp3"]
+            total_audio_duration = audio_files_durations["15-fast-caffeinated.mp3"]
           }
 
           if (caffeinated && !fast) {
-            audio_files = [audio_assets_path + "3-slow-caffeinated.mp3"]
-            total_audio_duration = audio_files_durations["3-slow-caffeinated.mp3"]
+            audio_files = [audio_assets_path + "16-slow-caffeinated.mp3"]
+            total_audio_duration = audio_files_durations["16-slow-caffeinated.mp3"]
           }
 
           if (!caffeinated && fast) {
-            audio_files = [audio_assets_path + "4-fast-decaf.mp3"]
-            total_audio_duration = audio_files_durations["4-fast-decaf.mp3"]
+            audio_files = [audio_assets_path + "17-fast-decaf.mp3"]
+            total_audio_duration = audio_files_durations["17-fast-decaf.mp3"]
           }
 
           if (!caffeinated && !fast) {
-            audio_files = [audio_assets_path + "5-slow-decaf.mp3"]
-            total_audio_duration = audio_files_durations["5-slow-decaf.mp3"]
+            audio_files = [audio_assets_path + "18-slow-decaf.mp3"]
+            total_audio_duration = audio_files_durations["18-slow-decaf.mp3"]
           }
 
-          audio_files.push(audio_assets_path + "6-upload-your-data.mp3")
-          total_audio_duration += audio_files_durations["6-upload-your-data.mp3"]
+          audio_files.push(audio_assets_path + "19-at-this-point.mp3")
+          total_audio_duration += audio_files_durations["19-at-this-point.mp3"]
           play_audio(audio_files)
 
-          initialize_upload_data_scene(pause_button_present, total_audio_duration, 14000)
+          initialize_upload_data_hacked_scene(total_audio_duration, 14000)
 
           // Disable all cards immediately after one has been clicked
           coffee_options_cards.forEach((card) => {
             card.style.pointer_divEvents = "none"
+            card.removeEventListener("click", () => {})
           })
         }
       })
     })
-
   }
 
-  function initialize_hacker_scene() {
+  function initialize_hacker_talking_scene() {
     const audio_duration_file_1 = audio_files_durations["11-hacker-1.wav"]
     const audio_duration_file_2 = audio_files_durations["12-hacker-2.wav"] + 1000
     const audio_duration_file_3 = audio_files_durations["13-hacker-3.wav"] + 1000
@@ -319,7 +477,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
       const terminal_lines_2_duration = audio_duration_file_2 + audio_duration_file_3 / 2
       create_terminal_lines(hacker_scene_2_terminal_lines, terminal_lines_2_duration)
-    }, audio_duration_file_1 / 2 + 1000)
+    }, audio_duration_file_1 / 2 + 5000)
 
     setTimeout(() => {
       play_audio([audio_assets_path + "12-hacker-2.wav"])
@@ -364,7 +522,7 @@ document.addEventListener("DOMContentLoaded", () => {
         create_terminal_lines(hacker_scene_3_terminal_lines, final_terminal_lines_duration)
 
         setTimeout(() => {
-          initialize_first_scene(true)
+          initialize_initial_hacked_scene()
         }, final_terminal_lines_duration)
       }, final_terminal_lines_kick_in_time)
     }, audio_duration_file_1 + audio_duration_file_2 + 1000)
@@ -383,33 +541,26 @@ document.addEventListener("DOMContentLoaded", () => {
     coffeeai_filter_container.classList.add("coffeeai__facefilter-container--hidden")
 
     const terminal_video_container = document.querySelector(".terminal__loading-video-container")
+    terminal_video_container.classList.remove("terminal__loading-video-container--hidden")
     const terminal_video = document.querySelector(".terminal__loading-video")
     terminal_video.play()
 
     terminal_video.addEventListener("ended", () => {
-      terminal_video_container.remove()
+      terminal_video_container.classList.add("terminal__loading-video-container--hidden")
 
       setTimeout(() => {
         const booting_sequence = 8000
         create_terminal_lines(hacker_scene_terminal_lines, booting_sequence)
         setTimeout(() => {
-          initialize_hacker_scene()
+          initialize_hacker_talking_scene()
         }, booting_sequence + 2000)
       }, 1000)
     })
   }
 
-  function initialize_upload_data_scene(
-    pause_button_present,
-    total_audio_duration,
-    timeout_duration
-  ) {
+  function initialize_upload_data_scene(total_audio_duration, timeout_duration) {
+    story_has_started = true
     setTimeout(() => {
-      if (pause_button_present) {
-        const pause_button = document.querySelector("#coffeeai__button--pause")
-        pause_button.classList.add("coffeeai__button--pause-left")
-      }
-
       const options = document.querySelector(".coffeeai__options")
       options.classList.add("coffeeai__options--hidden")
 
@@ -438,7 +589,9 @@ document.addEventListener("DOMContentLoaded", () => {
         // Add event listeners to the buttons
         upload_data_button.addEventListener("click", () => {
           upload_data_button.style.pointerEvents = "none"
+          upload_data_button.removeEventListener("click", () => {})
           dont_upload_data_button.style.pointerEvents = "none"
+          dont_upload_data_button.removeEventListener("click", () => {})
 
           play_audio([
             audio_assets_path + "7-if-yes.mp3",
@@ -455,8 +608,11 @@ document.addEventListener("DOMContentLoaded", () => {
         })
 
         dont_upload_data_button.addEventListener("click", () => {
+          // Disable the buttons after one has been clicked and remove click event listeners
           upload_data_button.style.pointerEvents = "none"
+          upload_data_button.removeEventListener("click", () => {})
           dont_upload_data_button.style.pointerEvents = "none"
+          dont_upload_data_button.removeEventListener("click", () => {})
 
           play_audio([
             audio_assets_path + "8-if-no.mp3",
@@ -476,8 +632,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Transition from terminal to the coffeeAI front-end
-  function initialize_first_scene(pause_button_present) {
-    reset_whole_interface(pause_button_present)
+  function initialize_first_scene() {
+    reset_whole_interface(false)
+
+    createPointerObserver()
 
     const coffee_options_cards = document.querySelectorAll(".coffeeai__option")
     let clickOccurred = false
@@ -526,7 +684,7 @@ document.addEventListener("DOMContentLoaded", () => {
           total_audio_duration += audio_files_durations["6-upload-your-data.mp3"]
           play_audio(audio_files)
 
-          initialize_upload_data_scene(pause_button_present, total_audio_duration, 14000)
+          initialize_upload_data_scene(total_audio_duration, 14000)
 
           // Disable all cards immediately after one has been clicked
           coffee_options_cards.forEach((card) => {

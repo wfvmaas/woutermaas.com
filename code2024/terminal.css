@@ -1,6 +1,6 @@
 :root {
     --global-font-size: 18px;
-    --global-line-height: 0.8em;
+    --global-line-height: 1em;
     --global-space: 10px;
     --font-stack: "Menlo", "Monaco", "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", serif;
     --mono-font-stack: "Menlo", "Monaco", "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", serif;
@@ -452,7 +452,8 @@
   }
   
   p {
-    margin: 0 0 var(--global-line-height);
+    margin: 0 0 calc(var(--global-line-height2) / 3);
+    margin-bottom: 5px;
   }
   
   .container {

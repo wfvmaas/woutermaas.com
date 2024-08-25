@@ -372,7 +372,6 @@ table {
   animation-duration: 4.6s;
 }
 
-
 .coffeeai__button--upload {
   width: 70%;
   height: auto;
@@ -404,7 +403,6 @@ table {
   transition: all 0.3s ease;
   transition: left 3s ease;
   transition: top 3s ease;
-
 }
 
 .coffeeai__button--pause-left {
@@ -476,6 +474,13 @@ table {
 }
 
 .coffeeai__facefilter-container--hidden {
+  display: none;
+}
+
+.terminal__loading-video-container {
+}
+
+.terminal__loading-video-container--hidden {
   display: none;
 }
 
