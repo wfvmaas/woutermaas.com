@@ -1,6 +1,6 @@
 :root {
     --global-font-size: 18px;
-    --global-line-height: 1em;
+    --global-line-height: 1.1em;
     --global-space: 10px;
     --font-stack: "Menlo", "Monaco", "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", serif;
     --mono-font-stack: "Menlo", "Monaco", "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", serif;
@@ -51,6 +51,11 @@
       overflow: hidden;
       position: relative;
       background-color: var(--background-color);
+  }
+    
+  
+  .terminal--website {
+    
   }
 
   .terminal--hidden {

@@ -388,7 +388,8 @@ table {
   transition: background-color 0.3s; /* Smooth transition on hover */
   text-decoration: none; /* Remove underline if using <a> */
 }
-.coffeeai__button--pause, .coffeeai__button--play {
+.coffeeai__button--pause,
+.coffeeai__button--play {
   position: absolute;
   top: 70vh;
   left: 58vw;
@@ -472,8 +473,11 @@ table {
 }
 
 .coffeeai__facefilter-container--hacker-scene {
-  top: 20vh;
+  /* top: 20vh;
   left: calc(50vw - 10vw);
+  width: 44vw; */
+  top: 5vh;
+  right: 0;
   width: 44vw;
 }
 
@@ -481,7 +485,7 @@ table {
   display: none;
 }
 
-.terminal__training-video{
+.terminal__training-video {
   width: 100%;
   height: auto;
   object-fit: contain;

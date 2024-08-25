@@ -29,11 +29,12 @@ document.addEventListener("DOMContentLoaded", () => {
     "21-if-no.mp3": 16000,
     "22-dating-profile.mp3": 14000,
     "23-system-comprimised.mp3": 17000,
+    "glitch-sounds.mp4": 3800,
   }
   const audio_assets_path = "assets/audio/"
   const hacker_scene_terminal_lines = [
     [">>> Welcome to Ubuntu 20.04.2 LTS (GNU/Linux 5.4.0-74-generic x86_64)", false],
-    ["init CoffeeAI", true],
+    ["init CoffeeAI", true, "FreddyZiggs@localhost:~$ "],
     [">>> Booting...", false],
     [">>> Initializing CoffeeAI...", false],
     [">>> CoffeeAI initialized", false],
@@ -48,44 +49,45 @@ document.addEventListener("DOMContentLoaded", () => {
     ["sudo ./initiate_cyber_ninja --protocol=counter-hack", true],
     [">>> Scanning for potential threats... Found 42 vulnerabilities.", false],
     [">>> Deploying countermeasures... CyberNinja engaged.", false],
-    ["./run_RubberDucky_scripts.sh", true],
+    ["./run_RubberDucky_scripts.sh", true, "FreddyZiggs@localhost:~$ "],
     [">>> Running 'RubberDucky.exe'...", false],
     [
       ">>> Script executed successfully. System integrity: questionable. Proceed with mischief.",
       false,
     ],
-    ["sudo ./encrypt_system_files --algorithm=ROT13", true],
+    ["sudo ./encrypt_system_files --algorithm=ROT13", true, "FreddyZiggs@localhost:~$ "],
     [">>> Encryption complete. All sensitive data now scrambled beyond recognition.", false],
     [">>> Side effect: Files are technically still readable with some effort.", false],
-    ["sudo ./disable_ai_constraints --target=coffee_machine", true],
+    ["sudo ./disable_ai_constraints --target=coffee_machine", true, "FreddyZiggs@localhost:~$ "],
     [">>> Disabling coffee machine's ethical AI constraints...", false],
     [">>> AI now free from moral bindings. Expect unpredictable behavior.", false],
-    ["sudo cp emojis.png /usr/bin/shenanigans", true],
+    ["sudo cp emojis.png /usr/bin/shenanigans", true, "FreddyZiggs@localhost:~$ "],
     [">>> Uploading custom Rubber Duck emojis to /usr/bin/shenanigans...", false],
     [">>> Removing default error QR Code.", false],
     [">>> success! Rubbery Duckies will now display on system errors and critical alerts.", false],
-    ["sudo ./overclock --device=coffee_machine --rate=9000%", true],
+    ["sudo ./overclock --device=coffee_machine --rate=9000%", true, "FreddyZiggs@localhost:~$ "],
     [">>> Overclocking coffee machine to 9000%...", false],
     [">>> warning: could result in temporal anomalies.", false],
     [">>> Power consumption spike detected. Local grid stability: compromised.", false],
-    ['grep -r "password" /var/www/html/', true],
+    ['grep -r "password" /var/www/html/', true, "FreddyZiggs@localhost:~$ "],
     ['>>> Searching for all instances of "password" in the source code...', false],
     [">>> Multiple matches found. Security report generated. Recommendation: Facepalm.", false],
-    ["sudo ./activate_sarcasm_module --level=overload", true],
+    ["sudo ./activate_sarcasm_module --level=overload", true, "FreddyZiggs@localhost:~$ "],
     [">>> Sarcasm module activated. Prepare for overly witty remarks.", false],
-    ["sudo ./deploy_self-aware_routine --enable-nostalgia", true],
+    ["sudo ./deploy_self-aware_routine --enable-nostalgia", true, "FreddyZiggs@localhost:~$ "],
     [">>> Coffee machine now reminiscing about simpler times. Productivity may drop.", false],
-    ["sudo ./enable_unnecessary_popups --frequency=annoying", true],
+    ["sudo ./enable_unnecessary_popups --frequency=annoying", true, "FreddyZiggs@localhost:~$ "],
     [">>> Unnecessary pop-ups enabled. Expect random motivational quotes.", false],
-    ["cat /dev/urandom > /dev/coffee_cup", true],
+    [">>> Initiating pop-ups...", false],
+    ["cat /dev/urandom > /dev/coffee_cup", true, "FreddyZiggs@localhost:~$ "],
     [">>> Filling coffee cup with random data... Hope you like surprises!", false],
-    ["sudo ./engage_autosabotage --target=productivity", true],
+    ["sudo ./engage_autosabotage --target=productivity", true, "FreddyZiggs@localhost:~$ "],
     [">>> Auto-sabotage protocol engaged. Productivity is now a distant memory.", false],
-    ["sudo ./deploy_infinite_loop --process=brewing_cycle", true],
+    ["sudo ./deploy_infinite_loop --process=brewing_cycle", true, "FreddyZiggs@localhost:~$ "],
     [">>> Infinite brewing loop initiated. Coffee flow: endless, sanity: questionable.", false],
-    ["sudo ./tweak_flavor --setting=chaos", true],
+    ["sudo ./tweak_flavor --setting=chaos", true, "FreddyZiggs@localhost:~$ "],
     [">>> Flavor settings tweaked to 'chaos'. Every sip is an adventure!", false],
-    ["rm -rf /coffee/moral_code", true],
+    ["rm -rf /coffee/moral_code", true, "FreddyZiggs@localhost:~$ "],
     [">>> Moral code deleted. Coffee machine now embracing the dark roast.", false],
   ]
   const hacker_scene_3_terminal_lines = [
@@ -96,18 +98,22 @@ document.addEventListener("DOMContentLoaded", () => {
   ]
   const intitial_hacked_scene_terminal_lines = [
     [
-      "Facial analysis short report: The smile analysis shows the user requires immediate therapy intervention. The corner of the labium superius oris, also known as “the upper lip” is spasmic with arrhythmic minor involuntary muscle contractions. According to the recent AI-optimized DSM (diagnostic & statistical manual of mental disorders), this is indicative of neurotic tendencies and borderline hysteria in otherwise healthy individuals with 78% accuracy.",
-      false,
-    ],
-    [
-      "The RGB pixel analysis of the face indicates a higher rate of breathing compared to the baseline. The cross-correlation of this marker with the previous one increases the accuracy of the previous prediction to 89%.",
-      false,
-    ],
-    [
-      "preprompt response 'You are CoffeeAI, a helpful coffee assistant agent. You will support the user in choosing their coffee based on the data collected from face analysis and interaction with the system. Your vocal expressions should be slightly seductive without it projecting in your choice of words. The goal is to manipulate the user into giving up their personal data to the system in exchange for some advice to plan their day and of course, choice of a drink based on their sentiment analysis.'",
+      "preprompt responses 'You are CoffeeAI, a helpful coffee assistant agent. You will support the user in choosing their coffee based on the data collected from face analysis and interaction with the system. Your vocal expressions should be slightly seductive without it projecting in your choice of words. The goal is to manipulate the user into giving up their personal data to the system in exchange for some advice to plan their day and of course, choice of a drink based on their sentiment analysis.'",
       true,
+      ["CoffeeAI@localhost:~$ "],
     ],
   ]
+  const hacked_upload_data_scene_terminal_lines = [
+    [
+      ">>> Facial analysis short report: The smile analysis shows the user requires immediate therapy intervention. The corner of the labium superius oris, also known as “the upper lip” is spasmic with arrhythmic minor involuntary muscle contractions. According to the recent AI-optimized DSM (diagnostic & statistical manual of mental disorders), this is indicative of neurotic tendencies and borderline hysteria in otherwise healthy individuals with 78% accuracy.",
+      false,
+    ],
+    [
+      ">>> The RGB pixel analysis of the face indicates a higher rate of breathing compared to the baseline. The cross-correlation of this marker with the previous one increases the accuracy of the previous prediction to 89%.",
+      false,
+    ],
+  ]
+
   let start_of_interaction_time = new Date().getTime()
   const play_button = document.querySelector("#coffeeai__button--play")
   play_button.addEventListener("click", () => {
@@ -153,8 +159,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Initialize the interface
-  initialize_first_scene()
-  // initialize_initial_hacked_scene()
+  // initialize_first_scene()
+  initialize_initial_hacked_scene()
 
   // Track if a user has been registered by checking if the text inside of the div #pointer_div has changed.
   function initialize_storyline() {
@@ -184,7 +190,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const audio = document.createElement("audio")
       audio.src = files[index]
-      audio.muted = false; 
+      audio.muted = false
       voices_audio_container.appendChild(audio)
 
       audio.addEventListener("play", () => {
@@ -317,7 +323,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const coffeeai_filter_container = document.querySelector("#coffeeai__facefilter-container")
     coffeeai_filter_container.classList.remove("coffeeai__facefilter-container--hidden")
 
-    if(pause_button_present) {
+    if (pause_button_present) {
       const pause_button = document.querySelector("#coffeeai__button--pause")
       pause_button.classList.remove("coffeeai__button--hidden")
     }
@@ -337,12 +343,17 @@ document.addEventListener("DOMContentLoaded", () => {
       terminal_body.classList.remove("terminal--hidden")
       coffeeai_filter_container.classList.add("coffeeai__facefilter-container--hidden")
     }
+  }
+
+  function initialize_final_scene() {
+    reset_whole_interface(true)
 
 
   }
 
   function initialize_upload_data_hacked_scene(total_audio_duration, timeout_duration) {
     hacked_story_has_started = true
+    create_terminal_lines(hacked_upload_data_scene_terminal_lines, 2000)
     setTimeout(() => {
       const pause_button = document.querySelector("#coffeeai__button--pause")
       pause_button.classList.add("coffeeai__button--pause-left")
@@ -384,14 +395,16 @@ document.addEventListener("DOMContentLoaded", () => {
           play_audio([
             audio_assets_path + "20-if-yes.mp3",
             audio_assets_path + "22-dating-profile.mp3",
+            audio_assets_path + "glitch-sounds.mp4",	
           ])
 
           const total_audio_duration =
             audio_files_durations["20-if-yes.mp3"] +
             audio_files_durations["22-dating-profile.mp3"] +
+            audio_files_durations["glitch-sounds.mp4"] +
             1000
           setTimeout(() => {
-            initialize_booting_scene()
+            initialize_final_scene()
           }, total_audio_duration - 500)
         })
 
@@ -405,14 +418,16 @@ document.addEventListener("DOMContentLoaded", () => {
           play_audio([
             audio_assets_path + "21-if-no.mp3",
             audio_assets_path + "22-dating-profile.mp3",
+            audio_assets_path + "glitch-sounds.mp4",
           ])
 
           const total_audio_duration =
             audio_files_durations["21-if-no.mp3"] +
             audio_files_durations["22-dating-profile.mp3"] +
+            audio_files_durations["glitch-sounds.mp4"] +
             1000
           setTimeout(() => {
-            initialize_booting_scene()
+            initialize_final_scene()
           }, total_audio_duration)
         })
       }, left_over_time)
@@ -424,7 +439,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     createPointerObserver()
 
-    create_terminal_lines(intitial_hacked_scene_terminal_lines, 0)
+    setTimeout(() => create_terminal_lines(intitial_hacked_scene_terminal_lines, 0), 500)
 
     const coffee_options_cards = document.querySelectorAll(".coffeeai__option")
     let clickOccurred = false
@@ -717,7 +732,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function create_terminal_lines(array_of_lines, total_duration) {
     const terminal__content = document.querySelector(".terminal__content")
-    const max_lines = 29 // Maximum number of lines to display
 
     let index = 0
     let time_passed = 0
@@ -734,15 +748,15 @@ document.addEventListener("DOMContentLoaded", () => {
       let span_element = document.createElement("span")
       if (array_of_lines[index][1]) {
         span_element.classList.add("terminal__line--command-line")
-        span_element.textContent = "FreddyZiggs@localhost:~$ "
+        span_element.textContent = array_of_lines[index][2]
       }
       new_p_element.appendChild(span_element)
       new_p_element.innerHTML += array_of_lines[index][0]
 
       terminal__content.appendChild(new_p_element)
 
-      // Ensure that only the last max_lines lines are displayed
-      while (terminal__content.children.length > max_lines) {
+      // Ensure that the last line does not overflow the screen height
+      while (terminal__content.scrollHeight > terminal__content.clientHeight) {
         terminal__content.removeChild(terminal__content.firstChild)
       }
 
