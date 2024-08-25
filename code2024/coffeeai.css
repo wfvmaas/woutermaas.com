@@ -142,6 +142,7 @@ table {
   overflow: hidden;
 }
 
+
 .coffeeai--hidden {
   display: none;
 }
@@ -191,6 +192,10 @@ table {
   justify-content: flex-start;
   align-items: center;
   gap: 10px;
+}
+
+.coffeeai__body-container--hidden {
+  display: none;
 }
 
 .coffeeai__drink-choice h2,
@@ -407,7 +412,9 @@ table {
 }
 
 .coffeeai__button--play {
-  left: calc(75vw - 2vw);
+  transform: translate(-50%, -50%);
+  left: 50vw;
+  top: 85vh;
 }
 
 .coffeeai__button--pause-left {
@@ -506,6 +513,10 @@ table {
   transition: all 0.5s ease; /* Transition for the canvas position change */
 }
 
+.headControlsCanvas--hidden {
+  display: none;
+}
+
 #pointer {
   display: none;
   position: fixed;
@@ -514,4 +525,37 @@ table {
   z-index: 1;
   border: 3px solid black;
   background-color: yellow;
+}
+
+.coffeeai__qr-code {
+  position: absolute;
+  top: 55vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+  height: 70vh;
+  width: auto;
+  z-index: 100;
+}
+
+.coffeeai__qr-code--hidden {
+  display: none;
+}
+
+.final-glitch-container {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.5;
+}
+
+.final-glitch-container--hidden {
+  display: none;
+}
+
+.final-glitch-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }

@@ -28,8 +28,8 @@ document.addEventListener("DOMContentLoaded", () => {
     "20-if-yes.mp3": 18000,
     "21-if-no.mp3": 16000,
     "22-dating-profile.mp3": 14000,
-    "23-system-comprimised.mp3": 17000,
-    "glitch-sounds.mp4": 3800,
+    "23-system-compromised.mp3": 17000,
+    "glitch-sounds.mp4": 3800
   }
   const audio_assets_path = "assets/audio/"
   const hacker_scene_terminal_lines = [
@@ -160,7 +160,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Initialize the interface
   // initialize_first_scene()
-  initialize_initial_hacked_scene()
+  // initialize_initial_hacked_scene()
+  initialize_final_scene()
 
   // Track if a user has been registered by checking if the text inside of the div #pointer_div has changed.
   function initialize_storyline() {
@@ -244,6 +245,18 @@ document.addEventListener("DOMContentLoaded", () => {
     set_view_to_coffeeai(pause_button_present)
 
     end_soundbar_animation()
+
+    const final_glitch_container = document.querySelector("#final-glitch-container")
+    final_glitch_container.classList.add("final-glitch-container--hidden")
+
+    const headControlsCanvas = document.querySelector("#headControlsCanvas")
+    headControlsCanvas.classList.remove("headControlsCanvas--hidden")
+
+    const qr_code = document.querySelector(".coffeeai__qr-code")
+    qr_code.classList.add("coffeeai__qr-code--hidden")
+
+    const coffeeai__body = document.querySelector(".coffeeai__body-container")
+    coffeeai__body.classList.remove("coffeeai__body-container--hidden")
 
     const options = document.querySelector(".coffeeai__options")
     options.classList.remove("coffeeai__options--hidden")
@@ -346,9 +359,41 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function initialize_final_scene() {
-    reset_whole_interface(true)
+    reset_whole_interface(false)
 
+    const coffeeai__body = document.querySelector(".coffeeai__body-container")
+    coffeeai__body.classList.add("coffeeai__body-container--hidden")
 
+    const qr_code = document.querySelector(".coffeeai__qr-code")
+    qr_code.classList.remove("coffeeai__qr-code--hidden")
+
+    const headControlsCanvas = document.querySelector("#headControlsCanvas")
+    headControlsCanvas.classList.add("headControlsCanvas--hidden")
+
+    play_audio([
+      audio_assets_path + "23-system-compromised.mp3",
+      audio_assets_path + "10-something-wrong.mp3",
+      audio_assets_path + "glitch-sounds.mp4",
+    ])
+
+    const total_audio_duration = audio_files_durations["23-system-compromised.mp3"] + audio_files_durations["10-something-wrong.mp3"] + audio_files_durations["glitch-sounds.mp4"]
+
+    setTimeout(() => {
+      const final_glitch_container = document.querySelector("#final-glitch-container")
+      final_glitch_container.classList.remove("final-glitch-container--hidden")
+      const final_glitch_video = document.querySelector("#final-glitch-video")
+      final_glitch_video.play()
+
+      setTimeout(() => {
+        final_glitch_container.classList.add("final-glitch-container--hidden")
+      }, 4000);
+    }, total_audio_duration - 2500)
+
+    setTimeout(() => {
+      set_view_to_terminal()
+      qr_code.src = "assets/images/qr-code-rubber-ducky.png"
+
+    }, total_audio_duration - 2500)
   }
 
   function initialize_upload_data_hacked_scene(total_audio_duration, timeout_duration) {
@@ -395,7 +440,7 @@ document.addEventListener("DOMContentLoaded", () => {
           play_audio([
             audio_assets_path + "20-if-yes.mp3",
             audio_assets_path + "22-dating-profile.mp3",
-            audio_assets_path + "glitch-sounds.mp4",	
+            audio_assets_path + "glitch-sounds.mp4",
           ])
 
           const total_audio_duration =
