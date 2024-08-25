@@ -290,9 +290,9 @@ table {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 30%;
+  height: 250px;
   width: 41%;
-  gap: 50px;
+  gap: 30px;
   position: absolute;
   top: 65vh;
   left: 70vw;
@@ -300,7 +300,7 @@ table {
 
 .coffeeai__stars {
   width: 80%;
-  height: 80%;
+  height: 60%;
   object-fit: contain;
   animation: coffeeai__sparkle 3s infinite;
 }
@@ -324,7 +324,7 @@ table {
 .coffeeai__soundbar {
   display: flex;
   align-items: center;
-  height: 35%;
+  height: 30%;
   width: 100%;
   justify-content: center;
 }
