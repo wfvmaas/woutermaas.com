@@ -379,6 +379,11 @@ document.addEventListener("DOMContentLoaded", () => {
       set_view_to_terminal()
       qr_code.src = "assets/images/qr-code-rubber-ducky.png"
     }, total_audio_duration - 2500)
+
+    // Reload the page 1 minute after the final audio file has finished playing
+    setTimeout(() => {
+      location.reload()
+    }, total_audio_duration + 60000)
   }
 
   function initialize_upload_data_hacked_scene(total_audio_duration, timeout_duration) {
@@ -829,7 +834,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.removeEventListener(event, resetInactivityTimeout, false)
       })
       location.reload() // Reload the page
-    }, 60000 * 3.5)
+    }, 60000 * 2.5)
   }
 
   // List of events that reset the inactivity timer
