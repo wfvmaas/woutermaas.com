@@ -382,8 +382,8 @@ table {
   height: auto;
   padding: 15px;
   font-weight: 800;
-  background-color: #ff0000; /* Bright red background */
-  color: white; /* White text color */
+  background-color: #FDD15B;
+  color: black;
   font-size: 40px; /* Large font size */
   border: none; /* Remove default border */
   border-radius: 30px; /* Rounded corners */
