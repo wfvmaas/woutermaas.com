@@ -2,10 +2,12 @@ document.addEventListener("DOMContentLoaded", () => {
   console.log("DOM fully loaded and parsed")
   const website_text = [
     [">>> Welcome to EspressoExposé 20.04.2 LTS (GNU/Linux 5.4.0-74-generic x86_64)", null],
-    ["init EspressoExposé", "console_command", "WouterMaas@localhost:~$ "],
+    ["init EspressoExposé.exe", "console_command", "WouterMaas@localhost:~$ "],
     [">>> Booting...", null],
-    [">>> Initializing EspressoExposé...", null],
-    [">>> EspressoExposé initialized", null],
+    [">>> Initializing Espresso Exposé...", null],
+    [">>> Espresso Exposé initialized", null],
+    ["Get in touch with the makers of Espresso Exposé. ", null],
+    ["Contact us", "url", "https://www.woutermaas.com/contact"],
     [">>> These genartive AI models like ChatGPT are actually much less closed than big companies woud like us to believe. This is also one of the big discussions about 'debasing' AI at the moment. The fun thing is that you can already make an AI much more open, right now, by 'jailbreaking' them. Check out this community for fun examples of this", null],
     ["Jailbreaking ChatGPT", "url", "https://www.reddit.com/r/ChatGPTJailbreak/new/"],
     ["init deeper_knowledge", "console_command", "MonaHedayati@localhost:~$ "],
