@@ -257,6 +257,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const upload_data_container = document.querySelector(".coffeeai__upload-data")
     upload_data_container.classList.add("coffeeai__upload-data--hidden")
 
+    const upload_data_button = document.querySelector("#button__upload")
+    upload_data_button.classList.add("coffeeai__button--not-selectable")
+
+    const dont_upload_data_button = document.querySelector("#button__dont-upload")
+    dont_upload_data_button.classList.add("coffeeai__button--not-selectable")
+
     const coffeeai_filter_container = document.querySelector("#coffeeai__facefilter-container")
     coffeeai_filter_container.classList.remove("coffeeai__facefilter-container--hidden")
     coffeeai_filter_container.classList.remove("coffeeai__facefilter-container--hacker-scene")
