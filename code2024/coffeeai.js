@@ -2,31 +2,31 @@ document.addEventListener("DOMContentLoaded", () => {
   console.log("DOM fully loaded and parsed")
 
   // Global variables
-  let story_stage = 'initial'
+  let story_stage = "initial"
   const audio_files_durations = {
-    "1-hey-there.mp3": 5000,
-    "2-fast-caffeinated.mp3": 13000,
-    "3-slow-caffeinated.mp3": 13000,
-    "4-fast-decaf.mp3": 14000,
-    "5-slow-decaf.mp3": 14000,
-    "6-upload-your-data.mp3": 24000,
-    "7-if-yes.mp3": 24000,
-    "8-if-no.mp3": 16000,
+    "1-hey-there.wav": 5000,
+    "2-fast-caffeinated.wav": 13000,
+    "3-slow-caffeinated.wav": 13000,
+    "4-fast-decaf.wav": 14000,
+    "5-slow-decaf.wav": 14000,
+    "6-upload-your-data.wav": 24000,
+    "7-if-yes.wav": 24000,
+    "8-if-no.wav": 16000,
     "9-perfect-partner.wav": 12000,
-    "10-something-wrong.mp3": 16000,
+    "10-something-wrong.wav": 16000,
     "11-hacker-1.wav": 23000,
     "12-hacker-2.wav": 32000,
     "13-hacker-3.wav": 32000,
-    "14-prompt.mp3": 1000,
-    "15-fast-caffeinated.mp3": 17000,
-    "16-slow-caffeinated.mp3": 19000,
-    "17-fast-decaf.mp3": 17000,
-    "18-slow-decaf.mp3": 17000,
-    "19-at-this-point.mp3": 19000,
-    "20-if-yes.mp3": 18000,
-    "21-if-no.mp3": 16000,
-    "22-dating-profile.mp3": 14000,
-    "23-system-compromised.mp3": 17000,
+    "14-prompt.wav": 1000,
+    "15-fast-caffeinated.wav": 17000,
+    "16-slow-caffeinated.wav": 19000,
+    "17-fast-decaf.wav": 17000,
+    "18-slow-decaf.wav": 17000,
+    "19-at-this-point.wav": 19000,
+    "20-if-yes.wav": 18000,
+    "21-if-no.wav": 16000,
+    "22-dating-profile.wav": 14000,
+    "23-system-compromised.wav": 17000,
     "glitch-sounds.mp4": 3800,
   }
   const audio_assets_path = "assets/audio/"
@@ -167,11 +167,11 @@ document.addEventListener("DOMContentLoaded", () => {
   function initialize_storyline() {
     start_of_interaction_time = new Date().getTime()
     console.log(story_stage)
-    if (story_stage === 'initial') {
-      play_audio([audio_assets_path + "1-hey-there.mp3"])
+    if (story_stage === "initial") {
+      play_audio([audio_assets_path + "1-hey-there.wav"])
       return
-    } else if (story_stage === 'hacked') {
-      play_audio([audio_assets_path + "14-prompt.mp3"])
+    } else if (story_stage === "hacked") {
+      play_audio([audio_assets_path + "14-prompt.wav"])
       return
     } else {
       return
@@ -288,7 +288,7 @@ document.addEventListener("DOMContentLoaded", () => {
         set_view_to_terminal(true)
       })
     } else {
-      story_stage = 'initial'
+      story_stage = "initial"
       terminal_loading_video.classList.remove("terminal__loading-video-container--hidden")
       terminal__training_videos.classList.add("terminal__training-videos--hidden")
       terminal__content.classList.add("terminal__content--no-video")
@@ -360,14 +360,14 @@ document.addEventListener("DOMContentLoaded", () => {
     headControlsCanvas.classList.add("headControlsCanvas--hidden")
 
     play_audio([
-      audio_assets_path + "23-system-compromised.mp3",
-      audio_assets_path + "10-something-wrong.mp3",
+      audio_assets_path + "23-system-compromised.wav",
+      audio_assets_path + "10-something-wrong.wav",
       audio_assets_path + "glitch-sounds.mp4",
     ])
 
     const total_audio_duration =
-      audio_files_durations["23-system-compromised.mp3"] +
-      audio_files_durations["10-something-wrong.mp3"] +
+      audio_files_durations["23-system-compromised.wav"] +
+      audio_files_durations["10-something-wrong.wav"] +
       audio_files_durations["glitch-sounds.mp4"]
 
     setTimeout(() => {
@@ -429,14 +429,14 @@ document.addEventListener("DOMContentLoaded", () => {
           dont_upload_data_button.removeEventListener("click", handleDontUploadClick)
 
           play_audio([
-            audio_assets_path + "20-if-yes.mp3",
-            audio_assets_path + "22-dating-profile.mp3",
+            audio_assets_path + "20-if-yes.wav",
+            audio_assets_path + "22-dating-profile.wav",
             audio_assets_path + "glitch-sounds.mp4",
           ])
 
           const total_audio_duration =
-            audio_files_durations["20-if-yes.mp3"] +
-            audio_files_durations["22-dating-profile.mp3"] +
+            audio_files_durations["20-if-yes.wav"] +
+            audio_files_durations["22-dating-profile.wav"] +
             audio_files_durations["glitch-sounds.mp4"] +
             1000
           setTimeout(() => {
@@ -449,14 +449,14 @@ document.addEventListener("DOMContentLoaded", () => {
           dont_upload_data_button.removeEventListener("click", handleDontUploadClick)
 
           play_audio([
-            audio_assets_path + "21-if-no.mp3",
-            audio_assets_path + "22-dating-profile.mp3",
+            audio_assets_path + "21-if-no.wav",
+            audio_assets_path + "22-dating-profile.wav",
             audio_assets_path + "glitch-sounds.mp4",
           ])
 
           const total_audio_duration =
-            audio_files_durations["21-if-no.mp3"] +
-            audio_files_durations["22-dating-profile.mp3"] +
+            audio_files_durations["21-if-no.wav"] +
+            audio_files_durations["22-dating-profile.wav"] +
             audio_files_durations["glitch-sounds.mp4"] +
             1000
           setTimeout(() => {
@@ -472,75 +472,75 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function initialize_initial_hacked_scene() {
-    reset_whole_interface(true);
+    reset_whole_interface(true)
 
-    story_stage = 'hacked'
-  
-    createPointerObserver();
-  
-    setTimeout(() => create_terminal_lines(intitial_hacked_scene_terminal_lines, 0), 500);
-  
-    const coffee_options_cards = document.querySelectorAll(".coffeeai__option");
-    let clickOccurred = false;
-  
+    story_stage = "hacked"
+
+    createPointerObserver()
+
+    setTimeout(() => create_terminal_lines(intitial_hacked_scene_terminal_lines, 0), 500)
+
+    const coffee_options_cards = document.querySelectorAll(".coffeeai__option")
+    let clickOccurred = false
+
     // Define the event handler function
     function handleCardClick(event) {
       if (!clickOccurred) {
-        clickOccurred = true;
-  
-        let caffeinated = false;
-        const card = event.currentTarget;
+        clickOccurred = true
+
+        let caffeinated = false
+        const card = event.currentTarget
         if (
           card.id === "espresso" ||
           card.id === "latte" ||
           card.id === "cappuccino" ||
           card.id === "macchiato"
         )
-          caffeinated = true;
-  
-        const current_time = new Date().getTime();
-        let fast = false;
+          caffeinated = true
+
+        const current_time = new Date().getTime()
+        let fast = false
         // Fast: if the user clicks on a card before 7 seconds have passed
-        if (start_of_interaction_time + 7000 > current_time) fast = true;
-        let audio_files = [];
-        let total_audio_duration = 0;
+        if (start_of_interaction_time + 7000 > current_time) fast = true
+        let audio_files = []
+        let total_audio_duration = 0
         if (caffeinated && fast) {
-          audio_files = [audio_assets_path + "15-fast-caffeinated.mp3"];
-          total_audio_duration = audio_files_durations["15-fast-caffeinated.mp3"];
+          audio_files = [audio_assets_path + "15-fast-caffeinated.wav"]
+          total_audio_duration = audio_files_durations["15-fast-caffeinated.wav"]
         }
-  
+
         if (caffeinated && !fast) {
-          audio_files = [audio_assets_path + "16-slow-caffeinated.mp3"];
-          total_audio_duration = audio_files_durations["16-slow-caffeinated.mp3"];
+          audio_files = [audio_assets_path + "16-slow-caffeinated.wav"]
+          total_audio_duration = audio_files_durations["16-slow-caffeinated.wav"]
         }
-  
+
         if (!caffeinated && fast) {
-          audio_files = [audio_assets_path + "17-fast-decaf.mp3"];
-          total_audio_duration = audio_files_durations["17-fast-decaf.mp3"];
+          audio_files = [audio_assets_path + "17-fast-decaf.wav"]
+          total_audio_duration = audio_files_durations["17-fast-decaf.wav"]
         }
-  
+
         if (!caffeinated && !fast) {
-          audio_files = [audio_assets_path + "18-slow-decaf.mp3"];
-          total_audio_duration = audio_files_durations["18-slow-decaf.mp3"];
+          audio_files = [audio_assets_path + "18-slow-decaf.wav"]
+          total_audio_duration = audio_files_durations["18-slow-decaf.wav"]
         }
-  
-        audio_files.push(audio_assets_path + "19-at-this-point.mp3");
-        total_audio_duration += audio_files_durations["19-at-this-point.mp3"];
-        play_audio(audio_files);
-  
-        initialize_upload_data_hacked_scene(total_audio_duration, 14000);
-  
+
+        audio_files.push(audio_assets_path + "19-at-this-point.wav")
+        total_audio_duration += audio_files_durations["19-at-this-point.wav"]
+        play_audio(audio_files)
+
+        initialize_upload_data_hacked_scene(total_audio_duration, 14000)
+
         // Remove the event listeners from the cards
         coffee_options_cards.forEach((card) => {
-          card.removeEventListener("click", handleCardClick);
-        });
+          card.removeEventListener("click", handleCardClick)
+        })
       }
     }
-  
+
     // Add event listeners to the cards
     coffee_options_cards.forEach((card) => {
-      card.addEventListener("click", handleCardClick);
-    });
+      card.addEventListener("click", handleCardClick)
+    })
   }
 
   function initialize_hacker_talking_scene() {
@@ -637,7 +637,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function initialize_upload_data_scene(total_audio_duration, timeout_duration) {
-    story_stage = 'upload_data'
+    story_stage = "upload_data"
     setTimeout(() => {
       const options = document.querySelector(".coffeeai__options")
       options.classList.add("coffeeai__options--hidden")
@@ -670,12 +670,12 @@ document.addEventListener("DOMContentLoaded", () => {
           dont_upload_data_button.removeEventListener("click", handleDontUploadClick)
 
           play_audio([
-            audio_assets_path + "7-if-yes.mp3",
+            audio_assets_path + "7-if-yes.wav",
             audio_assets_path + "9-perfect-partner.wav",
           ])
 
           const total_audio_duration =
-            audio_files_durations["7-if-yes.mp3"] +
+            audio_files_durations["7-if-yes.wav"] +
             audio_files_durations["9-perfect-partner.wav"] +
             1000
           setTimeout(() => {
@@ -688,12 +688,12 @@ document.addEventListener("DOMContentLoaded", () => {
           dont_upload_data_button.removeEventListener("click", handleDontUploadClick)
 
           play_audio([
-            audio_assets_path + "8-if-no.mp3",
+            audio_assets_path + "8-if-no.wav",
             audio_assets_path + "9-perfect-partner.wav",
           ])
 
           const total_audio_duration =
-            audio_files_durations["8-if-no.mp3"] +
+            audio_files_durations["8-if-no.wav"] +
             audio_files_durations["9-perfect-partner.wav"] +
             1000
           setTimeout(() => {
@@ -739,27 +739,27 @@ document.addEventListener("DOMContentLoaded", () => {
         let audio_files = []
         let total_audio_duration = 0
         if (caffeinated && fast) {
-          audio_files = [audio_assets_path + "2-fast-caffeinated.mp3"]
-          total_audio_duration = audio_files_durations["2-fast-caffeinated.mp3"]
+          audio_files = [audio_assets_path + "2-fast-caffeinated.wav"]
+          total_audio_duration = audio_files_durations["2-fast-caffeinated.wav"]
         }
 
         if (caffeinated && !fast) {
-          audio_files = [audio_assets_path + "3-slow-caffeinated.mp3"]
-          total_audio_duration = audio_files_durations["3-slow-caffeinated.mp3"]
+          audio_files = [audio_assets_path + "3-slow-caffeinated.wav"]
+          total_audio_duration = audio_files_durations["3-slow-caffeinated.wav"]
         }
 
         if (!caffeinated && fast) {
-          audio_files = [audio_assets_path + "4-fast-decaf.mp3"]
-          total_audio_duration = audio_files_durations["4-fast-decaf.mp3"]
+          audio_files = [audio_assets_path + "4-fast-decaf.wav"]
+          total_audio_duration = audio_files_durations["4-fast-decaf.wav"]
         }
 
         if (!caffeinated && !fast) {
-          audio_files = [audio_assets_path + "5-slow-decaf.mp3"]
-          total_audio_duration = audio_files_durations["5-slow-decaf.mp3"]
+          audio_files = [audio_assets_path + "5-slow-decaf.wav"]
+          total_audio_duration = audio_files_durations["5-slow-decaf.wav"]
         }
 
-        audio_files.push(audio_assets_path + "6-upload-your-data.mp3")
-        total_audio_duration += audio_files_durations["6-upload-your-data.mp3"]
+        audio_files.push(audio_assets_path + "6-upload-your-data.wav")
+        total_audio_duration += audio_files_durations["6-upload-your-data.wav"]
         play_audio(audio_files)
 
         initialize_upload_data_scene(total_audio_duration, 14000)
@@ -776,6 +776,91 @@ document.addEventListener("DOMContentLoaded", () => {
       card.addEventListener("click", handleCardClick)
     })
   }
+
+  function set_analysis_values() {
+    const pointer_div = document.querySelector("#pointer")
+    const mood_value = document.querySelector("#coffeeai__analysis-mood-value")
+    const eagerness_value = document.querySelector("#coffeeai__analysis-eagerness-value")
+    const attention_value = document.querySelector("#coffeeai__analysis-attention-value")
+
+    let lastExecutionTime = 0
+    const throttleInterval = 80 // 10ms throttle interval
+
+    const observer = new MutationObserver((mutationsList) => {
+      const currentTime = Date.now()
+
+      if (currentTime - lastExecutionTime >= throttleInterval) {
+        lastExecutionTime = currentTime
+
+        for (let mutation of mutationsList) {
+          if (mutation.type === "childList") {
+            const pointer_value = pointer_div.textContent.split(",")
+            const leftright = parseFloat(pointer_value[0])
+            const updown = parseFloat(pointer_value[1])
+
+            const mood = getMood(leftright)
+            const eagerness = getEagerness(updown)
+            const attention = getAttention(leftright, updown)
+
+            mood_value.textContent = mood
+            eagerness_value.textContent = eagerness
+            attention_value.textContent = attention
+
+            mood_value.style.color = getColor(leftright)
+            eagerness_value.style.color = getColor(updown)
+            attention_value.style.color = getColor(leftright + updown)
+          }
+        }
+      }
+    })
+
+    function getMood(value) {
+      if (value <= -0.0355) return "Bored"
+      else if (value <= -0.0244) return "Dissatisfied"
+      else if (value <= -0.0133) return "Content"
+      else if (value <= -0.0022) return "Excited"
+      else if (value <= 0.0089) return "Ecstatic"
+      else return "Overjoyed"
+    }
+
+    function getEagerness(value) {
+      if (value <= -0.0307) return "Uninterested"
+      else if (value <= -0.0186) return "Curious"
+      else if (value <= -0.0065) return "Interested"
+      else if (value <= 0.0056) return "Extremely Eager"
+      else if (value <= 0.0177) return "Eager"
+      else return "Curious"
+    }
+
+    function getAttention(leftright, updown) {
+      const combined = leftright + updown
+      if (combined <= -0.0401) return "Distracted"
+      else if (combined <= -0.0268) return "Attentive"
+      else if (combined <= -0.0135) return "Engaged"
+      else if (combined <= -0.0002) return "Focused"
+      else if (combined <= 0.0131) return "Laser Focused"
+      else return "Focused"
+    }
+
+    function getColor(value) {
+      const normalized = (value + 0.05) / 0.1
+      let green
+      if (normalized <= 0.5) {
+        green = 255 * (normalized * 2) // Increase greenness up to the midpoint
+      } else {
+        green = 255 * (2 - normalized * 2) // Decrease greenness after the midpoint
+      }
+      const red = 255 * (1 - normalized)
+      return `rgb(${red}, ${green}, 0)`
+    }
+
+    observer.observe(pointer_div, {
+      childList: true,
+      subtree: true,
+    })
+  }
+
+  set_analysis_values()
 
   function create_terminal_lines(array_of_lines, total_duration) {
     const terminal__content = document.querySelector(".terminal__content")

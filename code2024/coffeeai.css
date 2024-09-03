@@ -173,6 +173,14 @@ table {
   transition: all 3s ease;
 }
 
+.coffeeai__header--analysis-header {
+  font-size: 1.2em;
+  font-weight: 700;
+  color: black;
+  margin-bottom: 2px;
+
+}
+
 .coffeeai__header--hidden {
   opacity: 0;
   height: 0;
@@ -182,6 +190,18 @@ table {
   margin-top: 10px;
   font-size: 1.2em;
   color: #666;
+}
+
+.coffeeai__analysis-value {
+  font-size: 1em;
+  font-weight: 400;
+  color: #333;
+  white-space: nowrap;          /* Prevents text from wrapping */
+  overflow: hidden;             /* Hides overflowed text */
+  text-overflow: ellipsis;      /* Adds ellipsis for overflowed text */
+  width: 180px;
+  max-width: 100%;              /* Ensures the text doesn't exceed its container */
+  display: block;
 }
 
 .coffeeai__body-container {
@@ -465,18 +485,21 @@ table {
   align-items: center;
   height: auto;
   transition: all 3s ease;
+  gap: 10px;
 }
 
 .coffeeai__facefilter-container--start {
   top: 19vh;
-  left: 58vw;
-  width: 35vw;
+  left: 53.5vw;
+  width: 47vw;
+  /* left: 58vw;
+  width: 35vw; */
 }
 
 .coffeeai__facefilter-container--center {
   top: 14vh;
-  left: calc(50vw - 33vw);
-  width: 66vw;
+  left: calc(50vw - 41vw + 85px);
+  width: 82vw;
 }
 
 .coffeeai__facefilter-container--hacker-scene {
@@ -525,6 +548,11 @@ table {
   z-index: 1;
   border: 3px solid black;
   background-color: yellow;
+}
+
+.coffeeai__facefilter-analysis {
+  position: relative;
+
 }
 
 .coffeeai__qr-code {

@@ -53,7 +53,7 @@ THREE.HeadControls = function ( threeCamera, canvasId, NNCPath ) {
     that.avgx = posx*0.99 + that.avgx*0.01;
     that.avgy = posy*0.99 + that.avgy*0.01;
 
-    document.getElementById("pointer").innerHTML = ""+leftright+"<br/>"+updown;
+    document.getElementById("pointer").innerHTML = leftright+","+updown;
 
 
     // to prevent a glitchy experience when a head rotation is right between two values,
