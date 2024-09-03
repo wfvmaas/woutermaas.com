@@ -498,15 +498,15 @@ table {
 
 .coffeeai__facefilter-container--center {
   top: 14vh;
-  left: calc(50vw - 41vw + 85px);
-  width: 82vw;
+  left: calc(50vw - 40vw + 85px);
+  width: 80vw;
 }
 
 .coffeeai__facefilter-container--hacker-scene {
   /* top: 20vh;
   left: calc(50vw - 10vw);
   width: 44vw; */
-  top: 5vh;
+  top: 0;
   right: 0;
   width: 44vw;
 }
@@ -551,7 +551,7 @@ table {
 }
 
 .coffeeai__facefilter-analysis {
-  position: relative;
+  /* position: relative; */
 
 }
 

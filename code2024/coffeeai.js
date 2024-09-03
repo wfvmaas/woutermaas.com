@@ -356,8 +356,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const qr_code = document.querySelector(".coffeeai__qr-code")
     qr_code.classList.remove("coffeeai__qr-code--hidden")
 
-    const headControlsCanvas = document.querySelector("#headControlsCanvas")
-    headControlsCanvas.classList.add("headControlsCanvas--hidden")
+    // const headControlsCanvas = document.querySelector("#headControlsCanvas")
+    // headControlsCanvas.classList.add("headControlsCanvas--hidden")
+
+    const coffeeai__facefilter_container = document.querySelector("#coffeeai__facefilter-container")
+    coffeeai__facefilter_container.classList.add("coffeeai__facefilter-container--hidden")
 
     play_audio([
       audio_assets_path + "23-system-compromised.wav",
@@ -389,7 +392,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Reload the page 1 minute after the final audio file has finished playing
     setTimeout(() => {
       location.reload()
-    }, total_audio_duration + 60000)
+    }, total_audio_duration + 30000)
   }
 
   function initialize_upload_data_hacked_scene(total_audio_duration, timeout_duration) {
