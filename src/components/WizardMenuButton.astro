@@ -54,7 +54,12 @@ const { isHomePage = false } = Astro.props
     if (isHomePage) {
       // Scroll to menu section on home page
       const menuSection = document.getElementById("menu-section")
-      menuSection?.scrollIntoView({ behavior: "smooth" })
+      if (menuSection) {
+        menuSection.scrollIntoView({ behavior: "smooth" })
+      } else {
+        // Fallback if menu section not found (shouldn't happen on home)
+        document.dispatchEvent(new CustomEvent("open-mobile-menu"))
+      }
     } else {
       // Open modal on other pages
       document.dispatchEvent(new CustomEvent("open-mobile-menu"))

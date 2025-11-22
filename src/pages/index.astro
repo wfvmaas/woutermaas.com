@@ -41,7 +41,7 @@ import ScrollIndicator from "../components/ScrollIndicator.astro"
 
       <!-- Scroll Indicator -->
       <div class="scroll-indicator-wrapper">
-        <ScrollIndicator scale={1.5} />
+        <ScrollIndicator scale={1.5} target="#menu-section" />
       </div>
 
       <!-- Menu Section -->
@@ -260,15 +260,3 @@ import ScrollIndicator from "../components/ScrollIndicator.astro"
     }
   }
 </style>
-
-<script>
-  // Smooth scroll to menu section when arrow is clicked
-  const scrollArrow = document.getElementById("scroll-indicator")
-  const menuSection = document.getElementById("menu-section")
-
-  scrollArrow?.addEventListener("click", () => {
-    menuSection?.scrollIntoView({
-      behavior: "smooth",
-    })
-  })
-</script>

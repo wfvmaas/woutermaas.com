@@ -2,14 +2,15 @@
 interface Props {
   color?: string
   scale?: number
+  target?: string
 }
 
-const { color = "currentColor", scale = 1 } = Astro.props
+const { color = "currentColor", scale = 1, target } = Astro.props
 ---
 
 <div
   class="scroll-indicator"
-  id="scroll-indicator"
+  data-target={target}
   style={`--scale: ${scale}; --color: ${color};`}
 >
   <svg
@@ -63,3 +64,19 @@ const { color = "currentColor", scale = 1 } = Astro.props
     }
   }
 </style>
+
+<script>
+  const indicators = document.querySelectorAll(".scroll-indicator")
+
+  indicators.forEach((indicator) => {
+    indicator.addEventListener("click", () => {
+      const targetId = indicator.getAttribute("data-target")
+      if (targetId) {
+        const targetElement = document.querySelector(targetId)
+        targetElement?.scrollIntoView({
+          behavior: "smooth",
+        })
+      }
+    })
+  })
+</script>
