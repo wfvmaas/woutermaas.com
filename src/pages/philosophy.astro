@@ -1,0 +1,51 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro"
+import { getCollection } from "astro:content"
+
+const posts = await getCollection("philosophy")
+---
+
+<BaseLayout title="Philosophy">
+  <div class="overview-page">
+    <div class="page-header">
+      <h1>Philosophy</h1>
+      <img
+        src="/doodles/philosophy_stickfigure.svg"
+        alt="Philosophy"
+        class="header-illustration"
+      />
+    </div>
+    <div class="content-list">
+      {
+        posts.length > 0 ? (
+          posts.map((post) => (
+            <a href={`/philosophy/${post.slug}`} class="content-item">
+              <article>
+                <h2>{post.data.title}</h2>
+                <p>{post.data.description}</p>
+              </article>
+            </a>
+          ))
+        ) : (
+          <p class="empty-state">Thoughts loading...</p>
+        )
+      }
+    </div>
+  </div>
+</BaseLayout>
+
+<style lang="less">
+  @import "../styles/overview-shared.less";
+
+  .overview-page {
+    .overview-base();
+
+    .content-list {
+      .content-list-styles();
+    }
+
+    .empty-state {
+      .empty-state-styles();
+    }
+  }
+</style>

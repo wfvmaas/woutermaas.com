@@ -1,0 +1,32 @@
+---
+import { getCollection } from "astro:content"
+import BaseLayout from "../../layouts/BaseLayout.astro"
+import "../../styles/pages/detail.less"
+
+export async function getStaticPaths() {
+  const stories = await getCollection("storytelling")
+  return stories.map((story) => ({
+    params: { slug: story.slug },
+    props: { story },
+  }))
+}
+
+const { story } = Astro.props
+const { Content } = await story.render()
+---
+
+<BaseLayout title={story.data.title}>
+  <article class="detail-page">
+    <header class="page-header">
+      <h1>{story.data.title}</h1>
+      {
+        story.data.description && (
+          <p class="description">{story.data.description}</p>
+        )
+      }
+    </header>
+    <div class="content">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

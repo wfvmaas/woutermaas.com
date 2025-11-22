@@ -1,0 +1,337 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro"
+import WizardMenuButton from "../components/WizardMenuButton.astro"
+---
+
+<BaseLayout title="Home" showFooter={true} showWizardMenu={false}>
+  <div class="home-page">
+    <!-- Sticky Illustrations Container -->
+    <div class="sticky-illustrations">
+      <!-- Wizard (Top Right) -->
+      <img
+        src="/doodles/wizard_cloud_1.svg"
+        alt="Wizard on a cloud"
+        class="wizard"
+      />
+
+      <!-- Dragon (Center/Right) -->
+      <img src="/doodles/dragon_1.svg" alt="Dragon" class="dragon" />
+    </div>
+
+    <!-- Mobile Wizard Menu Button -->
+    <WizardMenuButton isHomePage={true} />
+
+    <!-- Scrollable Content -->
+    <div class="scrollable-content">
+      <!-- Hero Section -->
+      <section class="hero-section">
+        <div class="content">
+          <h1>Hello</h1>
+
+          <div class="intro-text">
+            <p>
+              My name is Wouter a creative software wizard who likes to build
+              all sorts of things
+            </p>
+            <p>Feel invited to get to know one of my many wizard hats</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Scroll Indicator -->
+      <div class="scroll-indicator" id="scroll-arrow">
+        <svg
+          width="40"
+          height="40"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M12 5v14M19 12l-7 7-7-7"></path>
+        </svg>
+      </div>
+
+      <!-- Menu Section -->
+      <section class="menu-section" id="menu-section">
+        <nav>
+          <ul>
+            <li>
+              <a href="/software">
+                <span class="bullet"></span>
+                Software
+              </a>
+            </li>
+            <li>
+              <a href="/storytelling">
+                <span class="bullet"></span>
+                Storytelling
+              </a>
+            </li>
+            <li>
+              <a href="/philosophy">
+                <span class="bullet"></span>
+                Philosophy
+              </a>
+            </li>
+            <li>
+              <a href="/art">
+                <span class="bullet"></span>
+                Art
+              </a>
+            </li>
+            <li>
+              <a href="/hiking">
+                <span class="bullet"></span>
+                Hiking
+              </a>
+            </li>
+            <li>
+              <a href="/cv">
+                <span class="bullet"></span>
+                Serious CV
+              </a>
+            </li>
+            <li>
+              <a href="/contact">
+                <span class="bullet"></span>
+                Contact
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </section>
+    </div>
+  </div>
+</BaseLayout>
+
+<style lang="less">
+  @import "../styles/variables.less";
+  @import "../styles/mixins.less";
+
+  .home-page {
+    .sticky-illustrations {
+      // On mobile: static positioning (not fixed)
+      @media (max-width: @screen-md) {
+        position: absolute;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      // On desktop: fixed positioning
+      @media (min-width: @screen-md) {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        overflow: hidden;
+      }
+
+      .wizard {
+        // Hide wizard image - using WizardMenuButton component instead
+        display: none;
+      }
+
+      .dragon {
+        position: absolute;
+        top: 25%;
+        left: 5%;
+        width: 8rem;
+
+        @media (min-width: @screen-md) {
+          top: 30%;
+          left: auto;
+          right: 25%;
+          width: 10rem;
+        }
+
+        @media (min-width: @screen-lg) {
+          width: 12rem;
+          right: 30%;
+        }
+      }
+    }
+
+    .scrollable-content {
+      position: relative;
+      z-index: 10;
+
+      .scroll-indicator {
+        // Center relative to entire viewport width
+        position: absolute;
+        left: 50%;
+        top: 90vh;
+        transform: translateX(-50%) scale(1.5);
+        width: fit-content;
+        cursor: pointer;
+        z-index: 20;
+        .transition(transform);
+
+        &:hover {
+          transform: translateX(-50%) translateY(5px) scale(1.5);
+        }
+
+        svg {
+          width: 40px;
+          height: 40px;
+        }
+      }
+    }
+
+    .hero-section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: @spacing-8;
+      max-width: @container-max-width;
+      margin: 0 auto;
+      // position: relative; // Removed as arrow is now outside
+
+      @media (min-width: @screen-md) {
+        padding: @spacing-16;
+      }
+
+      @media (min-width: @screen-lg) {
+        padding-left: @spacing-24;
+        padding-right: @spacing-24;
+      }
+
+      .content {
+        max-width: 48rem;
+        padding-top: 45vh;
+
+        @media (min-width: @screen-md) {
+          padding-top: 25vh;
+        }
+
+        h1 {
+          font-size: 6.5rem;
+          font-weight: 600;
+          letter-spacing: -0.05em;
+          line-height: 1;
+          margin: 0 0 @spacing-8 0;
+
+          @media (min-width: @screen-sm) {
+            font-size: 7rem;
+          }
+
+          @media (min-width: @screen-md) {
+            font-size: 8rem;
+          }
+
+          @media (min-width: @screen-lg) {
+            font-size: 12rem;
+          }
+        }
+
+        .intro-text {
+          font-size: @text-base;
+          font-weight: 500;
+          max-width: 36rem;
+
+          @media (min-width: @screen-md) {
+            font-size: @text-lg;
+          }
+
+          @media (min-width: @screen-lg) {
+            font-size: @text-xl;
+          }
+
+          p {
+            margin-bottom: @spacing-6;
+          }
+        }
+      }
+    }
+
+    .menu-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: @spacing-8;
+      max-width: @container-max-width;
+      margin: 0 auto;
+
+      @media (min-width: @screen-md) {
+        padding: @spacing-16;
+      }
+
+      @media (min-width: @screen-lg) {
+        padding-left: @spacing-24;
+        padding-right: @spacing-24;
+      }
+
+      nav {
+        width: 100%;
+
+        ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+
+          li {
+            margin-bottom: @spacing-4;
+
+            @media (min-width: @screen-md) {
+              margin-bottom: @spacing-6;
+            }
+
+            a {
+              display: flex;
+              align-items: center;
+              font-size: @text-4xl;
+              font-weight: 700;
+              .transition(color);
+
+              @media (min-width: @screen-md) {
+                font-size: @text-5xl;
+              }
+
+              @media (min-width: @screen-lg) {
+                font-size: @text-6xl;
+              }
+
+              &:hover {
+                color: @color-gray-300;
+
+                .bullet {
+                  opacity: 1;
+                }
+              }
+
+              .bullet {
+                // Hide on mobile to remove whitespace
+                display: none;
+
+                // Show on desktop only
+                @media (min-width: @screen-md) {
+                  display: block;
+                  width: @spacing-4;
+                  height: @spacing-4;
+                  background-color: @color-black;
+                  border-radius: 50%;
+                  margin-right: @spacing-6;
+                  opacity: 0;
+                  .transition(opacity);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+</style>
+
+<script>
+  // Smooth scroll to menu section when arrow is clicked
+  const scrollArrow = document.getElementById("scroll-arrow")
+  const menuSection = document.getElementById("menu-section")
+
+  scrollArrow?.addEventListener("click", () => {
+    menuSection?.scrollIntoView({ behavior: "smooth" })
+  })
+</script>

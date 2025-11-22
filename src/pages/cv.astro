@@ -1,0 +1,184 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro"
+---
+
+<BaseLayout title="Serious CV">
+  <div class="cv-page">
+    <header class="cv-header">
+      <h1>Wouter Maas</h1>
+      <p class="subtitle">Medior Web Developer</p>
+      <div class="meta">
+        <span>Vue / Nuxt Specialist</span>
+        <span>Creative Technologist</span>
+        <span>Problem Solver</span>
+      </div>
+    </header>
+
+    <section class="cv-section">
+      <h2>Experience</h2>
+      <div class="experience-list">
+        <div class="experience-item">
+          <div class="experience-header">
+            <h3>Senior Web Developer</h3>
+            <span class="date">2020 - Present</span>
+          </div>
+          <p class="company">Company Name</p>
+          <p class="description">
+            Leading frontend development using Vue.js and Nuxt. Architecting
+            scalable web applications and mentoring junior developers.
+          </p>
+        </div>
+        <!-- More items... -->
+      </div>
+    </section>
+
+    <section class="cv-section">
+      <h2>Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h3>Frontend</h3>
+          <p>Vue, Nuxt, Astro, Less, TypeScript</p>
+        </div>
+        <div class="skill-card">
+          <h3>Tools</h3>
+          <p>Git, Figma, VS Code</p>
+        </div>
+        <!-- More items... -->
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style lang="less">
+  @import "../styles/variables.less";
+  @import "../styles/mixins.less";
+
+  .cv-page {
+    max-width: 56rem;
+    margin: 0 auto;
+    padding: @spacing-20 @spacing-4;
+
+    @media (min-width: @screen-sm) {
+      padding-left: @spacing-6;
+      padding-right: @spacing-6;
+    }
+
+    @media (min-width: @screen-lg) {
+      padding-left: @spacing-8;
+      padding-right: @spacing-8;
+    }
+
+    .cv-header {
+      margin-bottom: @spacing-16;
+      border-bottom: 1px solid @color-gray-100;
+      padding-bottom: @spacing-16;
+
+      h1 {
+        font-size: @text-6xl;
+        font-weight: 700;
+        letter-spacing: -0.05em;
+        margin: 0 0 @spacing-6 0;
+      }
+
+      .subtitle {
+        font-size: @text-2xl;
+        color: @color-gray-600;
+        font-weight: 300;
+        margin: 0;
+      }
+
+      .meta {
+        margin-top: @spacing-8;
+        display: flex;
+        gap: @spacing-4;
+        font-size: @text-sm;
+        color: @color-gray-500;
+
+        span {
+          &:not(:last-child)::after {
+            content: "•";
+            margin-left: @spacing-4;
+          }
+        }
+      }
+    }
+
+    .cv-section {
+      margin-bottom: @spacing-16;
+
+      h2 {
+        font-size: @text-2xl;
+        font-weight: 700;
+        margin-bottom: @spacing-8;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: @color-gray-400;
+      }
+
+      .experience-list {
+        display: flex;
+        flex-direction: column;
+        gap: @spacing-12;
+
+        .experience-item {
+          .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: @spacing-2;
+
+            h3 {
+              font-size: @text-xl;
+              font-weight: 700;
+              margin: 0;
+            }
+
+            .date {
+              color: @color-gray-500;
+              font-family: monospace;
+              font-size: @text-sm;
+            }
+          }
+
+          .company {
+            color: @color-gray-600;
+            margin-bottom: @spacing-4;
+          }
+
+          .description {
+            color: @color-gray-600;
+            line-height: 1.6;
+            margin: 0;
+          }
+        }
+      }
+
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: @spacing-4;
+
+        @media (min-width: @screen-md) {
+          grid-template-columns: repeat(3, 1fr);
+        }
+
+        .skill-card {
+          padding: @spacing-4;
+          background: @color-gray-100;
+          border-radius: 0.5rem;
+
+          h3 {
+            font-weight: 700;
+            margin: 0 0 @spacing-2 0;
+          }
+
+          p {
+            font-size: @text-sm;
+            color: @color-gray-600;
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+</style>

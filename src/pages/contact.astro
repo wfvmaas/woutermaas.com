@@ -1,0 +1,127 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro"
+---
+
+<BaseLayout title="Contact">
+  <div class="contact-page">
+    <h1>Get in Touch</h1>
+    <p class="intro">
+      Interested in collaborating or just want to say hi? Drop me a line.
+    </p>
+
+    <form class="contact-form">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Your name" />
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="you@example.com"
+        />
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea
+          id="message"
+          name="message"
+          rows="6"
+          placeholder="Tell me about your project..."></textarea>
+      </div>
+      <button type="submit" class="submit-button"> Send Message </button>
+    </form>
+  </div>
+</BaseLayout>
+
+<style lang="less">
+  @import "../styles/variables.less";
+  @import "../styles/mixins.less";
+
+  .contact-page {
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: @spacing-20 @spacing-4;
+
+    @media (min-width: @screen-sm) {
+      padding-left: @spacing-6;
+      padding-right: @spacing-6;
+    }
+
+    @media (min-width: @screen-lg) {
+      padding-left: @spacing-8;
+      padding-right: @spacing-8;
+    }
+
+    h1 {
+      font-size: @text-5xl;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      margin: 0 0 @spacing-8 0;
+    }
+
+    .intro {
+      font-size: @text-xl;
+      color: @color-gray-600;
+      margin: 0 0 @spacing-12 0;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: @spacing-6;
+
+      .form-group {
+        label {
+          display: block;
+          font-size: @text-sm;
+          font-weight: 500;
+          color: @color-gray-700;
+          margin-bottom: @spacing-1;
+        }
+
+        input,
+        textarea {
+          width: 100%;
+          padding: @spacing-3 @spacing-4;
+          border-radius: 0.5rem;
+          border: 1px solid @color-gray-200;
+          outline: none;
+          .transition(border-color);
+
+          &::placeholder {
+            color: @color-gray-300;
+          }
+
+          &:focus {
+            border-color: @color-black;
+            box-shadow: 0 0 0 1px @color-black;
+          }
+        }
+
+        textarea {
+          resize: vertical;
+          min-height: 150px;
+        }
+      }
+
+      .submit-button {
+        width: 100%;
+        background: @color-black;
+        color: @color-bg;
+        font-weight: 500;
+        padding: @spacing-4;
+        border-radius: 0.5rem;
+        border: none;
+        cursor: pointer;
+        .transition(background);
+
+        &:hover {
+          background: @color-gray-900;
+        }
+      }
+    }
+  }
+</style>

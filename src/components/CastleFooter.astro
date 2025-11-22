@@ -1,0 +1,51 @@
+---
+import "../styles/global.less"
+---
+
+<footer class="castle-footer">
+  <div class="castle-illustration">
+    <img src="/doodles/castle_1.svg" alt="Castle" />
+  </div>
+  <p class="footer-text">I have a castle, I don't need a footer</p>
+</footer>
+
+<style lang="less">
+  @import "../styles/variables.less";
+  @import "../styles/mixins.less";
+
+  .castle-footer {
+    width: 100%;
+    text-align: center;
+    padding-bottom: 0;
+    margin: 0;
+
+    .castle-illustration {
+      max-width: 300px;
+      width: 100%;
+      margin: 0 auto;
+      margin-bottom: -12px;
+
+      @media (min-width: @screen-md) {
+        max-width: 400px;
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+    }
+
+    .footer-text {
+      font-size: @text-sm;
+      color: @color-gray-600;
+      margin: 0;
+      padding: @spacing-4 0;
+      border-top: 5px solid @color-black;
+
+      @media (min-width: @screen-md) {
+        font-size: @text-base;
+      }
+    }
+  }
+</style>

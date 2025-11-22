@@ -1,0 +1,48 @@
+// Responsive mixins
+.respond-to(@breakpoint, @rules) when (@breakpoint = sm) {
+  @media (min-width: @screen-sm) {
+    @rules();
+  }
+}
+
+.respond-to(@breakpoint, @rules) when (@breakpoint = md) {
+  @media (min-width: @screen-md) {
+    @rules();
+  }
+}
+
+.respond-to(@breakpoint, @rules) when (@breakpoint = lg) {
+  @media (min-width: @screen-lg) {
+    @rules();
+  }
+}
+
+.respond-to(@breakpoint, @rules) when (@breakpoint = xl) {
+  @media (min-width: @screen-xl) {
+    @rules();
+  }
+}
+
+// Container mixin
+.container() {
+  max-width: @container-max-width;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: @spacing-4;
+  padding-right: @spacing-4;
+
+  @media (min-width: @screen-sm) {
+    padding-left: @spacing-6;
+    padding-right: @spacing-6;
+  }
+
+  @media (min-width: @screen-lg) {
+    padding-left: @spacing-8;
+    padding-right: @spacing-8;
+  }
+}
+
+// Transition mixin
+.transition(@property: all, @duration: 300ms, @timing: ease) {
+  transition: @property @duration @timing;
+}

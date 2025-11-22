@@ -1,0 +1,33 @@
+---
+import { getCollection } from "astro:content"
+import BaseLayout from "../../layouts/BaseLayout.astro"
+import "../../styles/pages/detail.less"
+
+export async function getStaticPaths() {
+  const art = await getCollection("art")
+  return art.map((item) => ({
+    params: { slug: item.slug },
+    props: { item },
+  }))
+}
+
+const { item } = Astro.props
+const { Content } = await item.render()
+---
+
+<BaseLayout title={item.data.title}>
+  <article class="art-detail">
+    <div class="art-grid">
+      <div class="art-image">
+        {/* Image placeholder */}
+        <span class="placeholder">Image</span>
+      </div>
+      <div class="art-info">
+        <h1>{item.data.title}</h1>
+        <div class="content">
+          <Content />
+        </div>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

@@ -1,0 +1,38 @@
+---
+import { getCollection } from "astro:content"
+import BaseLayout from "../../layouts/BaseLayout.astro"
+import "../../styles/pages/detail.less"
+
+export async function getStaticPaths() {
+  const hikes = await getCollection("hiking")
+  return hikes.map((hike) => ({
+    params: { slug: hike.slug },
+    props: { hike },
+  }))
+}
+
+const { hike } = Astro.props
+const { Content } = await hike.render()
+---
+
+<BaseLayout title={hike.data.title}>
+  <article class="hiking-detail">
+    <div class="hero-section">
+      {/* Hero Image placeholder */}
+      <div class="gradient-overlay"></div>
+      <div class="hero-content">
+        <h1>{hike.data.title}</h1>
+        {
+          hike.data.description && (
+            <p class="description">{hike.data.description}</p>
+          )
+        }
+      </div>
+    </div>
+    <div class="content-section">
+      <div class="content">
+        <Content />
+      </div>
+    </div>
+  </article>
+</BaseLayout>

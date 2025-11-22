@@ -1,0 +1,71 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro"
+import { getCollection } from "astro:content"
+
+const projects = await getCollection("software")
+---
+
+<BaseLayout title="Software">
+  <div class="overview-page">
+    <div class="page-header">
+      <h1>Software</h1>
+      <img
+        src="/doodles/software_factory.svg"
+        alt="Software Factory"
+        class="header-illustration"
+      />
+    </div>
+
+    <div class="projects-grid">
+      {
+        projects.map((project) => (
+          <a href={`/software/${project.slug}`} class="project-card">
+            <article>
+              <div class="project-image">
+                {project.data.heroImage ? (
+                  <img
+                    src={project.data.heroImage.src}
+                    alt={project.data.title}
+                  />
+                ) : (
+                  <div class="placeholder">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="1"
+                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                      />
+                    </svg>
+                  </div>
+                )}
+              </div>
+              <div class="project-content">
+                <div class="tags">
+                  {project.data.tags?.map((tag) => (
+                    <span class="tag">{tag}</span>
+                  ))}
+                </div>
+                <h2 class="project-title">{project.data.title}</h2>
+                <p class="project-description">{project.data.description}</p>
+                <span class="read-more">Read Case Study</span>
+              </div>
+            </article>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</BaseLayout>
+
+<style lang="less">
+  @import "../../styles/overview-shared.less";
+
+  .overview-page {
+    .overview-base();
+
+    .projects-grid {
+      .projects-grid-styles();
+    }
+  }
+</style>

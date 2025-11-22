@@ -1,0 +1,50 @@
+---
+import WizardMenuButton from "../components/WizardMenuButton.astro"
+import MobileMenuModal from "../components/MobileMenuModal.astro"
+import CastleFooter from "../components/CastleFooter.astro"
+import "../styles/global.less"
+
+interface Props {
+  title: string
+  description?: string
+  showFooter?: boolean
+  showWizardMenu?: boolean
+}
+
+const {
+  title,
+  description = "Portfolio of Wouter Maas - Web Developer, Storyteller, Philosopher.",
+  showFooter = true,
+  showWizardMenu = true,
+} = Astro.props
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title} | Wouter Maas</title>
+  </head>
+  <body>
+    {showWizardMenu && <WizardMenuButton />}
+    <main>
+      <slot />
+    </main>
+    {showFooter && <CastleFooter />}
+    <MobileMenuModal />
+  </body>
+</html>
+
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body.overflow-hidden {
+    overflow: hidden;
+  }
+</style>

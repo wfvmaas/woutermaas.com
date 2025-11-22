@@ -1,0 +1,51 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro"
+import { getCollection } from "astro:content"
+
+const stories = await getCollection("storytelling")
+---
+
+<BaseLayout title="Storytelling">
+  <div class="overview-page">
+    <div class="page-header">
+      <h1>Storytelling</h1>
+      <img
+        src="/doodles/storytelling.svg"
+        alt="Storytelling"
+        class="header-illustration"
+      />
+    </div>
+    <div class="stories-list">
+      {
+        stories.length > 0 ? (
+          stories.map((story) => (
+            <a href={`/storytelling/${story.slug}`} class="story-item">
+              <article>
+                <h2>{story.data.title}</h2>
+                <p>{story.data.description}</p>
+              </article>
+            </a>
+          ))
+        ) : (
+          <p class="empty-state">Stories being written...</p>
+        )
+      }
+    </div>
+  </div>
+</BaseLayout>
+
+<style lang="less">
+  @import "../styles/overview-shared.less";
+
+  .overview-page {
+    .overview-base();
+
+    .stories-list {
+      .stories-list-styles();
+    }
+
+    .empty-state {
+      .empty-state-styles();
+    }
+  }
+</style>

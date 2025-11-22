@@ -1,0 +1,160 @@
+---
+const links = [
+  { href: "/software", label: "Software" },
+  { href: "/storytelling", label: "Storytelling" },
+  { href: "/philosophy", label: "Philosophy" },
+  { href: "/art", label: "Art" },
+  { href: "/hiking", label: "Hiking" },
+  { href: "/cv", label: "Serious CV" },
+  { href: "/contact", label: "Contact" },
+]
+---
+
+<div class="mobile-menu-modal" id="mobile-menu-modal">
+  <div class="backdrop" id="mobile-menu-backdrop"></div>
+  <div class="menu-content">
+    <button class="close-btn" id="mobile-menu-close">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+    <nav>
+      <ul>
+        {
+          links.map((link) => (
+            <li>
+              <a href={link.href}>{link.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<style lang="less">
+  @import "../styles/variables.less";
+  @import "../styles/mixins.less";
+
+  .mobile-menu-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    pointer-events: none;
+
+    // Hide on desktop
+    @media (min-width: @screen-md) {
+      display: none;
+    }
+
+    &.open {
+      pointer-events: auto;
+
+      .backdrop {
+        opacity: 1;
+      }
+
+      .menu-content {
+        transform: translateX(0);
+      }
+    }
+
+    .backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      transition: opacity 300ms ease-out;
+    }
+
+    .menu-content {
+      position: relative;
+      z-index: 1;
+      background: white;
+      height: 100%;
+      width: 80%;
+      max-width: 400px;
+      padding: @spacing-8;
+      transform: translateX(-100%);
+      transition: transform 300ms ease-out;
+      display: flex;
+      flex-direction: column;
+
+      .close-btn {
+        position: absolute;
+        top: @spacing-4;
+        right: @spacing-4;
+        background: none;
+        border: none;
+        padding: @spacing-2;
+        cursor: pointer;
+        color: @color-black;
+        .transition(color);
+
+        &:hover {
+          color: @color-gray-600;
+        }
+
+        svg {
+          width: 2rem;
+          height: 2rem;
+        }
+      }
+
+      nav {
+        margin-top: @spacing-16;
+
+        ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+
+          li {
+            margin-bottom: @spacing-6;
+
+            a {
+              display: block;
+              font-size: @text-3xl;
+              font-weight: 700;
+              color: @color-black;
+              .transition(color);
+
+              &:hover {
+                color: @color-gray-600;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+</style>
+
+<script>
+  const modal = document.getElementById("mobile-menu-modal")
+  const backdrop = document.getElementById("mobile-menu-backdrop")
+  const closeBtn = document.getElementById("mobile-menu-close")
+
+  function openMenu() {
+    modal?.classList.add("open")
+    document.body.classList.add("overflow-hidden")
+  }
+
+  function closeMenu() {
+    modal?.classList.remove("open")
+    document.body.classList.remove("overflow-hidden")
+  }
+
+  // Listen for open event from WizardMenuButton
+  document.addEventListener("open-mobile-menu", openMenu)
+
+  // Close on backdrop click
+  backdrop?.addEventListener("click", closeMenu)
+
+  // Close on close button click
+  closeBtn?.addEventListener("click", closeMenu)
+</script>

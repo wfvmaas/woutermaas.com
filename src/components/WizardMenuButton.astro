@@ -1,0 +1,61 @@
+---
+interface Props {
+  isHomePage?: boolean
+}
+
+const { isHomePage = false } = Astro.props
+---
+
+<div class="wizard-menu-button" id="wizard-menu-btn" data-is-home={isHomePage}>
+  <img src="/doodles/wizard_cloud_1.svg" alt="Menu" />
+  <div class="menu-label">Menu</div>
+</div>
+
+<style lang="less">
+  @import "../styles/variables.less";
+  @import "../styles/mixins.less";
+
+  .wizard-menu-button {
+    position: sticky;
+    top: 1rem;
+    right: 1rem;
+    z-index: 100;
+    float: right;
+    cursor: pointer;
+    text-align: center;
+
+    // Hide on desktop
+    @media (min-width: @screen-md) {
+      display: none;
+    }
+
+    img {
+      width: 4rem;
+      height: auto;
+      .transition(transform);
+    }
+
+    .menu-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      margin-top: 0.25rem;
+      color: @color-black;
+    }
+  }
+</style>
+
+<script>
+  const wizardButton = document.getElementById("wizard-menu-btn")
+  const isHomePage = wizardButton?.dataset.isHome === "true"
+
+  wizardButton?.addEventListener("click", () => {
+    if (isHomePage) {
+      // Scroll to menu section on home page
+      const menuSection = document.getElementById("menu-section")
+      menuSection?.scrollIntoView({ behavior: "smooth" })
+    } else {
+      // Open modal on other pages
+      document.dispatchEvent(new CustomEvent("open-mobile-menu"))
+    }
+  })
+</script>
