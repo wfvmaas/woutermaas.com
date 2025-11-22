@@ -1,6 +1,6 @@
 ---
 title: "Abstract No. 1"
-description: "Digital mixed media."
+abstract: "Digital mixed media."
 publishDate: 2023-11-22
 ---
 

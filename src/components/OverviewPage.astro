@@ -51,7 +51,9 @@ import ScrollIndicator from "./ScrollIndicator.astro"
               </div>
             )}
             <div class="project-content">
-              <p class="project-description">{project.data.description}</p>
+              <p class="project-description">
+                {project.data.abstract || project.data.title}
+              </p>
             </div>
           </article>
         ))

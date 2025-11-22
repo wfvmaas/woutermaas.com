@@ -1,6 +1,6 @@
 ---
 title: "StoryForgers.com"
-description: "In my free time, I co-run StoryForgers, a small tabletop game company, with two friends."
+abstract: "In my free time, I co-run StoryForgers, a small tabletop game company, with two friends."
 order: 4
 tags: ["PHP", "WordPress", "CMS", "SEO"]
 publishDate: 2023-01-04

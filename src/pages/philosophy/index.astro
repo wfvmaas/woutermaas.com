@@ -3,7 +3,14 @@ import { getCollection, getEntry } from "astro:content"
 import OverviewPage from "../../components/OverviewPage.astro"
 
 const overview = await getEntry("overviews", "philosophy")
-const projects = (await getCollection("philosophy")).sort(
+if (!overview) throw new Error("Philosophy overview not found")
+
+// Fetch both full projects and overview-only entries
+const fullProjects = await getCollection("philosophy")
+const overviewOnlyProjects = await getCollection("philosophy-overview-only")
+
+// Merge and sort by order
+const allProjects = [...fullProjects, ...overviewOnlyProjects].sort(
   (a, b) => (a.data.order ?? 99) - (b.data.order ?? 99)
 )
 ---
@@ -13,5 +20,5 @@ const projects = (await getCollection("philosophy")).sort(
   title={overview.data.title}
   introText={overview.data.introText}
   heroImage={overview.data.heroImage}
-  projects={projects}
+  projects={allProjects}
 />

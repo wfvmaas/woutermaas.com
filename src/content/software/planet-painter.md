@@ -1,6 +1,6 @@
 ---
 title: "Planet Painter"
-description: "Planet Painter is a desktop program developed in collaboration with the think tank The Why Factory of the Dutch Architecture firm MVRDV."
+abstract: "Planet Painter is a desktop program developed in collaboration with the think tank The Why Factory of the Dutch Architecture firm MVRDV."
 order: 7
 tags: ["Desktop App", "Visualization", "Urban Planning"]
 publishDate: 2023-01-07

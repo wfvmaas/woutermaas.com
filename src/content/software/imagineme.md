@@ -1,6 +1,6 @@
 ---
 title: "ImagineMe"
-description: "ImagineMe"
+abstract: "ImagineMe"
 order: 2
 tags: []
 publishDate: 2023-01-02

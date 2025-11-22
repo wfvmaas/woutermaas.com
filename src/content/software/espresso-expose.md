@@ -1,6 +1,6 @@
 ---
 title: "Espresso Exposé"
-description: "Espresso Exposé is an interactive artwork that highlights how Artificial Intelligence is increasingly reshaping our daily lives."
+abstract: "Espresso Exposé is an interactive artwork that highlights how Artificial Intelligence is increasingly reshaping our daily lives."
 order: 5
 tags: ["AI", "Interactive Art"]
 publishDate: 2023-01-05

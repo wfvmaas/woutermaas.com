@@ -1,6 +1,6 @@
 ---
 title: "leiderschapsontwikkeling.nl"
-description: "Leiderschapsontwikkeling.nl is a platform that strengthens leadership through authentic connections within organizations."
+abstract: "Leiderschapsontwikkeling.nl is a platform that strengthens leadership through authentic connections within organizations."
 order: 3
 tags: ["WordPress", "SEO", "Branding"]
 publishDate: 2023-01-03

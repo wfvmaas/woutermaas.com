@@ -1,6 +1,6 @@
 ---
 title: "Computer Science Thesis"
-description: "My thesis (Secure MPC-Sortition: Consolidating Innovations in Democracy and Cryptography) explores how Secure Multi-Party Computation (MPC) can enhance privacy in citizens’ assembly sortition."
+abstract: "My thesis (Secure MPC-Sortition: Consolidating Innovations in Democracy and Cryptography) explores how Secure Multi-Party Computation (MPC) can enhance privacy in citizens’ assembly sortition."
 order: 6
 tags: ["MPC", "Cryptography", "Privacy"]
 publishDate: 2023-01-06

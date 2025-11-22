@@ -7,7 +7,7 @@
         "title": {
           "type": "string"
         },
-        "description": {
+        "abstract": {
           "type": "string"
         },
         "publishDate": {
@@ -47,9 +47,7 @@
         }
       },
       "required": [
-        "title",
-        "description",
-        "publishDate"
+        "title"
       ],
       "additionalProperties": false
     }

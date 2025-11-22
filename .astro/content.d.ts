@@ -172,6 +172,16 @@ declare module 'astro:content' {
   rendered?: RenderedContent;
   filePath?: string;
 }>;
+"art-overview-only": Record<string, {
+  id: string;
+  render(): Render[".md"];
+  slug: string;
+  body: string;
+  collection: "art-overview-only";
+  data: InferEntrySchema<"art-overview-only">;
+  rendered?: RenderedContent;
+  filePath?: string;
+}>;
 "hiking": Record<string, {
   id: string;
   render(): Render[".md"];
@@ -179,6 +189,16 @@ declare module 'astro:content' {
   body: string;
   collection: "hiking";
   data: InferEntrySchema<"hiking">;
+  rendered?: RenderedContent;
+  filePath?: string;
+}>;
+"hiking-overview-only": Record<string, {
+  id: string;
+  render(): Render[".md"];
+  slug: string;
+  body: string;
+  collection: "hiking-overview-only";
+  data: InferEntrySchema<"hiking-overview-only">;
   rendered?: RenderedContent;
   filePath?: string;
 }>;
@@ -202,6 +222,16 @@ declare module 'astro:content' {
   rendered?: RenderedContent;
   filePath?: string;
 }>;
+"philosophy-overview-only": Record<string, {
+  id: string;
+  render(): Render[".md"];
+  slug: string;
+  body: string;
+  collection: "philosophy-overview-only";
+  data: InferEntrySchema<"philosophy-overview-only">;
+  rendered?: RenderedContent;
+  filePath?: string;
+}>;
 "software": Record<string, {
   id: string;
   render(): Render[".md"];
@@ -212,6 +242,16 @@ declare module 'astro:content' {
   rendered?: RenderedContent;
   filePath?: string;
 }>;
+"software-overview-only": Record<string, {
+  id: string;
+  render(): Render[".md"];
+  slug: string;
+  body: string;
+  collection: "software-overview-only";
+  data: InferEntrySchema<"software-overview-only">;
+  rendered?: RenderedContent;
+  filePath?: string;
+}>;
 "storytelling": Record<string, {
   id: string;
   render(): Render[".md"];
@@ -219,6 +259,16 @@ declare module 'astro:content' {
   body: string;
   collection: "storytelling";
   data: InferEntrySchema<"storytelling">;
+  rendered?: RenderedContent;
+  filePath?: string;
+}>;
+"storytelling-overview-only": Record<string, {
+  id: string;
+  render(): Render[".md"];
+  slug: string;
+  body: string;
+  collection: "storytelling-overview-only";
+  data: InferEntrySchema<"storytelling-overview-only">;
   rendered?: RenderedContent;
   filePath?: string;
 }>;
