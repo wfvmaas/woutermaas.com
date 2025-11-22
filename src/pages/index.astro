@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro"
 import WizardMenuButton from "../components/WizardMenuButton.astro"
+import ScrollIndicator from "../components/ScrollIndicator.astro"
 ---
 
 <BaseLayout title="Home" showFooter={true} showWizardMenu={false}>
@@ -39,19 +40,8 @@ import WizardMenuButton from "../components/WizardMenuButton.astro"
       </section>
 
       <!-- Scroll Indicator -->
-      <div class="scroll-indicator" id="scroll-arrow">
-        <svg
-          width="40"
-          height="40"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path d="M12 5v14M19 12l-7 7-7-7"></path>
-        </svg>
+      <div class="scroll-indicator-wrapper">
+        <ScrollIndicator scale={1.5} />
       </div>
 
       <!-- Menu Section -->
@@ -59,46 +49,25 @@ import WizardMenuButton from "../components/WizardMenuButton.astro"
         <nav>
           <ul>
             <li>
-              <a href="/software">
-                <span class="bullet"></span>
-                Software
-              </a>
+              <a href="/software"> Software </a>
             </li>
             <li>
-              <a href="/storytelling">
-                <span class="bullet"></span>
-                Storytelling
-              </a>
+              <a href="/storytelling"> Storytelling </a>
             </li>
             <li>
-              <a href="/philosophy">
-                <span class="bullet"></span>
-                Philosophy
-              </a>
+              <a href="/philosophy"> Philosophy </a>
             </li>
             <li>
-              <a href="/art">
-                <span class="bullet"></span>
-                Art
-              </a>
+              <a href="/art"> Art </a>
             </li>
             <li>
-              <a href="/hiking">
-                <span class="bullet"></span>
-                Hiking
-              </a>
+              <a href="/hiking"> Hiking </a>
             </li>
             <li>
-              <a href="/cv">
-                <span class="bullet"></span>
-                Serious CV
-              </a>
+              <a href="/cv"> Serious CV </a>
             </li>
             <li>
-              <a href="/contact">
-                <span class="bullet"></span>
-                Contact
-              </a>
+              <a href="/contact"> Contact </a>
             </li>
           </ul>
         </nav>
@@ -113,14 +82,12 @@ import WizardMenuButton from "../components/WizardMenuButton.astro"
 
   .home-page {
     .sticky-illustrations {
-      // On mobile: static positioning (not fixed)
       @media (max-width: @screen-md) {
         position: absolute;
         pointer-events: none;
         z-index: 0;
       }
 
-      // On desktop: fixed positioning
       @media (min-width: @screen-md) {
         position: fixed;
         inset: 0;
@@ -130,7 +97,6 @@ import WizardMenuButton from "../components/WizardMenuButton.astro"
       }
 
       .wizard {
-        // Hide wizard image - using WizardMenuButton component instead
         display: none;
       }
 
@@ -157,26 +123,20 @@ import WizardMenuButton from "../components/WizardMenuButton.astro"
     .scrollable-content {
       position: relative;
       z-index: 10;
+      .container();
+      max-width: 100% !important;
+      @media (min-width: @screen-lg) {
+        padding-left: 6rem;
+        padding-right: 6rem;
+      }
 
-      .scroll-indicator {
-        // Center relative to entire viewport width
+      .scroll-indicator-wrapper {
         position: absolute;
         left: 50%;
         top: 90vh;
-        transform: translateX(-50%) scale(1.5);
+        transform: translateX(-50%);
         width: fit-content;
-        cursor: pointer;
         z-index: 20;
-        .transition(transform);
-
-        &:hover {
-          transform: translateX(-50%) translateY(5px) scale(1.5);
-        }
-
-        svg {
-          width: 40px;
-          height: 40px;
-        }
       }
     }
 
@@ -185,27 +145,10 @@ import WizardMenuButton from "../components/WizardMenuButton.astro"
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: @spacing-8;
-      max-width: @container-max-width;
-      margin: 0 auto;
-      // position: relative; // Removed as arrow is now outside
-
-      @media (min-width: @screen-md) {
-        padding: @spacing-16;
-      }
-
-      @media (min-width: @screen-lg) {
-        padding-left: @spacing-24;
-        padding-right: @spacing-24;
-      }
 
       .content {
         max-width: 48rem;
         padding-top: 45vh;
-
-        @media (min-width: @screen-md) {
-          padding-top: 25vh;
-        }
 
         h1 {
           font-size: 6.5rem;
@@ -251,19 +194,6 @@ import WizardMenuButton from "../components/WizardMenuButton.astro"
       min-height: 100vh;
       display: flex;
       align-items: center;
-      padding: @spacing-8;
-      max-width: @container-max-width;
-      margin: 0 auto;
-
-      @media (min-width: @screen-md) {
-        padding: @spacing-16;
-      }
-
-      @media (min-width: @screen-lg) {
-        padding-left: @spacing-24;
-        padding-right: @spacing-24;
-      }
-
       nav {
         width: 100%;
 
@@ -285,6 +215,7 @@ import WizardMenuButton from "../components/WizardMenuButton.astro"
               font-size: @text-4xl;
               font-weight: 700;
               .transition(color);
+              position: relative; // For absolute positioning of bullet
 
               @media (min-width: @screen-md) {
                 font-size: @text-5xl;
@@ -297,23 +228,27 @@ import WizardMenuButton from "../components/WizardMenuButton.astro"
               &:hover {
                 color: @color-gray-300;
 
-                .bullet {
+                &::before {
                   opacity: 1;
                 }
               }
 
-              .bullet {
-                // Hide on mobile to remove whitespace
+              &::before {
+                content: "";
+                // Hide on mobile
                 display: none;
 
                 // Show on desktop only
                 @media (min-width: @screen-md) {
                   display: block;
+                  position: absolute;
+                  left: -@spacing-6; // Position to the left of text
+                  top: 50%;
+                  transform: translateY(-50%);
                   width: @spacing-4;
                   height: @spacing-4;
                   background-color: @color-black;
                   border-radius: 50%;
-                  margin-right: @spacing-6;
                   opacity: 0;
                   .transition(opacity);
                 }
@@ -328,10 +263,12 @@ import WizardMenuButton from "../components/WizardMenuButton.astro"
 
 <script>
   // Smooth scroll to menu section when arrow is clicked
-  const scrollArrow = document.getElementById("scroll-arrow")
+  const scrollArrow = document.getElementById("scroll-indicator")
   const menuSection = document.getElementById("menu-section")
 
   scrollArrow?.addEventListener("click", () => {
-    menuSection?.scrollIntoView({ behavior: "smooth" })
+    menuSection?.scrollIntoView({
+      behavior: "smooth",
+    })
   })
 </script>

@@ -1,0 +1,65 @@
+---
+interface Props {
+  color?: string
+  scale?: number
+}
+
+const { color = "currentColor", scale = 1 } = Astro.props
+---
+
+<div
+  class="scroll-indicator"
+  id="scroll-indicator"
+  style={`--scale: ${scale}; --color: ${color};`}
+>
+  <svg
+    width="40"
+    height="40"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M12 5v14M19 12l-7 7-7-7"></path>
+  </svg>
+</div>
+
+<style lang="less">
+  @import "../styles/mixins.less";
+
+  .scroll-indicator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color);
+    cursor: pointer;
+    transform: scale(var(--scale));
+    .transition(transform);
+
+    &:hover {
+      transform: scale(var(--scale)) translateY(5px);
+    }
+
+    svg {
+      animation: bounce 2s infinite;
+    }
+  }
+
+  @keyframes bounce {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-10px);
+    }
+    60% {
+      transform: translateY(-5px);
+    }
+  }
+</style>

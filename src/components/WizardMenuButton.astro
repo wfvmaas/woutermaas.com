@@ -24,15 +24,17 @@ const { isHomePage = false } = Astro.props
     cursor: pointer;
     text-align: center;
 
-    // Hide on desktop
-    @media (min-width: @screen-md) {
-      display: none;
-    }
+    // Visible on all screen sizes
+    display: block;
 
     img {
       width: 4rem;
       height: auto;
       .transition(transform);
+
+      @media (min-width: @screen-md) {
+        width: 6rem;
+      }
     }
 
     .menu-label {
