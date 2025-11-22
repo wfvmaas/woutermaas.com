@@ -1,0 +1,17 @@
+---
+import { getCollection, getEntry } from "astro:content"
+import OverviewPage from "../../components/OverviewPage.astro"
+
+const overview = await getEntry("overviews", "philosophy")
+const projects = (await getCollection("philosophy")).sort(
+  (a, b) => (a.data.order ?? 99) - (b.data.order ?? 99)
+)
+---
+
+<OverviewPage
+  category="philosophy"
+  title={overview.data.title}
+  introText={overview.data.introText}
+  heroImage={overview.data.heroImage}
+  projects={projects}
+/>

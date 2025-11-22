@@ -1,29 +1,29 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro"
-import { getCollection, getEntry } from "astro:content"
-import ScrollIndicator from "../components/ScrollIndicator.astro"
+interface Props {
+  category: string
+  title: string
+  introText: string
+  heroImage: string
+  projects: any[]
+}
 
-const overview = await getEntry("overviews", "philosophy")
-const projects = (await getCollection("philosophy")).sort(
-  (a, b) => (a.data.order ?? 99) - (b.data.order ?? 99)
-)
+const { category, title, introText, heroImage, projects } = Astro.props
+
+import BaseLayout from "../layouts/BaseLayout.astro"
+import ScrollIndicator from "./ScrollIndicator.astro"
 ---
 
-<BaseLayout title="Philosophy">
+<BaseLayout title={title}>
   <div class="overview-page">
     <div class="page-header">
       <div class="header-content">
         <div class="illustration-container">
-          <img
-            src={overview.data.heroImage}
-            alt="Philosophy"
-            class="header-illustration"
-          />
+          <img src={heroImage} alt={title} class="header-illustration" />
         </div>
         <div class="text-content">
-          <h1>{overview.data.title}</h1>
+          <h1>{title}</h1>
           <p class="intro-text">
-            {overview.data.introText}
+            {introText}
           </p>
         </div>
         <div class="scroll-indicator-wrapper">
