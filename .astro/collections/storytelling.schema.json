@@ -10,9 +10,6 @@
         "description": {
           "type": "string"
         },
-        "heroImage": {
-          "type": "string"
-        },
         "publishDate": {
           "anyOf": [
             {
@@ -29,12 +26,30 @@
             }
           ]
         },
+        "heroImage": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "link": {
+          "type": "string",
+          "format": "uri"
+        },
+        "order": {
+          "type": "number"
+        },
         "$schema": {
           "type": "string"
         }
       },
       "required": [
-        "title"
+        "title",
+        "description",
+        "publishDate"
       ],
       "additionalProperties": false
     }

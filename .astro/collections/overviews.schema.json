@@ -1,0 +1,29 @@
+{
+  "$ref": "#/definitions/overviews",
+  "definitions": {
+    "overviews": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "introText": {
+          "type": "string"
+        },
+        "heroImage": {
+          "type": "string"
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "introText",
+        "heroImage"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

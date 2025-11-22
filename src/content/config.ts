@@ -13,21 +13,33 @@ const softwareCollection = defineCollection({
   }),
 });
 
-const generalCollection = defineCollection({
-    type: 'content',
-    schema: ({ image }) => z.object({
-        title: z.string(),
-        description: z.string().optional(),
-        heroImage: image().optional(),
-        publishDate: z.date().optional(),
-    })
+const projectCollection = defineCollection({
+  type: 'content',
+  schema: ({ image }) => z.object({
+    title: z.string(),
+    description: z.string(),
+    publishDate: z.date(),
+    heroImage: z.union([z.string(), image()]).optional(),
+    tags: z.array(z.string()).optional(),
+    link: z.string().url().optional(),
+    order: z.number().optional(),
+  }),
+});
+
+const overviewCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    introText: z.string(),
+    heroImage: z.string(),
+  }),
 });
 
 export const collections = {
   'software': softwareCollection,
-  'storytelling': generalCollection,
-  'philosophy': generalCollection,
-  'art': generalCollection,
-  'hiking': generalCollection,
-  'cv': generalCollection,
+  'storytelling': projectCollection,
+  'philosophy': projectCollection,
+  'art': projectCollection,
+  'hiking': projectCollection,
+  'overviews': overviewCollection,
 };

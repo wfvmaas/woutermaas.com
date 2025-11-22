@@ -1,0 +1,57 @@
+@import "../variables.less";
+@import "../mixins.less";
+
+.art-detail,
+.software-detail,
+.storytelling-detail,
+.philosophy-detail,
+.hiking-detail {
+  .container();
+  padding-top: @spacing-24;
+  padding-bottom: @spacing-24;
+
+  .art-grid,
+  .detail-grid {
+    display: grid;
+    gap: @spacing-8;
+
+    @media (min-width: @screen-md) {
+      grid-template-columns: 1fr 1fr;
+      gap: @spacing-16;
+    }
+  }
+
+  .art-image,
+  .detail-image {
+    .placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: @color-gray-100;
+      min-height: 300px;
+      border-radius: @radius-lg;
+    }
+  }
+
+  .art-info,
+  .detail-info {
+    h1 {
+      font-size: @text-4xl;
+      font-weight: 700;
+      margin-bottom: @spacing-6;
+
+      @media (min-width: @screen-md) {
+        font-size: @text-5xl;
+      }
+    }
+
+    .content {
+      font-size: @text-base;
+      line-height: 1.6;
+
+      @media (min-width: @screen-md) {
+        font-size: @text-lg;
+      }
+    }
+  }
+}
