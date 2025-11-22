@@ -1,10 +1,8 @@
 ---
 title: "ImagineMe"
-description: "AI-powered image generation tool."
+description: "ImagineMe"
 order: 2
-tags: ["AI", "Image Generation"]
-publishDate: 2023-02-01
+tags: []
+publishDate: 2023-01-02
+heroImage: "/doodles/software_factory.svg"
 ---
-# ImagineMe
-
-Project description for ImagineMe.

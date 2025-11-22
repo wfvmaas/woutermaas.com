@@ -2,56 +2,77 @@
 import BaseLayout from "../../layouts/BaseLayout.astro"
 import { getCollection } from "astro:content"
 
-const projects = await getCollection("software")
+const projects = (await getCollection("software")).sort(
+  (a, b) => (a.data.order ?? 99) - (b.data.order ?? 99)
+)
 ---
 
 <BaseLayout title="Software">
   <div class="overview-page">
     <div class="page-header">
-      <h1>Software</h1>
-      <img
-        src="/doodles/software_factory.svg"
-        alt="Software Factory"
-        class="header-illustration"
-      />
+      <div class="header-content">
+        <div class="illustration-container">
+          <img
+            src="/doodles/software_factory.svg"
+            alt="Software Factory"
+            class="header-illustration"
+          />
+        </div>
+        <h1>Software</h1>
+        <p class="intro-text">
+          In need of a creative programmer? I like to build software for all
+          kinds of purposes but preferably I work on projects that make the
+          world a little more interesting
+        </p>
+        <div class="scroll-indicator">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M7 13l5 5 5-5M7 6l5 5 5-5"></path>
+          </svg>
+        </div>
+      </div>
     </div>
 
-    <div class="projects-grid">
+    <div class="projects-list">
       {
         projects.map((project) => (
-          <a href={`/software/${project.slug}`} class="project-card">
-            <article>
+          <article class="project-item">
+            <h2 class="project-title">{project.data.title}</h2>
+            {project.data.heroImage && (
               <div class="project-image">
-                {project.data.heroImage ? (
-                  <img
-                    src={project.data.heroImage.src}
-                    alt={project.data.title}
-                  />
-                ) : (
-                  <div class="placeholder">
-                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="1"
-                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                      />
-                    </svg>
-                  </div>
-                )}
+                <img
+                  src={
+                    typeof project.data.heroImage === "string"
+                      ? project.data.heroImage
+                      : project.data.heroImage.src
+                  }
+                  alt={project.data.title}
+                  loading="lazy"
+                />
               </div>
-              <div class="project-content">
-                <div class="tags">
-                  {project.data.tags?.map((tag) => (
-                    <span class="tag">{tag}</span>
-                  ))}
-                </div>
-                <h2 class="project-title">{project.data.title}</h2>
-                <p class="project-description">{project.data.description}</p>
-                <span class="read-more">Read Case Study</span>
-              </div>
-            </article>
-          </a>
+            )}
+            <div class="project-content">
+              <p class="project-description">{project.body}</p>
+              {project.data.title === "STOOR.net" && (
+                <a
+                  href="https://stoor.net"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="learn-more-btn"
+                >
+                  Learn more
+                </a>
+              )}
+            </div>
+          </article>
         ))
       }
     </div>
@@ -59,13 +80,138 @@ const projects = await getCollection("software")
 </BaseLayout>
 
 <style lang="less">
-  @import "../../styles/overview-shared.less";
+  @import "../../styles/variables.less";
+  @import "../../styles/mixins.less";
 
   .overview-page {
-    .overview-base();
+    padding-top: @spacing-24;
+    padding-bottom: @spacing-24;
+    max-width: 600px;
+    margin: 0 auto;
+    padding-left: @spacing-6;
+    padding-right: @spacing-6;
 
-    .projects-grid {
-      .projects-grid-styles();
+    .page-header {
+      margin-bottom: @spacing-16;
+      text-align: center;
+
+      .header-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: @spacing-8;
+
+        .illustration-container {
+          width: 100%;
+          max-width: 300px;
+          margin: 0 auto;
+
+          img {
+            width: 100%;
+            height: auto;
+          }
+        }
+
+        h1 {
+          font-size: @text-5xl;
+          font-weight: 700;
+          margin: 0;
+        }
+
+        .intro-text {
+          font-size: @text-lg;
+          line-height: 1.6;
+          color: @color-gray-900;
+          max-width: 40ch;
+        }
+
+        .scroll-indicator {
+          margin-top: @spacing-8;
+          animation: bounce 2s infinite;
+
+          svg {
+            width: 2rem;
+            height: 2rem;
+          }
+        }
+      }
+    }
+
+    .projects-list {
+      display: flex;
+      flex-direction: column;
+      gap: @spacing-16;
+
+      .project-item {
+        display: flex;
+        flex-direction: column;
+        gap: @spacing-6;
+
+        .project-title {
+          font-size: @text-2xl;
+          font-weight: 600;
+          margin: 0;
+        }
+
+        .project-image {
+          width: 100%;
+          border-radius: @radius-lg;
+          overflow: hidden;
+          background: @color-gray-100;
+
+          img {
+            width: 100%;
+            height: auto;
+            display: block;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+          }
+        }
+
+        .project-content {
+          .project-description {
+            font-size: @text-base;
+            line-height: 1.6;
+            color: @color-gray-800;
+            margin-bottom: @spacing-6;
+          }
+
+          .learn-more-btn {
+            display: inline-block;
+            width: 100%;
+            padding: @spacing-3 @spacing-6;
+            text-align: center;
+            background: transparent;
+            border: 1px solid @color-black;
+            border-radius: @radius-md;
+            color: @color-black;
+            font-weight: 500;
+            text-decoration: none;
+            .transition(all);
+
+            &:hover {
+              background: @color-black;
+              color: white;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @keyframes bounce {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-10px);
+    }
+    60% {
+      transform: translateY(-5px);
     }
   }
 </style>

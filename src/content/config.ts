@@ -6,9 +6,10 @@ const softwareCollection = defineCollection({
     title: z.string(),
     description: z.string(),
     publishDate: z.date(),
-    heroImage: image().optional(),
+    heroImage: z.union([z.string(), image()]).optional(),
     tags: z.array(z.string()).optional(),
     link: z.string().url().optional(), // For external links or demos
+    order: z.number().optional(),
   }),
 });
 

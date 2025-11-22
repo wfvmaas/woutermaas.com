@@ -39,6 +39,9 @@
           "type": "string",
           "format": "uri"
         },
+        "order": {
+          "type": "number"
+        },
         "$schema": {
           "type": "string"
         }
