@@ -9,8 +9,13 @@ interface Props {
 
 const { category, title, introText, heroImage, projects } = Astro.props
 
-import BaseLayout from "../layouts/BaseLayout.astro"
-import ScrollIndicator from "./ScrollIndicator.astro"
+import BaseLayout from "./BaseLayout.astro"
+import ScrollIndicator from "../components/ScrollIndicator.astro"
+
+// Helper to check if project has a detail page (not overview-only)
+const hasDetailPage = (project: any) => {
+  return !project.id.includes("-overview-only/")
+}
 ---
 
 <BaseLayout title={title}>
@@ -37,6 +42,7 @@ import ScrollIndicator from "./ScrollIndicator.astro"
         projects.map((project) => (
           <article class="project-item">
             <h2 class="project-title">{project.data.title}</h2>
+
             {project.data.heroImage && (
               <div class="project-image">
                 <img
@@ -50,10 +56,28 @@ import ScrollIndicator from "./ScrollIndicator.astro"
                 />
               </div>
             )}
+
             <div class="project-content">
               <p class="project-description">
                 {project.data.abstract || project.data.title}
               </p>
+
+              {hasDetailPage(project) && (
+                <a href={`/${category}/${project.slug}`} class="learn-more-btn">
+                  Learn More →
+                </a>
+              )}
+
+              {project.data.link && !hasDetailPage(project) && (
+                <a
+                  href={project.data.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="learn-more-btn"
+                >
+                  Visit Project →
+                </a>
+              )}
             </div>
           </article>
         ))
@@ -67,31 +91,32 @@ import ScrollIndicator from "./ScrollIndicator.astro"
   @import "../styles/mixins.less";
 
   .overview-page {
-    padding-top: @spacing-24;
+    padding-top: 0;
     padding-bottom: @spacing-24;
     max-width: 600px;
     margin: 0 auto;
     padding-left: @spacing-6;
-    padding-right: @spacing-6;
+    padding-right: 80px; // Space for wizard menu on mobile
 
     @media (min-width: @screen-lg) {
       max-width: @container-max-width;
-      padding-top: 0;
+      padding-right: @spacing-6; // Reset on desktop since wizard is fixed
       min-height: 100vh;
       display: flex;
       flex-direction: column;
     }
 
     .page-header {
-      margin-bottom: @spacing-16;
-      text-align: center;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: @spacing-6 0;
 
-      @media (min-width: @screen-lg) {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 0;
+      @media (max-width: @screen-md) {
+        align-items: flex-end;
+        padding-bottom: 12.5vh;
       }
 
       .header-content {
@@ -99,24 +124,25 @@ import ScrollIndicator from "./ScrollIndicator.astro"
         flex-direction: column;
         align-items: center;
         gap: @spacing-8;
-        position: relative;
+        text-align: center;
         width: 100%;
+        max-width: 500px;
 
         @media (min-width: @screen-lg) {
           flex-direction: row-reverse;
           justify-content: space-between;
+          text-align: left;
           gap: @spacing-16;
+          max-width: 1200px;
           padding: 0 @spacing-16;
         }
 
         .illustration-container {
           width: 100%;
-          max-width: 300px;
-          margin: 0 auto;
+          max-width: 250px;
 
           @media (min-width: @screen-lg) {
-            max-width: 500px;
-            margin: 0;
+            max-width: 400px;
           }
 
           img {
@@ -126,15 +152,12 @@ import ScrollIndicator from "./ScrollIndicator.astro"
         }
 
         .text-content {
-          @media (min-width: @screen-lg) {
-            text-align: left;
-            max-width: 500px;
-          }
+          flex: 1;
 
           h1 {
             font-size: @text-5xl;
             font-weight: 700;
-            margin: 0;
+            margin: 0 0 @spacing-6 0;
 
             @media (min-width: @screen-lg) {
               font-size: @text-8xl;
@@ -147,23 +170,24 @@ import ScrollIndicator from "./ScrollIndicator.astro"
             line-height: 1.6;
             color: @color-gray-900;
             max-width: 40ch;
+            margin: 0 auto;
 
             @media (min-width: @screen-lg) {
               font-size: @text-xl;
-              max-width: 100%;
+              margin: 0;
             }
           }
         }
+      }
 
-        .scroll-indicator-wrapper {
-          margin-top: @spacing-8;
+      .scroll-indicator-wrapper {
+        position: absolute;
+        bottom: @spacing-8;
+        left: 50%;
+        transform: translateX(-50%);
 
-          @media (min-width: @screen-lg) {
-            position: absolute;
-            bottom: -20vh;
-            left: 50%;
-            transform: translateX(-50%);
-          }
+        @media (min-width: @screen-lg) {
+          bottom: @spacing-12;
         }
       }
     }
@@ -171,7 +195,9 @@ import ScrollIndicator from "./ScrollIndicator.astro"
     .projects-list {
       display: flex;
       flex-direction: column;
-      gap: @spacing-16;
+      gap: @spacing-24;
+      max-width: 900px;
+      margin: 0 auto;
 
       @media (min-width: @screen-lg) {
         padding: @spacing-24 @spacing-16;
@@ -183,31 +209,13 @@ import ScrollIndicator from "./ScrollIndicator.astro"
         flex-direction: column;
         gap: @spacing-6;
 
-        @media (min-width: @screen-lg) {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: @spacing-16;
-          align-items: center;
-
-          &:nth-child(even) {
-            direction: rtl;
-
-            .project-content,
-            .project-title {
-              direction: ltr;
-            }
-          }
-        }
-
         .project-title {
           font-size: @text-2xl;
           font-weight: 600;
-          margin: 0;
+          margin: 0 0 @spacing-4 0;
 
           @media (min-width: @screen-lg) {
-            grid-column: 1 / -1;
             font-size: @text-4xl;
-            margin-bottom: @spacing-4;
           }
         }
 
@@ -216,12 +224,12 @@ import ScrollIndicator from "./ScrollIndicator.astro"
           border-radius: @radius-lg;
           overflow: hidden;
           background: @color-gray-100;
+          margin-bottom: @spacing-4;
 
           img {
             width: 100%;
             height: auto;
             display: block;
-            aspect-ratio: 16/9;
             object-fit: cover;
           }
         }
@@ -235,6 +243,23 @@ import ScrollIndicator from "./ScrollIndicator.astro"
 
             @media (min-width: @screen-lg) {
               font-size: @text-lg;
+            }
+          }
+
+          .learn-more-btn {
+            display: inline-block;
+            padding: @spacing-3 @spacing-6;
+            background: @color-gray-900;
+            color: white;
+            text-decoration: none;
+            border-radius: @radius-md;
+            font-size: @text-base;
+            font-weight: 500;
+            .transition(all);
+
+            &:hover {
+              background: @color-gray-700;
+              transform: translateX(4px);
             }
           }
         }

@@ -1,33 +1,29 @@
 ---
 import { getCollection } from "astro:content"
-import BaseLayout from "../../layouts/BaseLayout.astro"
-import "../../styles/pages/detail.less"
+import ProjectPageLayout from "../../layouts/ProjectPageLayout.astro"
 
 export async function getStaticPaths() {
-  const art = await getCollection("art")
-  return art.map((item) => ({
-    params: { slug: item.slug },
-    props: { item },
+  const projects = await getCollection("art")
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
   }))
 }
 
-const { item } = Astro.props
-const { Content } = await item.render()
+const { project } = Astro.props
+const { Content } = await project.render()
+
+const heroImage = project.data.heroImage
+  ? typeof project.data.heroImage === "string"
+    ? project.data.heroImage
+    : project.data.heroImage.src
+  : undefined
 ---
 
-<BaseLayout title={item.data.title}>
-  <article class="art-detail">
-    <div class="art-grid">
-      <div class="art-image">
-        {/* Image placeholder */}
-        <span class="placeholder">Image</span>
-      </div>
-      <div class="art-info">
-        <h1>{item.data.title}</h1>
-        <div class="content">
-          <Content />
-        </div>
-      </div>
-    </div>
-  </article>
-</BaseLayout>
+<ProjectPageLayout
+  title={project.data.title}
+  abstract={project.data.abstract}
+  heroImage={heroImage}
+>
+  <Content />
+</ProjectPageLayout>

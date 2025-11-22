@@ -1,7 +1,6 @@
 ---
 import { getCollection } from "astro:content"
-import BaseLayout from "../../layouts/BaseLayout.astro"
-import "../../styles/pages/detail.less"
+import ProjectPageLayout from "../../layouts/ProjectPageLayout.astro"
 
 export async function getStaticPaths() {
   const projects = await getCollection("software")
@@ -13,28 +12,18 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props
 const { Content } = await project.render()
+
+const heroImage = project.data.heroImage
+  ? typeof project.data.heroImage === "string"
+    ? project.data.heroImage
+    : project.data.heroImage.src
+  : undefined
 ---
 
-<BaseLayout title={project.data.title}>
-  <article class="detail-page">
-    <header class="page-header">
-      <div class="tags">
-        {project.data.tags?.map((tag) => <span class="tag">{tag}</span>)}
-      </div>
-      <h1>{project.data.title}</h1>
-      <p class="description">{project.data.description}</p>
-    </header>
-
-    {
-      project.data.heroImage && (
-        <div class="hero-image">
-          <img src={project.data.heroImage.src} alt={project.data.title} />
-        </div>
-      )
-    }
-
-    <div class="content">
-      <Content />
-    </div>
-  </article>
-</BaseLayout>
+<ProjectPageLayout
+  title={project.data.title}
+  abstract={project.data.abstract}
+  heroImage={heroImage}
+>
+  <Content />
+</ProjectPageLayout>

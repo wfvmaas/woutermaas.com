@@ -1,6 +1,6 @@
 ---
 import { getCollection, getEntry } from "astro:content"
-import OverviewPage from "../../components/OverviewPage.astro"
+import OverviewPageLayout from "../../layouts/OverviewPageLayout.astro"
 
 const overview = await getEntry("overviews", "software")
 if (!overview) throw new Error("Software overview not found")
@@ -15,7 +15,7 @@ const allProjects = [...fullProjects, ...overviewOnlyProjects].sort(
 )
 ---
 
-<OverviewPage
+<OverviewPageLayout
   category="software"
   title={overview.data.title}
   introText={overview.data.introText}
