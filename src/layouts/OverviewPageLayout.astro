@@ -14,7 +14,7 @@ import ScrollIndicator from "../components/ScrollIndicator.astro"
 
 // Helper to check if project has a detail page (not overview-only)
 const hasDetailPage = (project: any) => {
-  return !project.id.includes("-overview-only/")
+  return project.collection === category
 }
 ---
 
@@ -125,6 +125,7 @@ const hasDetailPage = (project: any) => {
       @media (max-width: @screen-md) {
         align-items: flex-end;
         padding-bottom: 15vh;
+        margin-bottom: 4rem;
       }
 
       .header-content {
