@@ -19,57 +19,63 @@ const hasDetailPage = (project: any) => {
 ---
 
 <BaseLayout title={title}>
-  <div class="overview-page">
-    <div class="page-header">
-      <div class="header-content">
-        <div class="illustration-container">
-          <img src={heroImage} alt={title} class="header-illustration" />
+  <div class="layout-wrapper">
+    <div class="overview-page">
+      <div class="page-header">
+        <div class="header-content">
+          <div class="illustration-container">
+            <img src={heroImage} alt={title} class="header-illustration" />
+          </div>
+          <div class="text-content">
+            <h1>{title}</h1>
+            <p class="intro-text">
+              {introText}
+            </p>
+          </div>
         </div>
-        <div class="text-content">
-          <h1>{title}</h1>
-          <p class="intro-text">
-            {introText}
-          </p>
-        </div>
-        <div class="scroll-indicator-wrapper">
-          <ScrollIndicator target="#projects-list" />
-        </div>
+      </div>
+
+      <div class="projects-list" id="projects-list">
+        {
+          projects.map((project) => (
+            <article class="project-item">
+              <h2 class="project-title">{project.data.title}</h2>
+
+              {project.data.heroImage && (
+                <div class="project-image">
+                  <img
+                    src={
+                      typeof project.data.heroImage === "string"
+                        ? project.data.heroImage
+                        : project.data.heroImage.src
+                    }
+                    alt={project.data.title}
+                    loading="lazy"
+                  />
+                </div>
+              )}
+
+              <div class="project-info">
+                <p class="abstract">
+                  {project.data.abstract || project.data.title}
+                </p>
+                {hasDetailPage(project) && (
+                  <a
+                    href={`/${category}/${project.slug}`}
+                    class="learn-more-btn"
+                  >
+                    Learn more
+                  </a>
+                )}
+              </div>
+            </article>
+          ))
+        }
       </div>
     </div>
 
-    <div class="projects-list" id="projects-list">
-      {
-        projects.map((project) => (
-          <article class="project-item">
-            <h2 class="project-title">{project.data.title}</h2>
-
-            {project.data.heroImage && (
-              <div class="project-image">
-                <img
-                  src={
-                    typeof project.data.heroImage === "string"
-                      ? project.data.heroImage
-                      : project.data.heroImage.src
-                  }
-                  alt={project.data.title}
-                  loading="lazy"
-                />
-              </div>
-            )}
-
-            <div class="project-info">
-              <p class="abstract">
-                {project.data.abstract || project.data.title}
-              </p>
-              {hasDetailPage(project) && (
-                <a href={`/${category}/${project.slug}`} class="learn-more-btn">
-                  Learn more
-                </a>
-              )}
-            </div>
-          </article>
-        ))
-      }
+    <div class="scroll-indicator-wrapper">
+      <ScrollIndicator scale={1.5} target="#projects-list" />
     </div>
   </div>
 </BaseLayout>
@@ -77,6 +83,20 @@ const hasDetailPage = (project: any) => {
 <style lang="less">
   @import "../styles/variables.less";
   @import "../styles/mixins.less";
+
+  .layout-wrapper {
+    position: relative;
+    width: 100%;
+  }
+
+  .scroll-indicator-wrapper {
+    position: absolute;
+    left: 50%;
+    top: 90vh;
+    transform: translateX(-50%);
+    width: fit-content;
+    z-index: 20;
+  }
 
   .overview-page {
     padding-top: 0;
@@ -104,7 +124,7 @@ const hasDetailPage = (project: any) => {
 
       @media (max-width: @screen-md) {
         align-items: flex-end;
-        padding-bottom: 12.5vh;
+        padding-bottom: 15vh;
       }
 
       .header-content {
@@ -146,6 +166,7 @@ const hasDetailPage = (project: any) => {
             font-size: @text-5xl;
             font-weight: 700;
             margin: 0 0 @spacing-6 0;
+            text-align: left;
 
             @media (min-width: @screen-lg) {
               font-size: @text-8xl;
@@ -155,27 +176,17 @@ const hasDetailPage = (project: any) => {
 
           .intro-text {
             font-size: @text-lg;
-            line-height: 1.6;
+            line-height: 1.4;
             color: @color-gray-900;
             max-width: 40ch;
             margin: 0 auto;
+            text-align: left;
 
             @media (min-width: @screen-lg) {
               font-size: @text-xl;
               margin: 0;
             }
           }
-        }
-      }
-
-      .scroll-indicator-wrapper {
-        position: absolute;
-        bottom: @spacing-8;
-        left: 50%;
-        transform: translateX(-50%);
-
-        @media (min-width: @screen-lg) {
-          bottom: @spacing-12;
         }
       }
     }
@@ -241,7 +252,9 @@ const hasDetailPage = (project: any) => {
             display: block;
             width: 100%;
             padding: @spacing-3 @spacing-6;
-            margin: 0 auto;
+            margin-top: @spacing-4;
+            margin-left: auto;
+            margin-right: auto;
             background: transparent;
             color: @color-black;
             border: 2px solid @color-black;
