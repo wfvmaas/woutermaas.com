@@ -2,15 +2,32 @@
 import { getCollection } from "astro:content"
 import ProjectPageLayout from "../../layouts/ProjectPageLayout.astro"
 
+export const prerender = true
+
 export async function getStaticPaths() {
   const projects = await getCollection("philosophy")
-  return projects.map((project) => ({
-    params: { slug: project.slug },
-    props: { project },
-  }))
+
+  // Filter out overview pages (starting with "0") and strip numerical prefixes
+  return projects
+    .filter((project) => !project.slug.startsWith("0"))
+    .map((project) => {
+      // Strip numerical prefix (e.g., "1project" or "1.project" -> "project")
+      const cleanSlug = project.slug.replace(/^\d+\.?/, "")
+      return {
+        params: { slug: cleanSlug },
+        props: { originalSlug: project.slug },
+      }
+    })
 }
 
-const { project } = Astro.props
+const { originalSlug } = Astro.props
+const projects = await getCollection("philosophy")
+const project = projects.find((p) => p.slug === originalSlug)
+
+if (!project) {
+  throw new Error(`Project not found: ${originalSlug}`)
+}
+
 const { Content } = await project.render()
 
 const heroImage = project.data.heroImage

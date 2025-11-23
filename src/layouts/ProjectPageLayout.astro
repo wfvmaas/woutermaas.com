@@ -62,7 +62,7 @@ import ScrollIndicator from "../components/ScrollIndicator.astro"
       flex-direction: column;
       justify-content: center;
       position: relative;
-      max-width: 1200px;
+      max-width: 1600px;
       margin: 0 auto;
       padding-top: @spacing-24;
       padding-bottom: @spacing-24;
@@ -71,6 +71,7 @@ import ScrollIndicator from "../components/ScrollIndicator.astro"
         display: flex;
         flex-direction: column;
         gap: @spacing-8;
+        justify-content: space-between;
 
         @media (min-width: @screen-lg) {
           flex-direction: row;
@@ -80,6 +81,12 @@ import ScrollIndicator from "../components/ScrollIndicator.astro"
 
         .text-content {
           flex: 1;
+          gap: 40vh;
+          display: flex;
+          flex-direction: column;
+          @media (min-width: @screen-lg) {
+            max-width: 550px;
+          }
 
           h1 {
             font-size: @text-4xl;
@@ -92,7 +99,7 @@ import ScrollIndicator from "../components/ScrollIndicator.astro"
             }
 
             @media (min-width: @screen-lg) {
-              font-size: @text-6xl;
+              font-size: @text-8xl;
             }
           }
 
@@ -118,7 +125,7 @@ import ScrollIndicator from "../components/ScrollIndicator.astro"
           border-radius: @radius-lg;
           overflow: hidden;
           background: @color-gray-100;
-
+          align-self: center;
           @media (min-width: @screen-lg) {
             max-width: 50%;
           }
@@ -128,6 +135,7 @@ import ScrollIndicator from "../components/ScrollIndicator.astro"
             height: auto;
             display: block;
             object-fit: cover;
+            margin: auto;
           }
         }
       }

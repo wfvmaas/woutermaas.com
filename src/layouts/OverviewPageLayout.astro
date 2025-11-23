@@ -16,6 +16,11 @@ import ScrollIndicator from "../components/ScrollIndicator.astro"
 const hasDetailPage = (project: any) => {
   return project.collection === category
 }
+
+// Helper to strip numerical prefix from slug
+const cleanSlug = (slug: string) => {
+  return slug.replace(/^\d+\.?/, "")
+}
 ---
 
 <BaseLayout title={title}>
@@ -61,7 +66,7 @@ const hasDetailPage = (project: any) => {
                 </p>
                 {hasDetailPage(project) && (
                   <a
-                    href={`/${category}/${project.slug}`}
+                    href={`/${category}/${cleanSlug(project.slug)}`}
                     class="learn-more-btn"
                   >
                     Learn more
