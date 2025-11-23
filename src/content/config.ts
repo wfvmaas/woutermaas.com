@@ -4,20 +4,8 @@ const softwareCollection = defineCollection({
   type: 'content',
   schema: ({ image }) => z.object({
     title: z.string(),
-    abstract: z.string().optional(), // Optional for backward compatibility
-    publishDate: z.date().optional(),
-    heroImage: z.union([z.string(), image()]).optional(),
-    tags: z.array(z.string()).optional(),
-    link: z.string().url().optional(), // For external links or demos
-    order: z.number().optional(),
-  }),
-});
-
-const projectCollection = defineCollection({
-  type: 'content',
-  schema: ({ image }) => z.object({
-    title: z.string(),
-    abstract: z.string().optional(), // Optional for backward compatibility
+    introText: z.string().optional(), // Added for 0.[category].md
+    abstract: z.string().optional(),
     publishDate: z.date().optional(),
     heroImage: z.union([z.string(), image()]).optional(),
     tags: z.array(z.string()).optional(),
@@ -26,21 +14,28 @@ const projectCollection = defineCollection({
   }),
 });
 
-const overviewCollection = defineCollection({
+const projectCollection = defineCollection({
   type: 'content',
-  schema: z.object({
-    // Fields for page overviews (e.g., software.md)
-    introText: z.string().optional(),
-    
-    // Fields for project entries
-    abstract: z.string().optional(),
-    categories: z.array(z.string()).optional(),
-    link: z.string().url().optional().or(z.literal("")),
-    
-    // Shared fields
+  schema: ({ image }) => z.object({
     title: z.string(),
-    heroImage: z.string().optional().or(z.literal("")),
+    introText: z.string().optional(), // Added for 0.[category].md
+    abstract: z.string().optional(),
+    publishDate: z.date().optional(),
+    heroImage: z.union([z.string(), image()]).optional(),
+    tags: z.array(z.string()).optional(),
+    link: z.string().url().optional(),
     order: z.number().optional(),
+  }),
+});
+
+const abstractsCollection = defineCollection({
+  type: 'content',
+  schema: ({ image }) => z.object({
+    title: z.string(),
+    abstract: z.string(),
+    categories: z.array(z.string()),
+    order: z.number().optional(),
+    heroImage: z.union([z.string(), image()]).optional(),
   }),
 });
 
@@ -50,5 +45,5 @@ export const collections = {
   'philosophy': projectCollection,
   'art': projectCollection,
   'hiking': projectCollection,
-  'overviews': overviewCollection,
+  'abstracts': abstractsCollection,
 };

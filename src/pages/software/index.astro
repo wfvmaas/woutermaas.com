@@ -1,29 +1,19 @@
 ---
-import { getCollection, getEntry } from "astro:content"
+import { getOverviewContent } from "../../utils/contentHelpers"
 import OverviewPageLayout from "../../layouts/OverviewPageLayout.astro"
 
-const overview = await getEntry("overviews", "software")
-if (!overview) throw new Error("Software overview not found")
+const { heroData, projects, abstracts } = await getOverviewContent("software")
 
-// Fetch both full projects and overview-only entries
-const fullProjects = await getCollection("software")
-const overviewEntries = await getCollection("overviews", ({ data }) => {
-  return data.categories?.includes("software")
-})
+if (!heroData) throw new Error("Software overview not found")
 
-// Merge and sort by order
-const allProjects = [...fullProjects, ...overviewEntries].sort((a, b) => {
-  const orderA = a.data.order ?? 99
-  const orderB = b.data.order ?? 99
-  if (orderA !== orderB) return orderA - orderB
-  return a.data.title.localeCompare(b.data.title)
-})
+// Merge projects and abstracts
+const allProjects = [...projects, ...abstracts]
 ---
 
 <OverviewPageLayout
   category="software"
-  title={overview.data.title}
-  introText={overview.data.introText ?? ""}
-  heroImage={overview.data.heroImage ?? ""}
+  title={heroData.title}
+  introText={heroData.introText ?? ""}
+  heroImage={heroData.heroImage ?? ""}
   projects={allProjects}
 />

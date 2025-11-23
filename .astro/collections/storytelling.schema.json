@@ -7,6 +7,9 @@
         "title": {
           "type": "string"
         },
+        "introText": {
+          "type": "string"
+        },
         "abstract": {
           "type": "string"
         },
