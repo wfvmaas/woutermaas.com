@@ -7,18 +7,23 @@ if (!overview) throw new Error("Art overview not found")
 
 // Fetch both full projects and overview-only entries
 const fullProjects = await getCollection("art")
-const overviewOnlyProjects = await getCollection("art-overview-only")
+const overviewEntries = await getCollection("overviews", ({ data }) => {
+  return data.categories?.includes("art")
+})
 
 // Merge and sort by order
-const allProjects = [...fullProjects, ...overviewOnlyProjects].sort(
-  (a, b) => (a.data.order ?? 99) - (b.data.order ?? 99)
-)
+const allProjects = [...fullProjects, ...overviewEntries].sort((a, b) => {
+  const orderA = a.data.order ?? 99
+  const orderB = b.data.order ?? 99
+  if (orderA !== orderB) return orderA - orderB
+  return a.data.title.localeCompare(b.data.title)
+})
 ---
 
 <OverviewPageLayout
   category="art"
   title={overview.data.title}
-  introText={overview.data.introText}
-  heroImage={overview.data.heroImage}
+  introText={overview.data.introText ?? ""}
+  heroImage={overview.data.heroImage ?? ""}
   projects={allProjects}
 />

@@ -1,7 +1,7 @@
 {
-  "$ref": "#/definitions/art-overview-only",
+  "$ref": "#/definitions/overview",
   "definitions": {
-    "art-overview-only": {
+    "overview": {
       "type": "object",
       "properties": {
         "title": {
@@ -49,6 +49,12 @@
               "const": ""
             }
           ]
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "$schema": {
           "type": "string"

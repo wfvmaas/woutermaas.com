@@ -57,25 +57,13 @@ const hasDetailPage = (project: any) => {
               </div>
             )}
 
-            <div class="project-content">
-              <p class="project-description">
+            <div class="project-info">
+              <p class="abstract">
                 {project.data.abstract || project.data.title}
               </p>
-
               {hasDetailPage(project) && (
                 <a href={`/${category}/${project.slug}`} class="learn-more-btn">
-                  Learn More →
-                </a>
-              )}
-
-              {project.data.link && !hasDetailPage(project) && (
-                <a
-                  href={project.data.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="learn-more-btn"
-                >
-                  Visit Project →
+                  Learn more
                 </a>
               )}
             </div>
@@ -221,7 +209,6 @@ const hasDetailPage = (project: any) => {
 
         .project-image {
           width: 100%;
-          border-radius: @radius-lg;
           overflow: hidden;
           background: @color-gray-100;
           margin-bottom: @spacing-4;
@@ -234,12 +221,16 @@ const hasDetailPage = (project: any) => {
           }
         }
 
-        .project-content {
-          .project-description {
+        .project-info {
+          display: flex;
+          flex-direction: column;
+          gap: @spacing-6;
+
+          .abstract {
             font-size: @text-base;
             line-height: 1.6;
             color: @color-gray-800;
-            margin-bottom: @spacing-6;
+            margin: 0;
 
             @media (min-width: @screen-lg) {
               font-size: @text-lg;
@@ -247,19 +238,25 @@ const hasDetailPage = (project: any) => {
           }
 
           .learn-more-btn {
-            display: inline-block;
+            display: block;
+            width: 100%;
             padding: @spacing-3 @spacing-6;
-            background: @color-gray-900;
-            color: white;
-            text-decoration: none;
-            border-radius: @radius-md;
-            font-size: @text-base;
+            margin: 0 auto;
+            background: transparent;
+            color: @color-black;
+            border: 2px solid @color-black;
+            border-radius: @radius-sm;
+            text-align: center;
             font-weight: 500;
-            .transition(all);
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+
+            @media (min-width: @screen-lg) {
+              max-width: 400px;
+            }
 
             &:hover {
-              background: @color-gray-700;
-              transform: translateX(4px);
+              background: @color-gray-100;
             }
           }
         }

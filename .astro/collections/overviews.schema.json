@@ -4,23 +4,67 @@
     "overviews": {
       "type": "object",
       "properties": {
-        "title": {
-          "type": "string"
-        },
         "introText": {
           "type": "string"
         },
-        "heroImage": {
+        "abstract": {
           "type": "string"
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "link": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "not": {}
+                },
+                {
+                  "type": "string",
+                  "format": "uri"
+                }
+              ]
+            },
+            {
+              "type": "string",
+              "const": ""
+            }
+          ]
+        },
+        "title": {
+          "type": "string"
+        },
+        "heroImage": {
+          "anyOf": [
+            {
+              "anyOf": [
+                {
+                  "not": {}
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            {
+              "type": "string",
+              "const": ""
+            }
+          ]
+        },
+        "order": {
+          "type": "number"
         },
         "$schema": {
           "type": "string"
         }
       },
       "required": [
-        "title",
-        "introText",
-        "heroImage"
+        "title"
       ],
       "additionalProperties": false
     }

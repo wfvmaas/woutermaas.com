@@ -26,23 +26,21 @@ const projectCollection = defineCollection({
   }),
 });
 
-const overviewOnlyCollection = defineCollection({
-  type: 'content',
-  schema: z.object({
-    title: z.string(),
-    abstract: z.string(),
-    heroImage: z.string().optional(),
-    order: z.number().optional(),
-    link: z.string().url().optional(),
-  }),
-});
-
 const overviewCollection = defineCollection({
   type: 'content',
   schema: z.object({
+    // Fields for page overviews (e.g., software.md)
+    introText: z.string().optional(),
+    
+    // Fields for project entries
+    abstract: z.string().optional(),
+    categories: z.array(z.string()).optional(),
+    link: z.string().url().optional().or(z.literal("")),
+    
+    // Shared fields
     title: z.string(),
-    introText: z.string(),
-    heroImage: z.string(),
+    heroImage: z.string().optional().or(z.literal("")),
+    order: z.number().optional(),
   }),
 });
 
@@ -52,10 +50,5 @@ export const collections = {
   'philosophy': projectCollection,
   'art': projectCollection,
   'hiking': projectCollection,
-  'software-overview-only': overviewOnlyCollection,
-  'storytelling-overview-only': overviewOnlyCollection,
-  'philosophy-overview-only': overviewOnlyCollection,
-  'art-overview-only': overviewOnlyCollection,
-  'hiking-overview-only': overviewOnlyCollection,
   'overviews': overviewCollection,
 };

@@ -1,9 +1,9 @@
 ---
 title: "STOOR.net"
-abstract: "STOOR is a sonic lab in Rotterdam, providing electronic music producers with a creative, gear-rich space for unrestricted exploration."
+abstract: "STOOR is a sonic lab in Rotterdam, providing electronic music producers with a creative, gear-rich space for unrestricted exploration. I built their website using Shopify liquid and developed a tailored content management system, enabling seamless and rapid content updates."
 order: 1
 tags: ["Shopify", "CMS"]
 publishDate: 2023-01-01
-heroImage: "/doodles/software_factory.svg"
+heroImage: "/images/software/stoor_website_snapshot.jpg"
 ---
 STOOR is a sonic lab in Rotterdam, providing electronic music producers with a creative, gear-rich space for unrestricted exploration. I built their website using Shopify liquid and developed a tailored content management system, enabling seamless and rapid content updates.
