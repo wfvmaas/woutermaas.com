@@ -24,8 +24,8 @@ const cleanSlug = (slug: string) => {
 ---
 
 <BaseLayout title={title}>
-  <div class="layout-wrapper">
-    <div class="overview-page">
+  <div class="layout-wrapper outer-container">
+    <div class="overview-page allow-menu">
       <div class="page-header">
         <div class="header-content">
           <div class="illustration-container">
@@ -92,6 +92,7 @@ const cleanSlug = (slug: string) => {
   .layout-wrapper {
     position: relative;
     width: 100%;
+    // Padding handled by outer-container
   }
 
   .scroll-indicator-wrapper {
@@ -108,12 +109,10 @@ const cleanSlug = (slug: string) => {
     padding-bottom: @spacing-24;
     max-width: 600px;
     margin: 0 auto;
-    padding-left: @spacing-6;
-    padding-right: 80px; // Space for wizard menu on mobile
+    // Horizontal padding handled by outer-container and allow-menu
 
     @media (min-width: @screen-lg) {
       max-width: @container-max-width;
-      padding-right: @spacing-6; // Reset on desktop since wizard is fixed
       min-height: 100vh;
       display: flex;
       flex-direction: column;

@@ -123,6 +123,37 @@ a {
 }
 
 // Prose styles for markdown content
+.outer-container {
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+  padding-left: @layout-outer-padding-x;
+  padding-right: @layout-outer-padding-x;
+
+  @media (min-width: @screen-md) {
+    padding-left: @layout-outer-padding-x-md;
+    padding-right: @layout-outer-padding-x-md;
+  }
+
+  @media (min-width: @screen-lg) {
+    padding-left: @layout-outer-padding-x-lg;
+    padding-right: @layout-outer-padding-x-lg;
+  }
+}
+
+.content-container {
+  width: 100%;
+  max-width: @container-max-width;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.allow-menu {
+  @media (min-width: @screen-md) {
+    padding-right: @layout-menu-allowance;
+  }
+}
+
 .prose {
   max-width: 65ch;
   

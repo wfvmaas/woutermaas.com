@@ -5,7 +5,7 @@ import ScrollIndicator from "../components/ScrollIndicator.astro"
 ---
 
 <BaseLayout title="Home" showFooter={true} showWizardMenu={false}>
-  <div class="home-page">
+  <div class="home-page outer-container">
     <!-- Sticky Illustrations Container -->
     <div class="sticky-illustrations">
       <!-- Wizard (Top Right) -->
@@ -81,6 +81,8 @@ import ScrollIndicator from "../components/ScrollIndicator.astro"
   @import "../styles/mixins.less";
 
   .home-page {
+    // Padding handled by outer-container
+
     .sticky-illustrations {
       @media (max-width: @screen-md) {
         position: absolute;
@@ -123,12 +125,7 @@ import ScrollIndicator from "../components/ScrollIndicator.astro"
     .scrollable-content {
       position: relative;
       z-index: 10;
-      .container();
-      max-width: 100% !important;
-      @media (min-width: @screen-lg) {
-        padding-left: 6rem;
-        padding-right: 6rem;
-      }
+      // Remove manual padding, outer-container handles it
 
       .scroll-indicator-wrapper {
         position: absolute;

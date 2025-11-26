@@ -12,9 +12,9 @@ import ScrollIndicator from "../components/ScrollIndicator.astro"
 ---
 
 <BaseLayout title={title}>
-  <div class="project-page">
+  <div class="project-page outer-container">
     <!-- Header Section -->
-    <div class="project-header">
+    <div class="project-header allow-menu">
       <div class="header-content">
         <div class="text-content">
           <h1>{title}</h1>
@@ -48,7 +48,10 @@ import ScrollIndicator from "../components/ScrollIndicator.astro"
     }
 
     <!-- Content Section -->
-    <article class="project-content" id="project-content">
+    <article
+      class="project-content content-container allow-menu"
+      id="project-content"
+    >
       <slot />
     </article>
   </div>
@@ -60,12 +63,7 @@ import ScrollIndicator from "../components/ScrollIndicator.astro"
 
   .project-page {
     min-height: 100vh;
-    padding-left: @spacing-6;
-    padding-right: @spacing-6;
-
-    @media (min-width: @screen-md) {
-      padding-right: 120px; // Extra space for wizard menu
-    }
+    // Padding is now handled by outer-container
 
     .project-header {
       min-height: 100vh;
