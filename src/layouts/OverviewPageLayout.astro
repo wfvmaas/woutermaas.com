@@ -154,7 +154,7 @@ const projectsWithProcessedImages = projects.map((project) => {
       position: relative;
       padding: @spacing-6 0;
 
-      @media (max-width: @screen-md) {
+      @media (max-width: (@screen-lg - 1px)) {
         align-items: flex-end;
         padding-bottom: 15vh;
         margin-bottom: 4rem;
@@ -182,6 +182,9 @@ const projectsWithProcessedImages = projects.map((project) => {
           width: 100%;
           max-width: 250px;
 
+          @media (min-width: @screen-sm) {
+            max-width: 350px;
+          }
           @media (min-width: @screen-lg) {
             max-width: 400px;
           }

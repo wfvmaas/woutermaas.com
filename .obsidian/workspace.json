@@ -11,10 +11,14 @@
             "id": "09ea55521aeb371e",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "src/content/storytelling/1.storyforgers.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "1.storyforgers"
             }
           }
         ]
@@ -90,6 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "src/content/storytelling/1.storyforgers.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -99,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks"
+              "title": "Backlinks for 1.storyforgers"
             }
           },
           {
@@ -108,11 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "src/content/storytelling/1.storyforgers.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links"
+              "title": "Outgoing links from 1.storyforgers"
             }
           },
           {
@@ -150,12 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "src/content/storytelling/1.storyforgers.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of 1.storyforgers"
             }
           }
         ]
@@ -176,31 +183,31 @@
       "bases:Create new base": false
     }
   },
-  "active": "78e5e27d936257a1",
+  "active": "09ea55521aeb371e",
   "lastOpenFiles": [
-    "_tmp_136237_2465ad475bca486c8d2b835d7391baca",
-    "_tmp_135153_15574920bfba9dd4d38549d71c3e1bdf",
-    "_tmp_124248_0ef79dbb9d3309334d68e1eb687c7fff",
     "dist/_routes.json",
+    "dist/_astro/storyforgers_website_snapshot.CFz0h42p.jpg",
+    "dist/_astro/stoor_website_snapshot.DkUmf1fR.jpg",
+    "dist/_astro/planet_painter_snapshot.pHgd6P4M.jpg",
     "dist/_astro/index.DDo9Q4bw.css",
-    "dist/_astro/index.CRK_zj7k.css",
+    "dist/_astro/index.B-A7Dp18.css",
+    "dist/_astro/espresso_expose_header.QzU1T-nx.jpeg",
     "dist/_astro/_slug_._Q-SCiKJ.css",
-    "dist/_astro/_slug_.MzmjIgZH.css",
+    "dist/_astro/_slug_.B06FZ_na.css",
     "dist/storytelling/storyforgers/index.html",
     "dist/storytelling/storyforgers",
     "dist/storytelling",
+    "dist/software/thesis/index.html",
+    "dist/software/thesis",
+    "dist/software/stoor/index.html",
     "dist/logo_WVM.svg",
     "dist/images/software/storyforgers_website_snapshot.jpg",
     "dist/images/software/stoor_website_snapshot.jpg",
     "dist/images/software/planet_painter_snapshot.jpg",
     "dist/images/philosophy/deconstructing_transformers.jpg",
     "dist/images/art/espresso_expose_header.jpeg",
-    "dist/doodles/wizard_cloud_1.svg",
-    "dist/doodles/storytelling.svg",
-    "dist/doodles/software_factory.svg",
-    "dist/doodles/philosophy_stickfigure.svg",
-    "src/content/storytelling/1.storyforgers.md",
     "src/content/storytelling/0.storytelling.md",
+    "src/content/storytelling/1.storyforgers.md",
     "src/content/software/5.thesis.md",
     "src/content/software/4.stoor.md",
     "src/content/software/3.planet-painter.md",
