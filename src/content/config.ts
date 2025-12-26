@@ -33,8 +33,10 @@ const abstractsCollection = defineCollection({
   schema: ({ image }) => z.object({
     title: z.string(),
     abstract: z.string(),
-    categories: z.array(z.string()),
-    order: z.number().optional(),
+    categories: z.array(z.object({
+      name: z.string(),
+      order: z.number(),
+    })),
     heroImage: z.union([z.string(), image()]).optional(),
   }),
 });

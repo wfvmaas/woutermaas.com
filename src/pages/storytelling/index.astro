@@ -7,6 +7,14 @@ const { heroData, projects, abstracts } =
 
 if (!heroData) throw new Error("Storytelling overview not found")
 
+// Debug: log abstracts to see what we're getting
+console.log("Abstracts for storytelling:", abstracts.map(a => ({ 
+  slug: a.slug, 
+  title: a.data.title, 
+  abstract: a.data.abstract?.substring(0, 50) + "...",
+  categories: a.data.categories 
+})))
+
 // Merge projects and abstracts
 const allProjects = [...projects, ...abstracts]
 ---

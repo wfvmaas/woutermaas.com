@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content"
-import ProjectPageLayout from "../../layouts/ProjectPageLayout.astro"
+import DetailPageLayout from "../../layouts/DetailPageLayout.astro"
 
 export const prerender = true
 
@@ -37,10 +37,10 @@ const heroImage = project.data.heroImage
   : undefined
 ---
 
-<ProjectPageLayout
+<DetailPageLayout
   title={project.data.title}
   abstract={project.data.abstract}
   heroImage={heroImage}
 >
   <Content />
-</ProjectPageLayout>
+</DetailPageLayout>

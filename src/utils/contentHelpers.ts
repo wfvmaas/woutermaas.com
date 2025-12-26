@@ -40,13 +40,18 @@ export async function getOverviewContent(category: string) {
   });
 
   // 3. Fetch Abstracts from Abstracts Collection
-  const abstracts = await getCollection("abstracts", ({ data }) => {
-    return data.categories.includes(category);
+  const allAbstracts = await getCollection("abstracts");
+  const abstracts = allAbstracts.filter((entry) => {
+    return entry.data.categories.some((cat: any) => cat.name === category);
   });
 
-  // Sort abstracts by order
+  // Sort abstracts by order for the specific category
   abstracts.sort((a, b) => {
-    return (a.data.order ?? 999) - (b.data.order ?? 999);
+    const getOrder = (entry: any, category: string) => {
+      const categoryEntry = entry.data.categories.find((cat: any) => cat.name === category);
+      return categoryEntry?.order ?? 999;
+    };
+    return getOrder(a, category) - getOrder(b, category);
   });
 
   return {
