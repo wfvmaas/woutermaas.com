@@ -8,25 +8,20 @@ export const prerender = true
 export async function getStaticPaths() {
   const projects = await getCollection("software")
 
-  // Filter out overview pages (starting with "0") and strip numerical prefixes
+  // Filter out overview page (index.md)
   return projects
-    .filter((project) => !project.slug.startsWith("0"))
-    .map((project) => {
-      // Strip numerical prefix (e.g., "1storyforgers" or "1.storyforgers" -> "storyforgers")
-      const cleanSlug = project.slug.replace(/^\d+\.?/, "")
-      return {
-        params: { slug: cleanSlug },
-        props: { originalSlug: project.slug },
-      }
-    })
+    .filter((project) => project.slug !== "index")
+    .map((project) => ({
+      params: { slug: project.slug },
+    }))
 }
 
-const { originalSlug } = Astro.props
+const { slug } = Astro.params
 const projects = await getCollection("software")
-const project = projects.find((p) => p.slug === originalSlug)
+const project = projects.find((p) => p.slug === slug)
 
 if (!project) {
-  throw new Error(`Project not found: ${originalSlug}`)
+  throw new Error(`Project not found: ${slug}`)
 }
 
 const { Content } = await project.render()

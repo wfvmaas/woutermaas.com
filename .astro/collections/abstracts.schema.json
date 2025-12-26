@@ -10,21 +10,6 @@
         "abstract": {
           "type": "string"
         },
-        "categories": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "name"
-            ],
-            "additionalProperties": false
-          }
-        },
         "heroImage": {
           "anyOf": [
             {
@@ -61,8 +46,7 @@
       },
       "required": [
         "title",
-        "abstract",
-        "categories"
+        "abstract"
       ],
       "additionalProperties": false
     }

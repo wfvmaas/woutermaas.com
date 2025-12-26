@@ -4,7 +4,7 @@ const softwareCollection = defineCollection({
   type: 'content',
   schema: ({ image }) => z.object({
     title: z.string(),
-    introText: z.string().optional(), // Added for 0.[category].md
+    introText: z.string().optional(), // Added for index.md overview pages
     abstracts: z.array(z.string()).optional(), // References to abstract slugs for overview pages
     hero_text: z.string().optional(), // Hero text for detail pages
     abstract: z.string().optional(), // Deprecated, use hero_text for detail pages
@@ -24,7 +24,7 @@ const projectCollection = defineCollection({
   type: 'content',
   schema: ({ image }) => z.object({
     title: z.string(),
-    introText: z.string().optional(), // Added for 0.[category].md
+    introText: z.string().optional(), // Added for index.md overview pages
     abstracts: z.array(z.string()).optional(), // References to abstract slugs for overview pages
     hero_text: z.string().optional(), // Hero text for detail pages
     abstract: z.string().optional(), // Deprecated, use hero_text for detail pages
@@ -45,9 +45,6 @@ const abstractsCollection = defineCollection({
   schema: ({ image }) => z.object({
     title: z.string(),
     abstract: z.string(),
-    categories: z.array(z.object({
-      name: z.string(),
-    })),
     heroImage: z.union([
       z.string().startsWith('/'), // Public folder assets
       z.string().url(),           // Remote images

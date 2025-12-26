@@ -185,6 +185,16 @@
   },
   "active": "78e5e27d936257a1",
   "lastOpenFiles": [
+    "src/content/hiking/index.md",
+    "src/content/philosophy/index.md",
+    "src/content/storytelling/index.md",
+    "src/content/software/index.md",
+    "src/content/art/index.md",
+    "src/content/software/thesis.md",
+    "src/content/software/stoor.md",
+    "src/content/software/planet-painter.md",
+    "src/content/storytelling/storyforgers.md",
+    "src/content/art/espresso-expose.md",
     "src/content/abstracts/thesis.md",
     "src/content/abstracts/stoor.md",
     "src/content/abstracts/planet-painter.md",
@@ -220,16 +230,6 @@
     "src/content/art/1.espresso-expose.md",
     "src/content/art/0.art.md",
     "src/content/abstracts/workshops.md",
-    "src/content/abstracts/theatre.md",
-    "src/content/abstracts/storyforgers.md",
-    "src/content/abstracts/rereading-kafka.md",
-    "src/content/abstracts/inclusive-facilitation.md",
-    "src/content/abstracts/deconstructing_transformers.md",
-    "src/content/abstracts/anxiety_in_the_state_of_nature.md",
-    "woutermaas.com/content/storytelling/1.storyforgers.md",
-    "woutermaas.com/content/storytelling/0.storytelling.md",
-    "woutermaas.com/content/software/5.thesis.md",
-    "woutermaas.com/content/software/4.stoor.md",
-    "woutermaas.com/content/software/3.planet-painter.md"
+    "src/content/abstracts/theatre.md"
   ]
 }

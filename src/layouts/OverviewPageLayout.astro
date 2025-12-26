@@ -24,11 +24,6 @@ const isAbstract = (item: any) => {
   return item.collection === "abstracts"
 }
 
-// Helper to strip numerical prefix from slug
-const cleanSlug = (slug: string) => {
-  return slug.replace(/^\d+\.?/, "")
-}
-
 // Process project images before rendering
 // For content collection images, use .src directly (getImage may not be needed)
 const projectsWithProcessedImages = projects.map((project) => {
@@ -84,7 +79,7 @@ const projectsWithProcessedImages = projects.map((project) => {
                 </p>
                 {hasDetailPage(project) && (
                   <a
-                    href={`/${category}/${cleanSlug(project.slug)}`}
+                    href={`/${category}/${project.slug}`}
                     class="overview-page__learn-more-btn"
                   >
                     Learn more
