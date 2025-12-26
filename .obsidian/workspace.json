@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "src/content/abstracts/anxiety_in_the_state_of_nature.md",
+                "file": "src/content/abstracts/stoor.md",
                 "mode": "source",
-                "source": false
+                "source": true
               },
               "icon": "lucide-file",
-              "title": "anxiety_in_the_state_of_nature"
+              "title": "stoor"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "src/content/abstracts/anxiety_in_the_state_of_nature.md",
+                "file": "src/content/abstracts/stoor.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for anxiety_in_the_state_of_nature"
+              "title": "Backlinks for stoor"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "src/content/abstracts/anxiety_in_the_state_of_nature.md",
+                "file": "src/content/abstracts/stoor.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from anxiety_in_the_state_of_nature"
+              "title": "Outgoing links from stoor"
             }
           },
           {
@@ -156,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "src/content/abstracts/anxiety_in_the_state_of_nature.md",
+                "file": "src/content/abstracts/stoor.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of anxiety_in_the_state_of_nature"
+              "title": "Outline of stoor"
             }
           }
         ]
@@ -183,15 +183,32 @@
       "bases:Create new base": false
     }
   },
-  "active": "78e5e27d936257a1",
+  "active": "09ea55521aeb371e",
   "lastOpenFiles": [
+    "_tmp_179311_f474baa1efc07530e2069d3cca073265",
+    "_tmp_179155_bfe118b580d1609fbfad3fc2677949dc",
+    "src/content/abstracts/secure_mpc_sortition.md",
+    "src/content/software/stoor.md",
+    "src/content/abstracts/digital-natives.md",
+    "src/content/art/espresso-expose.md",
+    "src/content/software/planet-painter.md",
+    "src/content/storytelling/storyforgers.md",
+    "src/content/templates/detail page - template.md",
+    "src/content/templates/abstracts -  template.md",
+    "src/content/abstracts/planet-painter.md",
+    "src/content/abstracts/espresso-expose.md",
+    "src/content/templates",
+    "src/content/abstracts/deconstructing_transformers.md",
+    "public/logo_WVM_mask.svg",
+    "src/content/abstracts/inclusive-facilitation.md",
+    "src/content/abstracts/rereading-kafka.md",
+    "src/content/abstracts/anxiety_in_the_state_of_nature.md",
     "_tmp_171337_36338919c1b10a672fe0a2775560bff9",
     "public/downloads/deconstructing_transformers.pdf",
     "src/pages/api/download/[file].ts",
     "src/pages/api/download",
     "src/pages/api",
     "_tmp_169309_034c5e6afdee9c528359a87761758213",
-    "src/content/abstracts/secure_mpc_sortition.md",
     "src/content/abstracts/deconstructing-transformers.md",
     "src/content/abstracts/images/espresso_expose_header.jpeg",
     "src/content/abstracts/images/storyforgers_website_snapshot.jpg",
@@ -205,31 +222,14 @@
     "src/content/software/index.md",
     "src/content/art/index.md",
     "src/content/software/thesis.md",
-    "src/content/software/stoor.md",
-    "src/content/software/planet-painter.md",
-    "src/content/storytelling/storyforgers.md",
-    "src/content/art/espresso-expose.md",
     "src/content/abstracts/thesis.md",
     "src/content/abstracts/stoor.md",
-    "src/content/abstracts/planet-painter.md",
-    "src/content/abstracts/espresso-expose.md",
     "src/content/storytelling/1.storyforgers.md",
-    "dist/_routes.json",
     "dist/_astro/storyforgers_website_snapshot.CFz0h42p.jpg",
     "dist/_astro/stoor_website_snapshot.DkUmf1fR.jpg",
     "dist/_astro/planet_painter_snapshot.pHgd6P4M.jpg",
-    "dist/_astro/index.DDo9Q4bw.css",
-    "dist/_astro/index.B-A7Dp18.css",
     "dist/_astro/espresso_expose_header.QzU1T-nx.jpeg",
     "dist/logo_WVM.svg",
-    "dist/images/software/storyforgers_website_snapshot.jpg",
-    "src/content/storytelling/0.storytelling.md",
-    "src/content/software/5.thesis.md",
-    "src/content/software/4.stoor.md",
-    "src/content/software/3.planet-painter.md",
-    "src/content/software/0.software.md",
-    "src/content/philosophy/0.philosophy.md",
-    "src/content/hiking/0.hiking.md",
-    "src/content/art/1.espresso-expose.md"
+    "src/content/storytelling/0.storytelling.md"
   ]
 }

@@ -222,6 +222,14 @@ declare module 'astro:content' {
   rendered?: RenderedContent;
   filePath?: string;
 }>;
+"templates": Record<string, {
+  id: string;
+  body?: string;
+  collection: "templates";
+  data: any;
+  rendered?: RenderedContent;
+  filePath?: string;
+}>;
 
 	};
 

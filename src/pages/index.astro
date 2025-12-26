@@ -4,7 +4,7 @@ import WizardMenuButton from "../components/WizardMenuButton.astro"
 import ScrollIndicator from "../components/ScrollIndicator.astro"
 ---
 
-<BaseLayout title="Home" showFooter={true} showWizardMenu={false}>
+<BaseLayout title="Home" showFooter={true} showWizardMenu={false} showNavigation={false}>
   <div class="home-page layout-outer-container">
     <!-- Sticky Illustrations Container -->
     <div class="home-page__sticky-illustrations">
@@ -62,9 +62,6 @@ import ScrollIndicator from "../components/ScrollIndicator.astro"
             </li>
             <li>
               <a href="/hiking"> Hiking </a>
-            </li>
-            <li>
-              <a href="/cv"> Serious CV </a>
             </li>
             <li>
               <a href="/contact"> Contact </a>

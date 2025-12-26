@@ -1,20 +1,39 @@
 ---
 const links = [
-  { href: "/software", label: "Software" },
-  { href: "/storytelling", label: "Storytelling" },
-  { href: "/philosophy", label: "Philosophy" },
-  { href: "/art", label: "Art" },
-  { href: "/hiking", label: "Hiking" },
-  { href: "/cv", label: "Serious CV" },
-  { href: "/contact", label: "Contact" },
-]
+  { href: '/software', label: 'Software' },
+  { href: '/storytelling', label: 'Storytelling' },
+  { href: '/philosophy', label: 'Philosophy' },
+  { href: '/art', label: 'Art' },
+  { href: '/hiking', label: 'Hiking' },
+  { href: '/contact', label: 'Contact' },
+];
 ---
 
 <nav class="main-nav" id="main-nav">
   <div class="main-nav__container">
     <!-- Logo -->
     <div class="main-nav__logo">
-      <a href="/"> WOUTER MAAS </a>
+      <a href="/">
+        <svg
+          version="1.1"
+          id="logo"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          x="0px"
+          y="0px"
+          viewBox="0 0 728.6 396.5"
+          class="main-nav__logo-img"
+        >
+          <path
+            class="logo"
+            d="M630.4,0l-39.5,165.8c-8.8,39.3-19.9,99-19.9,99h-1.1c0,0-10-54.8-18.8-95.1L513.8,0l-92.3,0l-39.3,164.8
+	c-0.4,1.6-0.8,3.3-1.1,5.1l0,0c-8.8,39.7-17,84.3-17,84.6c0,0,0,0,0,0c-3.1-18.8-10-59.1-16.6-87.5L305.4,0h-90.7l-37.1,169.8
+	c-8.9,39.8-19.4,94-19.4,94h-1.1c0,0-9.4-59.7-18.3-97.9L99,0H0l108.7,396.5h95.6l41.8-190.7c3.3-15.7,6.6-34.1,9.1-48.5l55.3,214
+	l5.5,25.3h0h1h96.3l10.9-49.7l49.1-189.2c2.6,14.5,6.1,33.2,9.7,49.1l41.5,189.7h95.7L728.6,0L630.4,0L630.4,0z"
+          />
+        </svg>
+        <span class="main-nav__logo-text">WOUTER MAAS</span>
+      </a>
     </div>
 
     <!-- Desktop Menu -->
@@ -52,8 +71,8 @@ const links = [
 </div>
 
 <style lang="less">
-  @import "../styles/variables.less";
-  @import "../styles/mixins.less";
+  @import '../styles/variables.less';
+  @import '../styles/mixins.less';
 
   .main-nav {
     position: fixed;
@@ -78,15 +97,38 @@ const links = [
       flex-shrink: 0;
       display: flex;
       align-items: center;
-
       a {
-        font-size: @text-2xl;
-        font-weight: 700;
-        letter-spacing: -0.05em;
+        display: flex;
+        align-items: center;
+        gap: @spacing-3;
         .transition(opacity);
 
         &:hover {
           opacity: 0.7;
+        }
+      }
+
+      &-img {
+        display: none;
+        height: 2rem;
+        width: auto;
+
+        @media (min-width: @screen-md) {
+          display: block;
+        }
+
+        :global(.logo) {
+          fill: @color-black;
+        }
+      }
+
+      &-text {
+        font-size: @text-2xl;
+        font-weight: 700;
+        letter-spacing: -0.05em;
+
+        @media (min-width: @screen-md) {
+          display: none;
         }
       }
     }
@@ -205,15 +247,15 @@ const links = [
 </style>
 
 <script>
-  const mobileMenuBtn = document.getElementById("mobile-menu-btn")
-  const closeMenuBtn = document.getElementById("close-menu-btn")
-  const mobileMenu = document.getElementById("mobile-menu")
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const closeMenuBtn = document.getElementById('close-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
 
   function toggleMenu() {
-    mobileMenu?.classList.toggle("mobile-menu--open")
-    document.body.classList.toggle("overflow-hidden")
+    mobileMenu?.classList.toggle('mobile-menu--open');
+    document.body.classList.toggle('overflow-hidden');
   }
 
-  mobileMenuBtn?.addEventListener("click", toggleMenu)
-  closeMenuBtn?.addEventListener("click", toggleMenu)
+  mobileMenuBtn?.addEventListener('click', toggleMenu);
+  closeMenuBtn?.addEventListener('click', toggleMenu);
 </script>

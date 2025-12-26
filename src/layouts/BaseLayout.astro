@@ -1,6 +1,7 @@
 ---
 import WizardMenuButton from "../components/WizardMenuButton.astro"
 import MobileMenuModal from "../components/MobileMenuModal.astro"
+import Navigation from "../components/Navigation.astro"
 import CastleFooter from "../components/CastleFooter.astro"
 import "../styles/global.less"
 
@@ -9,6 +10,7 @@ interface Props {
   description?: string
   showFooter?: boolean
   showWizardMenu?: boolean
+  showNavigation?: boolean
 }
 
 const {
@@ -16,6 +18,7 @@ const {
   description = "Portfolio of Wouter Maas - Web Developer, Storyteller, Philosopher.",
   showFooter = true,
   showWizardMenu = true,
+  showNavigation = true,
 } = Astro.props
 ---
 
@@ -30,6 +33,7 @@ const {
     <title>{title} | Wouter Maas</title>
   </head>
   <body>
+    {showNavigation && <Navigation />}
     {showWizardMenu && <WizardMenuButton />}
     <main>
       <slot />

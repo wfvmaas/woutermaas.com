@@ -8,7 +8,7 @@ const { isHomePage = false } = Astro.props
 
 <div class="wizard-menu-button" id="wizard-menu-btn" data-is-home={isHomePage}>
   <img src="/doodles/wizard_cloud_1.svg" alt="Menu" />
-  <div class="wizard-menu-button__label">Menu</div>
+  <div class="wizard-menu-button__label" data-is-home={isHomePage}>Menu</div>
 </div>
 
 <style lang="less">
@@ -42,27 +42,112 @@ const { isHomePage = false } = Astro.props
       font-weight: 500;
       margin-top: 0.25rem;
       color: @color-black;
+      .transition(opacity, transform);
+    }
+
+    // Hide label on desktop when not on home page (until scroll)
+    @media (min-width: @screen-md) {
+      &[data-is-home="false"] &__label {
+        opacity: 0;
+        transform: translateY(-0.5rem);
+        pointer-events: none;
+      }
+
+      // Show when scrolled - needs higher specificity
+      &[data-is-home="false"] &__label--visible {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+        pointer-events: auto;
+      }
     }
   }
 </style>
 
 <script>
-  const wizardButton = document.getElementById("wizard-menu-btn")
-  const isHomePage = wizardButton?.dataset.isHome === "true"
+  function initWizardMenuButton() {
+    const wizardButton = document.getElementById("wizard-menu-btn")
+    if (!wizardButton) return
 
-  wizardButton?.addEventListener("click", () => {
-    if (isHomePage) {
-      // Scroll to menu section on home page
-      const menuSection = document.getElementById("home-page__menu-section")
-      if (menuSection) {
-        menuSection.scrollIntoView({ behavior: "smooth" })
-      } else {
-        // Fallback if menu section not found (shouldn't happen on home)
-        document.dispatchEvent(new CustomEvent("open-mobile-menu"))
+    const label = wizardButton.querySelector(".wizard-menu-button__label")
+    if (!label) return
+
+    const isHomePage = wizardButton.dataset.isHome === "true"
+    const isDesktop = window.innerWidth >= 768
+
+    // Handle scroll to show/hide label on desktop (not home page)
+    if (!isHomePage && isDesktop) {
+      const handleScroll = () => {
+        const scrollY = window.scrollY || window.pageYOffset
+        if (scrollY > 50) {
+          label.classList.add("wizard-menu-button__label--visible")
+        } else {
+          label.classList.remove("wizard-menu-button__label--visible")
+        }
       }
+      
+      // Set initial state - hidden
+      label.classList.remove("wizard-menu-button__label--visible")
+
+      // Check initial scroll position
+      handleScroll()
+      
+      // Listen for scroll events
+      window.addEventListener("scroll", handleScroll, { passive: true })
+      
+      // Handle window resize
+      window.addEventListener("resize", () => {
+        const isDesktopNow = window.innerWidth >= 768
+        if (isDesktopNow && !isHomePage) {
+          handleScroll()
+        } else {
+          // On mobile, always show label
+          label.classList.add("wizard-menu-button__label--visible")
+        }
+      }, { passive: true })
     } else {
-      // Open modal on other pages
-      document.dispatchEvent(new CustomEvent("open-mobile-menu"))
+      // On home page or mobile, always show label
+      label.classList.add("wizard-menu-button__label--visible")
     }
-  })
+
+    // Click handler
+    wizardButton.addEventListener("click", () => {
+      const isDesktopNow = window.innerWidth >= 768
+
+      if (isDesktopNow) {
+        // On desktop
+        if (isHomePage) {
+          // Scroll to menu section on home page (restore previous behavior)
+          const menuSection = document.getElementById("home-page__menu-section")
+          if (menuSection) {
+            menuSection.scrollIntoView({ behavior: "smooth" })
+          }
+        } else {
+          // Scroll to top on other pages
+          window.scrollTo({ top: 0, behavior: "smooth" })
+        }
+      } else {
+        // On mobile, keep current behavior
+        if (isHomePage) {
+          // Scroll to menu section on home page
+          const menuSection = document.getElementById("home-page__menu-section")
+          if (menuSection) {
+            menuSection.scrollIntoView({ behavior: "smooth" })
+          } else {
+            // Fallback if menu section not found (shouldn't happen on home)
+            document.dispatchEvent(new CustomEvent("open-mobile-menu"))
+          }
+        } else {
+          // Open modal on other pages
+          document.dispatchEvent(new CustomEvent("open-mobile-menu"))
+        }
+      }
+    })
+  }
+
+  // Run when DOM is ready
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initWizardMenuButton)
+  } else {
+    initWizardMenuButton()
+  }
 </script>
