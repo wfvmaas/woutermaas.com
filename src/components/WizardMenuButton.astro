@@ -42,7 +42,7 @@ const { isHomePage = false } = Astro.props
       font-weight: 500;
       margin-top: 0.25rem;
       color: @color-black;
-      .transition(opacity, transform);
+      transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
     }
 
     // Hide label on desktop when not on home page (until scroll)
