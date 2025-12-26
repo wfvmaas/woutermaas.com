@@ -17,6 +17,11 @@ const hasDetailPage = (project: any) => {
   return project.collection === category
 }
 
+// Helper to check if item is an abstract
+const isAbstract = (item: any) => {
+  return item.collection === "abstracts"
+}
+
 // Helper to strip numerical prefix from slug
 const cleanSlug = (slug: string) => {
   return slug.replace(/^\d+\.?/, "")
@@ -68,6 +73,16 @@ const cleanSlug = (slug: string) => {
                   <a
                     href={`/${category}/${cleanSlug(project.slug)}`}
                     class="learn-more-btn"
+                  >
+                    Learn more
+                  </a>
+                )}
+                {isAbstract(project) && project.data.link && (
+                  <a
+                    href={project.data.link}
+                    class="learn-more-btn"
+                    target={project.data.link.startsWith('http') ? '_blank' : undefined}
+                    rel={project.data.link.startsWith('http') ? 'noopener noreferrer' : undefined}
                   >
                     Learn more
                   </a>

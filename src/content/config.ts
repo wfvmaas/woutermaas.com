@@ -38,6 +38,13 @@ const abstractsCollection = defineCollection({
       order: z.number(),
     })),
     heroImage: z.union([z.string(), image()]).optional(),
+    link: z.union([
+      z.string().url(),
+      z.string().refine((val) => val.startsWith('/'), {
+        message: "Link must be a valid URL or start with '/' for relative paths",
+      }),
+      z.literal(''),
+    ]).optional(),
   }),
 });
 

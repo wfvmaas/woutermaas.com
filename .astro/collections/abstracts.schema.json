@@ -32,6 +32,21 @@
         "heroImage": {
           "type": "string"
         },
+        "link": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "uri"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string",
+              "const": ""
+            }
+          ]
+        },
         "$schema": {
           "type": "string"
         }
