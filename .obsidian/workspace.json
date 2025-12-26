@@ -185,6 +185,15 @@
   },
   "active": "78e5e27d936257a1",
   "lastOpenFiles": [
+    "_tmp_169309_034c5e6afdee9c528359a87761758213",
+    "src/content/abstracts/secure_mpc_sortition.md",
+    "src/content/abstracts/deconstructing-transformers.md",
+    "src/content/abstracts/images/espresso_expose_header.jpeg",
+    "src/content/abstracts/images/storyforgers_website_snapshot.jpg",
+    "src/content/abstracts/images/stoor_website_snapshot.jpg",
+    "src/content/abstracts/images/planet_painter_snapshot.jpg",
+    "_tmp_168606_bfe93d318b4262d81d0cc89db1ef2086",
+    "_tmp_166249_3286eb9572dced0cf3b5677914126109",
     "src/content/hiking/index.md",
     "src/content/philosophy/index.md",
     "src/content/storytelling/index.md",
@@ -212,14 +221,8 @@
     "dist/storytelling/storyforgers/index.html",
     "dist/storytelling/storyforgers",
     "dist/storytelling",
-    "dist/software/thesis/index.html",
-    "dist/software/thesis",
     "dist/logo_WVM.svg",
     "dist/images/software/storyforgers_website_snapshot.jpg",
-    "dist/images/software/stoor_website_snapshot.jpg",
-    "dist/images/software/planet_painter_snapshot.jpg",
-    "dist/images/philosophy/deconstructing_transformers.jpg",
-    "dist/images/art/espresso_expose_header.jpeg",
     "src/content/storytelling/0.storytelling.md",
     "src/content/software/5.thesis.md",
     "src/content/software/4.stoor.md",
@@ -227,9 +230,6 @@
     "src/content/software/0.software.md",
     "src/content/philosophy/0.philosophy.md",
     "src/content/hiking/0.hiking.md",
-    "src/content/art/1.espresso-expose.md",
-    "src/content/art/0.art.md",
-    "src/content/abstracts/workshops.md",
-    "src/content/abstracts/theatre.md"
+    "src/content/art/1.espresso-expose.md"
   ]
 }

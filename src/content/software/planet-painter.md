@@ -1,6 +1,6 @@
 ---
 title: "Planet Painter"
-hero_text: "Planet Painter is a desktop program developed in collaboration with the think tank [The Why Factory](https://www.mvrdv.nl/projects/368/the-why-factory) of the Dutch Architecture firm [MVRDV](https://www.mvrdv.nl/themes/15/next) aimed at visualizing and quantifying the impact of different kinds of urban interventions such as replacing cars with trees on the climate. By using satellite imagery, these kinds of scenarios can be generated even for underserved communities for which traditionally not enough data is collected to explore such scenarios."
+hero_text: "What would the centre of Amsterdam, New York or Shanghai look like if it were covered in trees? Planet Painter allows you to explore that question using real satellite imagery."
 order: 4
 publishDate: 2023-01-07
 heroImage: "./images/planet_painter_snapshot.jpg"
