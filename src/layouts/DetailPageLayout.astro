@@ -15,7 +15,7 @@ import ScrollIndicator from "../components/ScrollIndicator.astro"
   <div class="project-page outer-container">
     <!-- Header Section -->
     <div class="project-header allow-menu">
-      <div class="header-content">
+      <div class={`header-content ${!heroImage ? 'no-hero-image' : ''}`}>
         {
           heroImage && (
             <div class="hero-image hero-image-mobile">
@@ -99,6 +99,23 @@ import ScrollIndicator from "../components/ScrollIndicator.astro"
           flex-direction: row;
           gap: @spacing-16;
           align-items: flex-start;
+        }
+
+        &.no-hero-image {
+          @media (min-width: @screen-lg) {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .text-content {
+            @media (min-width: @screen-lg) {
+              gap: @spacing-8;
+              max-width: 800px;
+              width: 100%;
+              justify-content: center;
+            }
+          }
         }
 
         .hero-image-mobile {

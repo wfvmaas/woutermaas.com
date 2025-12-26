@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "src/content/storytelling/1.storyforgers.md",
+                "file": "src/content/abstracts/anxiety_in_the_state_of_nature.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "1.storyforgers"
+              "title": "anxiety_in_the_state_of_nature"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "src/content/storytelling/1.storyforgers.md",
+                "file": "src/content/abstracts/anxiety_in_the_state_of_nature.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for 1.storyforgers"
+              "title": "Backlinks for anxiety_in_the_state_of_nature"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "src/content/storytelling/1.storyforgers.md",
+                "file": "src/content/abstracts/anxiety_in_the_state_of_nature.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from 1.storyforgers"
+              "title": "Outgoing links from anxiety_in_the_state_of_nature"
             }
           },
           {
@@ -156,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "src/content/storytelling/1.storyforgers.md",
+                "file": "src/content/abstracts/anxiety_in_the_state_of_nature.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 1.storyforgers"
+              "title": "Outline of anxiety_in_the_state_of_nature"
             }
           }
         ]
@@ -185,6 +185,7 @@
   },
   "active": "09ea55521aeb371e",
   "lastOpenFiles": [
+    "src/content/storytelling/1.storyforgers.md",
     "dist/_routes.json",
     "dist/_astro/storyforgers_website_snapshot.CFz0h42p.jpg",
     "dist/_astro/stoor_website_snapshot.DkUmf1fR.jpg",
@@ -199,7 +200,6 @@
     "dist/storytelling",
     "dist/software/thesis/index.html",
     "dist/software/thesis",
-    "dist/software/stoor/index.html",
     "dist/logo_WVM.svg",
     "dist/images/software/storyforgers_website_snapshot.jpg",
     "dist/images/software/stoor_website_snapshot.jpg",
@@ -207,7 +207,6 @@
     "dist/images/philosophy/deconstructing_transformers.jpg",
     "dist/images/art/espresso_expose_header.jpeg",
     "src/content/storytelling/0.storytelling.md",
-    "src/content/storytelling/1.storyforgers.md",
     "src/content/software/5.thesis.md",
     "src/content/software/4.stoor.md",
     "src/content/software/3.planet-painter.md",
