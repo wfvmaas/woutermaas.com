@@ -5,31 +5,31 @@ import ScrollIndicator from "../components/ScrollIndicator.astro"
 ---
 
 <BaseLayout title="Home" showFooter={true} showWizardMenu={false}>
-  <div class="home-page outer-container">
+  <div class="home-page layout-outer-container">
     <!-- Sticky Illustrations Container -->
-    <div class="sticky-illustrations">
+    <div class="home-page__sticky-illustrations">
       <!-- Wizard (Top Right) -->
       <img
         src="/doodles/wizard_cloud_1.svg"
         alt="Wizard on a cloud"
-        class="wizard"
+        class="home-page__wizard"
       />
 
       <!-- Dragon (Center/Right) -->
-      <img src="/doodles/dragon_1.svg" alt="Dragon" class="dragon" />
+      <img src="/doodles/dragon_1.svg" alt="Dragon" class="home-page__dragon" />
     </div>
 
     <!-- Mobile Wizard Menu Button -->
     <WizardMenuButton isHomePage={true} />
 
     <!-- Scrollable Content -->
-    <div class="scrollable-content">
+    <div class="home-page__scrollable-content">
       <!-- Hero Section -->
-      <section class="hero-section">
-        <div class="content">
+      <section class="home-page__hero-section">
+        <div class="home-page__content">
           <h1>Hello</h1>
 
-          <div class="intro-text">
+          <div class="home-page__intro-text">
             <p>
               My name is Wouter a creative software wizard who likes to build
               all sorts of things
@@ -40,12 +40,12 @@ import ScrollIndicator from "../components/ScrollIndicator.astro"
       </section>
 
       <!-- Scroll Indicator -->
-      <div class="scroll-indicator-wrapper">
-        <ScrollIndicator scale={1.5} target="#menu-section" />
+      <div class="home-page__scroll-indicator-wrapper">
+        <ScrollIndicator scale={1.5} target="#home-page__menu-section" />
       </div>
 
       <!-- Menu Section -->
-      <section class="menu-section" id="menu-section">
+      <section class="home-page__menu-section" id="home-page__menu-section">
         <nav>
           <ul>
             <li>
@@ -81,9 +81,9 @@ import ScrollIndicator from "../components/ScrollIndicator.astro"
   @import "../styles/mixins.less";
 
   .home-page {
-    // Padding handled by outer-container
+    // Padding handled by layout-outer-container
 
-    .sticky-illustrations {
+    &__sticky-illustrations {
       @media (max-width: @screen-md) {
         position: absolute;
         pointer-events: none;
@@ -97,100 +97,101 @@ import ScrollIndicator from "../components/ScrollIndicator.astro"
         z-index: 0;
         overflow: hidden;
       }
+    }
 
-      .wizard {
-        display: none;
+    &__wizard {
+      display: none;
+    }
+
+    &__dragon {
+      position: absolute;
+      top: 25%;
+      left: 5%;
+      width: 8rem;
+
+      @media (min-width: @screen-md) {
+        top: 30%;
+        left: auto;
+        right: 25%;
+        width: 10rem;
       }
 
-      .dragon {
-        position: absolute;
-        top: 25%;
-        left: 5%;
-        width: 8rem;
-
-        @media (min-width: @screen-md) {
-          top: 30%;
-          left: auto;
-          right: 25%;
-          width: 10rem;
-        }
-
-        @media (min-width: @screen-lg) {
-          width: 12rem;
-          right: 30%;
-        }
+      @media (min-width: @screen-lg) {
+        width: 12rem;
+        right: 30%;
       }
     }
 
-    .scrollable-content {
+    &__scrollable-content {
       position: relative;
       z-index: 10;
-      // Remove manual padding, outer-container handles it
-
-      .scroll-indicator-wrapper {
-        position: absolute;
-        left: 50%;
-        top: 90vh;
-        transform: translateX(-50%);
-        width: fit-content;
-        z-index: 20;
-      }
+      // Remove manual padding, layout-outer-container handles it
     }
 
-    .hero-section {
+    &__scroll-indicator-wrapper {
+      position: absolute;
+      left: 50%;
+      top: 90vh;
+      transform: translateX(-50%);
+      width: fit-content;
+      z-index: 20;
+    }
+
+    &__hero-section {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+    }
 
-      .content {
-        max-width: 48rem;
-        padding-top: 45vh;
+    &__content {
+      max-width: 48rem;
+      padding-top: 45vh;
 
-        h1 {
-          font-size: 6.5rem;
-          font-weight: 600;
-          letter-spacing: -0.05em;
-          line-height: 1;
-          margin: 0 0 @spacing-8 0;
+      h1 {
+        font-size: 6.5rem;
+        font-weight: 600;
+        letter-spacing: -0.05em;
+        line-height: 1;
+        margin: 0 0 @spacing-8 0;
 
-          @media (min-width: @screen-sm) {
-            font-size: 7rem;
-          }
-
-          @media (min-width: @screen-md) {
-            font-size: 8rem;
-          }
-
-          @media (min-width: @screen-lg) {
-            font-size: 12rem;
-          }
+        @media (min-width: @screen-sm) {
+          font-size: 7rem;
         }
 
-        .intro-text {
-          font-size: @text-base;
-          font-weight: 500;
-          max-width: 36rem;
+        @media (min-width: @screen-md) {
+          font-size: 8rem;
+        }
 
-          @media (min-width: @screen-md) {
-            font-size: @text-lg;
-          }
-
-          @media (min-width: @screen-lg) {
-            font-size: @text-xl;
-          }
-
-          p {
-            margin-bottom: @spacing-6;
-          }
+        @media (min-width: @screen-lg) {
+          font-size: 12rem;
         }
       }
     }
 
-    .menu-section {
+    &__intro-text {
+      font-size: @text-base;
+      font-weight: 500;
+      max-width: 36rem;
+
+      @media (min-width: @screen-md) {
+        font-size: @text-lg;
+      }
+
+      @media (min-width: @screen-lg) {
+        font-size: @text-xl;
+      }
+
+      p {
+        margin-bottom: @spacing-6;
+      }
+    }
+
+    &__menu-section {
       min-height: 100vh;
       display: flex;
       align-items: center;
+
       nav {
         width: fit-content;
 

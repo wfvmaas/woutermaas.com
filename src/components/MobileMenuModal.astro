@@ -11,9 +11,9 @@ const links = [
 ---
 
 <div class="mobile-menu-modal" id="mobile-menu-modal">
-  <div class="backdrop" id="mobile-menu-backdrop"></div>
-  <div class="menu-content">
-    <button class="close-btn" id="mobile-menu-close">
+  <div class="mobile-menu-modal__backdrop" id="mobile-menu-backdrop"></div>
+  <div class="mobile-menu-modal__content">
+    <button class="mobile-menu-modal__close-btn" id="mobile-menu-close">
       <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path
           stroke-linecap="round"
@@ -46,19 +46,19 @@ const links = [
     z-index: 200;
     pointer-events: none;
 
-    &.open {
+    &--open {
       pointer-events: auto;
 
-      .backdrop {
+      .mobile-menu-modal__backdrop {
         opacity: 1;
       }
 
-      .menu-content {
+      .mobile-menu-modal__content {
         transform: translateX(0);
       }
     }
 
-    .backdrop {
+    &__backdrop {
       position: absolute;
       inset: 0;
       background: rgba(0, 0, 0, 0.5);
@@ -66,7 +66,7 @@ const links = [
       transition: opacity 300ms ease-out;
     }
 
-    .menu-content {
+    &__content {
       position: relative;
       z-index: 1;
       background: white;
@@ -78,49 +78,49 @@ const links = [
       transition: transform 300ms ease-out;
       display: flex;
       flex-direction: column;
+    }
 
-      .close-btn {
-        position: absolute;
-        top: @spacing-4;
-        right: @spacing-4;
-        background: none;
-        border: none;
-        padding: @spacing-2;
-        cursor: pointer;
-        color: @color-black;
-        .transition(color);
+    &__close-btn {
+      position: absolute;
+      top: @spacing-4;
+      right: @spacing-4;
+      background: none;
+      border: none;
+      padding: @spacing-2;
+      cursor: pointer;
+      color: @color-black;
+      .transition(color);
 
-        &:hover {
-          color: @color-gray-600;
-        }
-
-        svg {
-          width: 2rem;
-          height: 2rem;
-        }
+      &:hover {
+        color: @color-gray-600;
       }
 
-      nav {
-        margin-top: @spacing-16;
+      svg {
+        width: 2rem;
+        height: 2rem;
+      }
+    }
 
-        ul {
-          list-style: none;
-          padding: 0;
-          margin: 0;
+    nav {
+      margin-top: @spacing-16;
 
-          li {
-            margin-bottom: @spacing-6;
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
 
-            a {
-              display: block;
-              font-size: @text-3xl;
-              font-weight: 700;
-              color: @color-black;
-              .transition(color);
+        li {
+          margin-bottom: @spacing-6;
 
-              &:hover {
-                color: @color-gray-600;
-              }
+          a {
+            display: block;
+            font-size: @text-3xl;
+            font-weight: 700;
+            color: @color-black;
+            .transition(color);
+
+            &:hover {
+              color: @color-gray-600;
             }
           }
         }
@@ -135,12 +135,12 @@ const links = [
   const closeBtn = document.getElementById("mobile-menu-close")
 
   function openMenu() {
-    modal?.classList.add("open")
+    modal?.classList.add("mobile-menu-modal--open")
     document.body.classList.add("overflow-hidden")
   }
 
   function closeMenu() {
-    modal?.classList.remove("open")
+    modal?.classList.remove("mobile-menu-modal--open")
     document.body.classList.remove("overflow-hidden")
   }
 

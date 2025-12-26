@@ -3,28 +3,28 @@ import BaseLayout from "../layouts/BaseLayout.astro"
 ---
 
 <BaseLayout title="Serious CV">
-  <div class="cv-page outer-container">
-    <div class="content-container allow-menu">
-      <header class="cv-header">
+  <div class="cv-page layout-outer-container">
+    <div class="layout-content-container layout-allow-menu">
+      <header class="cv-page__header">
         <h1>Wouter Maas</h1>
-        <p class="subtitle">Medior Web Developer</p>
-        <div class="meta">
+        <p class="cv-page__subtitle">Medior Web Developer</p>
+        <div class="cv-page__meta">
           <span>Vue / Nuxt Specialist</span>
           <span>Creative Technologist</span>
           <span>Problem Solver</span>
         </div>
       </header>
 
-      <section class="cv-section">
+      <section class="cv-page__section">
         <h2>Experience</h2>
-        <div class="experience-list">
-          <div class="experience-item">
-            <div class="experience-header">
+        <div class="cv-page__experience-list">
+          <div class="cv-page__experience-item">
+            <div class="cv-page__experience-header">
               <h3>Senior Web Developer</h3>
-              <span class="date">2020 - Present</span>
+              <span class="cv-page__date">2020 - Present</span>
             </div>
-            <p class="company">Company Name</p>
-            <p class="description">
+            <p class="cv-page__company">Company Name</p>
+            <p class="cv-page__description">
               Leading frontend development using Vue.js and Nuxt. Architecting
               scalable web applications and mentoring junior developers.
             </p>
@@ -33,14 +33,14 @@ import BaseLayout from "../layouts/BaseLayout.astro"
         </div>
       </section>
 
-      <section class="cv-section">
+      <section class="cv-page__section">
         <h2>Skills</h2>
-        <div class="skills-grid">
-          <div class="skill-card">
+        <div class="cv-page__skills-grid">
+          <div class="cv-page__skill-card">
             <h3>Frontend</h3>
             <p>Vue, Nuxt, Astro, Less, TypeScript</p>
           </div>
-          <div class="skill-card">
+          <div class="cv-page__skill-card">
             <h3>Tools</h3>
             <p>Git, Figma, VS Code</p>
           </div>
@@ -56,16 +56,11 @@ import BaseLayout from "../layouts/BaseLayout.astro"
   @import "../styles/mixins.less";
 
   .cv-page {
-    // Padding is now handled by outer-container
+    // Padding is now handled by layout-outer-container
     padding-top: @spacing-20;
     padding-bottom: @spacing-20;
 
-    .content-container {
-      max-width: 56rem;
-      // Centering and menu allowance handled by classes
-    }
-
-    .cv-header {
+    &__header {
       margin-bottom: @spacing-16;
       border-bottom: 1px solid @color-gray-100;
       padding-bottom: @spacing-16;
@@ -76,31 +71,31 @@ import BaseLayout from "../layouts/BaseLayout.astro"
         letter-spacing: -0.05em;
         margin: 0 0 @spacing-6 0;
       }
+    }
 
-      .subtitle {
-        font-size: @text-2xl;
-        color: @color-gray-600;
-        font-weight: 300;
-        margin: 0;
-      }
+    &__subtitle {
+      font-size: @text-2xl;
+      color: @color-gray-600;
+      font-weight: 300;
+      margin: 0;
+    }
 
-      .meta {
-        margin-top: @spacing-8;
-        display: flex;
-        gap: @spacing-4;
-        font-size: @text-sm;
-        color: @color-gray-500;
+    &__meta {
+      margin-top: @spacing-8;
+      display: flex;
+      gap: @spacing-4;
+      font-size: @text-sm;
+      color: @color-gray-500;
 
-        span {
-          &:not(:last-child)::after {
-            content: "•";
-            margin-left: @spacing-4;
-          }
+      span {
+        &:not(:last-child)::after {
+          content: "•";
+          margin-left: @spacing-4;
         }
       }
     }
 
-    .cv-section {
+    &__section {
       margin-bottom: @spacing-16;
 
       h2 {
@@ -111,70 +106,72 @@ import BaseLayout from "../layouts/BaseLayout.astro"
         letter-spacing: 0.1em;
         color: @color-gray-400;
       }
+    }
 
-      .experience-list {
-        display: flex;
-        flex-direction: column;
-        gap: @spacing-12;
+    &__experience-list {
+      display: flex;
+      flex-direction: column;
+      gap: @spacing-12;
+    }
 
-        .experience-item {
-          .experience-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: @spacing-2;
+    &__experience-item {
+      // Experience item styles
+    }
 
-            h3 {
-              font-size: @text-xl;
-              font-weight: 700;
-              margin: 0;
-            }
+    &__experience-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: @spacing-2;
 
-            .date {
-              color: @color-gray-500;
-              font-family: monospace;
-              font-size: @text-sm;
-            }
-          }
+      h3 {
+        font-size: @text-xl;
+        font-weight: 700;
+        margin: 0;
+      }
+    }
 
-          .company {
-            color: @color-gray-600;
-            margin-bottom: @spacing-4;
-          }
+    &__date {
+      color: @color-gray-500;
+      font-family: monospace;
+      font-size: @text-sm;
+    }
 
-          .description {
-            color: @color-gray-600;
-            line-height: 1.6;
-            margin: 0;
-          }
-        }
+    &__company {
+      color: @color-gray-600;
+      margin-bottom: @spacing-4;
+    }
+
+    &__description {
+      color: @color-gray-600;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    &__skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: @spacing-4;
+
+      @media (min-width: @screen-md) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    &__skill-card {
+      padding: @spacing-4;
+      background: @color-gray-100;
+      border-radius: 0.5rem;
+
+      h3 {
+        font-weight: 700;
+        margin: 0 0 @spacing-2 0;
       }
 
-      .skills-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: @spacing-4;
-
-        @media (min-width: @screen-md) {
-          grid-template-columns: repeat(3, 1fr);
-        }
-
-        .skill-card {
-          padding: @spacing-4;
-          background: @color-gray-100;
-          border-radius: 0.5rem;
-
-          h3 {
-            font-weight: 700;
-            margin: 0 0 @spacing-2 0;
-          }
-
-          p {
-            font-size: @text-sm;
-            color: @color-gray-600;
-            margin: 0;
-          }
-        }
+      p {
+        font-size: @text-sm;
+        color: @color-gray-600;
+        margin: 0;
       }
     }
   }

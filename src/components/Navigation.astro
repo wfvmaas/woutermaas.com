@@ -11,20 +11,20 @@ const links = [
 ---
 
 <nav class="main-nav" id="main-nav">
-  <div class="nav-container">
+  <div class="main-nav__container">
     <!-- Logo -->
-    <div class="logo">
+    <div class="main-nav__logo">
       <a href="/"> WOUTER MAAS </a>
     </div>
 
     <!-- Desktop Menu -->
-    <div class="desktop-menu">
+    <div class="main-nav__desktop-menu">
       {links.map((link) => <a href={link.href}>{link.label}</a>)}
     </div>
 
     <!-- Mobile Menu Button -->
-    <div class="mobile-menu-btn-wrapper">
-      <button id="mobile-menu-btn" class="mobile-menu-btn">
+    <div class="main-nav__mobile-menu-btn-wrapper">
+      <button id="mobile-menu-btn" class="main-nav__mobile-menu-btn">
         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path
             stroke-linecap="round"
@@ -39,7 +39,7 @@ const links = [
 
 <!-- Mobile Menu Overlay -->
 <div id="mobile-menu" class="mobile-menu">
-  <button id="close-menu-btn" class="close-btn">
+  <button id="close-menu-btn" class="mobile-menu__close-btn">
     <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path
         stroke-linecap="round"
@@ -66,79 +66,83 @@ const links = [
     border-bottom: 1px solid @color-gray-100;
     .transition();
 
-    .nav-container {
+    &__container {
       .container();
       display: flex;
       justify-content: space-between;
       align-items: center;
       height: 5rem;
+    }
 
-      .logo {
-        flex-shrink: 0;
-        display: flex;
-        align-items: center;
+    &__logo {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
 
-        a {
-          font-size: @text-2xl;
-          font-weight: 700;
-          letter-spacing: -0.05em;
-          .transition(opacity);
-
-          &:hover {
-            opacity: 0.7;
-          }
-        }
-      }
-
-      .desktop-menu {
-        display: none;
-
-        @media (min-width: @screen-md) {
-          display: flex;
-          gap: @spacing-8;
-          align-items: center;
-        }
-
-        a {
-          font-size: @text-sm;
-          font-weight: 500;
-          color: @color-gray-900;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-          .transition(color);
-
-          &:hover {
-            color: @color-gray-500;
-          }
-        }
-      }
-
-      .mobile-menu-btn {
-        display: flex;
-        align-items: center;
-        padding: @spacing-2;
-        color: @color-gray-900;
-        background: none;
-        border: none;
-        cursor: pointer;
-        .transition(color);
-
-        @media (min-width: @screen-md) {
-          display: none;
-        }
+      a {
+        font-size: @text-2xl;
+        font-weight: 700;
+        letter-spacing: -0.05em;
+        .transition(opacity);
 
         &:hover {
-          color: @color-gray-600;
+          opacity: 0.7;
         }
+      }
+    }
 
-        &:focus {
-          outline: none;
-        }
+    &__desktop-menu {
+      display: none;
 
-        svg {
-          height: 1.5rem;
-          width: 1.5rem;
+      @media (min-width: @screen-md) {
+        display: flex;
+        gap: @spacing-8;
+        align-items: center;
+      }
+
+      a {
+        font-size: @text-sm;
+        font-weight: 500;
+        color: @color-gray-900;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        .transition(color);
+
+        &:hover {
+          color: @color-gray-500;
         }
+      }
+    }
+
+    &__mobile-menu-btn-wrapper {
+      // Wrapper for mobile menu button
+    }
+
+    &__mobile-menu-btn {
+      display: flex;
+      align-items: center;
+      padding: @spacing-2;
+      color: @color-gray-900;
+      background: none;
+      border: none;
+      cursor: pointer;
+      .transition(color);
+
+      @media (min-width: @screen-md) {
+        display: none;
+      }
+
+      &:hover {
+        color: @color-gray-600;
+      }
+
+      &:focus {
+        outline: none;
+      }
+
+      svg {
+        height: 1.5rem;
+        width: 1.5rem;
       }
     }
   }
@@ -160,11 +164,11 @@ const links = [
       display: none;
     }
 
-    &.open {
+    &--open {
       transform: translateX(0);
     }
 
-    .close-btn {
+    &__close-btn {
       position: absolute;
       top: @spacing-6;
       right: @spacing-6;
@@ -206,7 +210,7 @@ const links = [
   const mobileMenu = document.getElementById("mobile-menu")
 
   function toggleMenu() {
-    mobileMenu?.classList.toggle("open")
+    mobileMenu?.classList.toggle("mobile-menu--open")
     document.body.classList.toggle("overflow-hidden")
   }
 

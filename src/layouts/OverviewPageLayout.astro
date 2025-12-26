@@ -46,30 +46,30 @@ const projectsWithProcessedImages = projects.map((project) => {
 ---
 
 <BaseLayout title={title}>
-  <div class="layout-wrapper outer-container">
-    <div class="overview-page allow-menu">
-      <div class="page-header">
-        <div class="header-content">
-          <div class="illustration-container">
-            <img src={heroImage} alt={title} class="header-illustration" />
+  <div class="overview-page-wrapper layout-outer-container">
+    <div class="overview-page layout-allow-menu">
+      <div class="overview-page__header">
+        <div class="overview-page__header-content">
+          <div class="overview-page__illustration-container">
+            <img src={heroImage} alt={title} class="overview-page__header-illustration" />
           </div>
-          <div class="text-content">
+          <div class="overview-page__text-content">
             <h1>{title}</h1>
-            <p class="intro-text">
+            <p class="overview-page__intro-text">
               {introText}
             </p>
           </div>
         </div>
       </div>
 
-      <div class="projects-list" id="projects-list">
+      <div class="overview-page__projects-list" id="overview-page__projects-list">
         {
           projectsWithProcessedImages.map((project) => (
-            <article class="project-item">
-              <h2 class="project-title">{project.data.title}</h2>
+            <article class="overview-page__project-item">
+              <h2 class="overview-page__project-title">{project.data.title}</h2>
 
               {project.data.heroImage && (
-                <div class="project-image">
+                <div class="overview-page__project-image">
                   <img
                     src={project.data.heroImage}
                     alt={project.data.title}
@@ -78,14 +78,14 @@ const projectsWithProcessedImages = projects.map((project) => {
                 </div>
               )}
 
-              <div class="project-info">
-                <p class="abstract">
+              <div class="overview-page__project-info">
+                <p class="overview-page__abstract">
                   {project.data.abstract || project.data.title}
                 </p>
                 {hasDetailPage(project) && (
                   <a
                     href={`/${category}/${cleanSlug(project.slug)}`}
-                    class="learn-more-btn"
+                    class="overview-page__learn-more-btn"
                   >
                     Learn more
                   </a>
@@ -93,7 +93,7 @@ const projectsWithProcessedImages = projects.map((project) => {
                 {isAbstract(project) && project.data.link && (
                   <a
                     href={project.data.link}
-                    class="learn-more-btn"
+                    class="overview-page__learn-more-btn"
                     target={project.data.link.startsWith('http') ? '_blank' : undefined}
                     rel={project.data.link.startsWith('http') ? 'noopener noreferrer' : undefined}
                   >
@@ -107,8 +107,8 @@ const projectsWithProcessedImages = projects.map((project) => {
       </div>
     </div>
 
-    <div class="scroll-indicator-wrapper">
-      <ScrollIndicator scale={1.5} target="#projects-list" />
+    <div class="overview-page__scroll-indicator-wrapper">
+      <ScrollIndicator scale={1.5} target="#overview-page__projects-list" />
     </div>
   </div>
 </BaseLayout>
@@ -117,19 +117,10 @@ const projectsWithProcessedImages = projects.map((project) => {
   @import "../styles/variables.less";
   @import "../styles/mixins.less";
 
-  .layout-wrapper {
+  .overview-page-wrapper {
     position: relative;
     width: 100%;
-    // Padding handled by outer-container
-  }
-
-  .scroll-indicator-wrapper {
-    position: absolute;
-    left: 50%;
-    top: 90vh;
-    transform: translateX(-50%);
-    width: fit-content;
-    z-index: 20;
+    // Padding handled by layout-outer-container
   }
 
   .overview-page {
@@ -137,7 +128,7 @@ const projectsWithProcessedImages = projects.map((project) => {
     padding-bottom: @spacing-24;
     max-width: 600px;
     margin: 0 auto;
-    // Horizontal padding handled by outer-container and allow-menu
+    // Horizontal padding handled by layout-outer-container and layout-allow-menu
 
     @media (min-width: @screen-lg) {
       max-width: @container-max-width;
@@ -146,7 +137,7 @@ const projectsWithProcessedImages = projects.map((project) => {
       flex-direction: column;
     }
 
-    .page-header {
+    &__header {
       min-height: 100vh;
       display: flex;
       align-items: center;
@@ -159,75 +150,75 @@ const projectsWithProcessedImages = projects.map((project) => {
         padding-bottom: 15vh;
         margin-bottom: 4rem;
       }
+    }
 
-      .header-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: @spacing-8;
-        text-align: center;
+    &__header-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: @spacing-8;
+      text-align: center;
+      width: 100%;
+      max-width: 500px;
+
+      @media (min-width: @screen-lg) {
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        text-align: left;
+        gap: @spacing-16;
+        max-width: 1200px;
+        padding: 0 @spacing-16;
+      }
+    }
+
+    &__illustration-container {
+      width: 100%;
+      max-width: 250px;
+
+      @media (min-width: @screen-sm) {
+        max-width: 350px;
+      }
+      @media (min-width: @screen-lg) {
+        max-width: 400px;
+      }
+
+      img {
         width: 100%;
-        max-width: 500px;
+        height: auto;
+      }
+    }
+
+    &__text-content {
+      flex: 1;
+
+      h1 {
+        font-size: @text-5xl;
+        font-weight: 700;
+        margin: 0 0 @spacing-6 0;
+        text-align: left;
 
         @media (min-width: @screen-lg) {
-          flex-direction: row-reverse;
-          justify-content: space-between;
-          text-align: left;
-          gap: @spacing-16;
-          max-width: 1200px;
-          padding: 0 @spacing-16;
-        }
-
-        .illustration-container {
-          width: 100%;
-          max-width: 250px;
-
-          @media (min-width: @screen-sm) {
-            max-width: 350px;
-          }
-          @media (min-width: @screen-lg) {
-            max-width: 400px;
-          }
-
-          img {
-            width: 100%;
-            height: auto;
-          }
-        }
-
-        .text-content {
-          flex: 1;
-
-          h1 {
-            font-size: @text-5xl;
-            font-weight: 700;
-            margin: 0 0 @spacing-6 0;
-            text-align: left;
-
-            @media (min-width: @screen-lg) {
-              font-size: @text-8xl;
-              margin-bottom: @spacing-8;
-            }
-          }
-
-          .intro-text {
-            font-size: @text-lg;
-            line-height: 1.4;
-            color: @color-gray-900;
-            max-width: 40ch;
-            margin: 0 auto;
-            text-align: left;
-
-            @media (min-width: @screen-lg) {
-              font-size: @text-xl;
-              margin: 0;
-            }
-          }
+          font-size: @text-8xl;
+          margin-bottom: @spacing-8;
         }
       }
     }
 
-    .projects-list {
+    &__intro-text {
+      font-size: @text-lg;
+      line-height: 1.4;
+      color: @color-gray-900;
+      max-width: 40ch;
+      margin: 0 auto;
+      text-align: left;
+
+      @media (min-width: @screen-lg) {
+        font-size: @text-xl;
+        margin: 0;
+      }
+    }
+
+    &__projects-list {
       display: flex;
       flex-direction: column;
       gap: @spacing-24;
@@ -238,78 +229,87 @@ const projectsWithProcessedImages = projects.map((project) => {
         padding: @spacing-24 @spacing-16;
         gap: @spacing-32;
       }
+    }
 
-      .project-item {
-        display: flex;
-        flex-direction: column;
-        gap: @spacing-6;
+    &__project-item {
+      display: flex;
+      flex-direction: column;
+      gap: @spacing-6;
+    }
 
-        .project-title {
-          font-size: @text-2xl;
-          font-weight: 600;
-          margin: 0 0 @spacing-4 0;
+    &__project-title {
+      font-size: @text-2xl;
+      font-weight: 600;
+      margin: 0 0 @spacing-4 0;
 
-          @media (min-width: @screen-lg) {
-            font-size: @text-4xl;
-          }
-        }
-
-        .project-image {
-          width: 100%;
-          overflow: hidden;
-          background: @color-gray-100;
-          margin-bottom: @spacing-4;
-
-          img {
-            width: 100%;
-            height: auto;
-            display: block;
-            object-fit: cover;
-          }
-        }
-
-        .project-info {
-          display: flex;
-          flex-direction: column;
-          gap: @spacing-6;
-
-          .abstract {
-            font-size: @text-base;
-            line-height: 1.6;
-            color: @color-gray-800;
-            margin: 0;
-
-            @media (min-width: @screen-lg) {
-              font-size: @text-lg;
-            }
-          }
-
-          .learn-more-btn {
-            display: block;
-            width: 100%;
-            padding: @spacing-3 @spacing-6;
-            margin-top: @spacing-4;
-            margin-left: auto;
-            margin-right: auto;
-            background: transparent;
-            color: @color-black;
-            border: 2px solid @color-black;
-            border-radius: @radius-sm;
-            text-align: center;
-            font-weight: 500;
-            text-decoration: none;
-            transition: background-color 0.2s ease;
-
-            @media (min-width: @screen-lg) {
-              max-width: 400px;
-            }
-
-            &:hover {
-              background: @color-gray-100;
-            }
-          }
-        }
+      @media (min-width: @screen-lg) {
+        font-size: @text-4xl;
       }
+    }
+
+    &__project-image {
+      width: 100%;
+      overflow: hidden;
+      background: @color-gray-100;
+      margin-bottom: @spacing-4;
+
+      img {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: cover;
+      }
+    }
+
+    &__project-info {
+      display: flex;
+      flex-direction: column;
+      gap: @spacing-6;
+    }
+
+    &__abstract {
+      font-size: @text-base;
+      line-height: 1.6;
+      color: @color-gray-800;
+      margin: 0;
+
+      @media (min-width: @screen-lg) {
+        font-size: @text-lg;
+      }
+    }
+
+    &__learn-more-btn {
+      display: block;
+      width: 100%;
+      padding: @spacing-3 @spacing-6;
+      margin-top: @spacing-4;
+      margin-left: auto;
+      margin-right: auto;
+      background: transparent;
+      color: @color-black;
+      border: 2px solid @color-black;
+      border-radius: @radius-sm;
+      text-align: center;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background-color 0.2s ease;
+
+      @media (min-width: @screen-lg) {
+        max-width: 400px;
+      }
+
+      &:hover {
+        background: @color-gray-100;
+      }
+    }
+
+    &__scroll-indicator-wrapper {
+      position: absolute;
+      left: 50%;
+      top: 90vh;
+      transform: translateX(-50%);
+      width: fit-content;
+      z-index: 20;
     }
   }
 </style>

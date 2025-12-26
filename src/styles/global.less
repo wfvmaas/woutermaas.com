@@ -123,7 +123,7 @@ a {
 }
 
 // Prose styles for markdown content
-.outer-container {
+.layout-outer-container {
   width: 100%;
   position: relative;
   box-sizing: border-box;
@@ -141,14 +141,14 @@ a {
   }
 }
 
-.content-container {
+.layout-content-container {
   width: 100%;
   max-width: @container-max-width;
   margin-left: auto;
   margin-right: auto;
 }
 
-.allow-menu {
+.layout-allow-menu {
   @media (min-width: @screen-md) {
     padding-right: @layout-menu-allowance;
   }
@@ -210,7 +210,7 @@ a {
     }
   }
 
-  &.prose-lg {
+  &.prose--lg {
     font-size: @text-lg;
   }
 }
