@@ -17,14 +17,10 @@
             "properties": {
               "name": {
                 "type": "string"
-              },
-              "order": {
-                "type": "number"
               }
             },
             "required": [
-              "name",
-              "order"
+              "name"
             ],
             "additionalProperties": false
           }

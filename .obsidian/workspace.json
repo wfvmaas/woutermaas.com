@@ -183,8 +183,12 @@
       "bases:Create new base": false
     }
   },
-  "active": "09ea55521aeb371e",
+  "active": "78e5e27d936257a1",
   "lastOpenFiles": [
+    "src/content/abstracts/thesis.md",
+    "src/content/abstracts/stoor.md",
+    "src/content/abstracts/planet-painter.md",
+    "src/content/abstracts/espresso-expose.md",
     "src/content/storytelling/1.storyforgers.md",
     "dist/_routes.json",
     "dist/_astro/storyforgers_website_snapshot.CFz0h42p.jpg",
@@ -226,9 +230,6 @@
     "woutermaas.com/content/storytelling/0.storytelling.md",
     "woutermaas.com/content/software/5.thesis.md",
     "woutermaas.com/content/software/4.stoor.md",
-    "woutermaas.com/content/software/3.planet-painter.md",
-    "woutermaas.com/content/software/0.software.md",
-    "woutermaas.com/content/philosophy/0.philosophy.md",
-    "woutermaas.com/content/hiking/0.hiking.md"
+    "woutermaas.com/content/software/3.planet-painter.md"
   ]
 }

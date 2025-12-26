@@ -2,17 +2,6 @@ import { getCollection, getEntry } from "astro:content";
 
 export async function getOverviewContent(category: string) {
   // 1. Fetch Hero Content (0.[category])
-  // We try to fetch it from the category collection.
-  // Note: getEntry requires the collection name and the slug/id.
-  // Since 0.[category] is in the folder, it should be part of the collection.
-  // However, the slug might be "0.software" or just "0software" depending on config.
-  // Let's assume the slug matches the filename without extension.
-  // Actually, for collections defined with `type: 'content'`, the slug is the filename without extension.
-  // But wait, `0.software` might be excluded if we only want projects?
-  // No, the user said "information for the hero section... can be found in the markdown file starting with 0.[category]".
-  // So it IS part of the collection. We just need to filter it out from the project list.
-
-  // 2. Fetch Projects from Category Collection
   const allCategoryEntries = await getCollection(category as any);
 
   // Find hero entry (starts with "0" or "0.")
@@ -29,11 +18,20 @@ export async function getOverviewContent(category: string) {
     return entry.slug !== heroEntry?.slug;
   });
 
-  // 3. Fetch Abstracts from Abstracts Collection
+  // 2. Fetch Abstracts based on references in overview page
+  const abstractSlugs = heroEntry?.data?.abstracts || [];
   const allAbstracts = await getCollection("abstracts");
-  const abstracts = allAbstracts.filter((entry) => {
-    return entry.data.categories.some((cat: any) => cat.name === category);
+  
+  // Create a map of abstract slugs to entries for quick lookup
+  const abstractMap = new Map();
+  allAbstracts.forEach((entry) => {
+    abstractMap.set(entry.slug, entry);
   });
+
+  // Load abstracts in the order specified in the overview page
+  const abstracts = abstractSlugs
+    .map((slug: string) => abstractMap.get(slug))
+    .filter((entry: any) => entry !== undefined);
 
   // Helper to get order for projects (from filename prefix)
   const getProjectOrder = (entry: any) => {
@@ -41,25 +39,14 @@ export async function getOverviewContent(category: string) {
     return match ? parseInt(match[1], 10) : 999;
   };
 
-  // Helper to get order for abstracts (from category order)
-  const getAbstractOrder = (entry: any, category: string) => {
-    const categoryEntry = entry.data.categories.find((cat: any) => cat.name === category);
-    return categoryEntry?.order ?? 999;
-  };
+  // Sort projects by their order
+  const sortedProjects = [...projects].sort((a, b) => {
+    return getProjectOrder(a) - getProjectOrder(b);
+  });
 
   // Merge projects and abstracts together
-  const allItems = [...projects, ...abstracts];
-
-  // Sort all items together by their unified order
-  allItems.sort((a, b) => {
-    const aOrder = a.collection === "abstracts" 
-      ? getAbstractOrder(a, category)
-      : getProjectOrder(a);
-    const bOrder = b.collection === "abstracts"
-      ? getAbstractOrder(b, category)
-      : getProjectOrder(b);
-    return aOrder - bOrder;
-  });
+  // Projects come first (sorted by order), then abstracts (in the order specified in overview page)
+  const allItems = [...sortedProjects, ...abstracts];
 
   return {
     heroData: heroEntry?.data,

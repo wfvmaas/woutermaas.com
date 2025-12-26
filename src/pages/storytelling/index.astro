@@ -3,21 +3,9 @@ import { getOverviewContent } from "../../utils/contentHelpers"
 import { getImage } from "astro:assets"
 import OverviewPageLayout from "../../layouts/OverviewPageLayout.astro"
 
-const { heroData, projects, abstracts } =
-  await getOverviewContent("storytelling")
+const { heroData, projects } = await getOverviewContent("storytelling")
 
 if (!heroData) throw new Error("Storytelling overview not found")
-
-// Debug: log abstracts to see what we're getting
-console.log("Abstracts for storytelling:", abstracts.map(a => ({ 
-  slug: a.slug, 
-  title: a.data.title, 
-  abstract: a.data.abstract?.substring(0, 50) + "...",
-  categories: a.data.categories 
-})))
-
-// Merge projects and abstracts
-const allProjects = [...projects, ...abstracts]
 
 // Handle heroImage - can be string or image object
 const heroImage = heroData.heroImage
@@ -32,5 +20,5 @@ const heroImage = heroData.heroImage
   title={heroData.title}
   introText={heroData.introText ?? ""}
   heroImage={heroImage}
-  projects={allProjects}
+  projects={projects}
 />

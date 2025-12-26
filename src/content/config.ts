@@ -5,7 +5,9 @@ const softwareCollection = defineCollection({
   schema: ({ image }) => z.object({
     title: z.string(),
     introText: z.string().optional(), // Added for 0.[category].md
-    abstract: z.string().optional(),
+    abstracts: z.array(z.string()).optional(), // References to abstract slugs for overview pages
+    hero_text: z.string().optional(), // Hero text for detail pages
+    abstract: z.string().optional(), // Deprecated, use hero_text for detail pages
     publishDate: z.date().optional(),
     heroImage: z.union([
       z.string().startsWith('/'), // Public folder assets
@@ -23,7 +25,9 @@ const projectCollection = defineCollection({
   schema: ({ image }) => z.object({
     title: z.string(),
     introText: z.string().optional(), // Added for 0.[category].md
-    abstract: z.string().optional(),
+    abstracts: z.array(z.string()).optional(), // References to abstract slugs for overview pages
+    hero_text: z.string().optional(), // Hero text for detail pages
+    abstract: z.string().optional(), // Deprecated, use hero_text for detail pages
     publishDate: z.date().optional(),
     heroImage: z.union([
       z.string().startsWith('/'), // Public folder assets
@@ -43,7 +47,6 @@ const abstractsCollection = defineCollection({
     abstract: z.string(),
     categories: z.array(z.object({
       name: z.string(),
-      order: z.number(),
     })),
     heroImage: z.union([
       z.string().startsWith('/'), // Public folder assets

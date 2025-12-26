@@ -10,6 +10,15 @@
         "introText": {
           "type": "string"
         },
+        "abstracts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hero_text": {
+          "type": "string"
+        },
         "abstract": {
           "type": "string"
         },

@@ -1,11 +1,11 @@
 ---
 interface Props {
   title: string
-  abstract?: string
+  hero_text?: string
   heroImage?: string
 }
 
-const { title, abstract, heroImage } = Astro.props
+const { title, hero_text, heroImage } = Astro.props
 
 import BaseLayout from "./BaseLayout.astro"
 import ScrollIndicator from "../components/ScrollIndicator.astro"
@@ -28,7 +28,7 @@ import ScrollIndicator from "../components/ScrollIndicator.astro"
         }
         <div class="detail-page__text-content">
           <h1>{title}</h1>
-          {abstract && <p class="detail-page__abstract">{abstract}</p>}
+          {hero_text && <p class="detail-page__abstract">{hero_text}</p>}
         </div>
         {
           heroImage && (
