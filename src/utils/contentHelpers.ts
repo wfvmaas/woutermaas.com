@@ -29,34 +29,41 @@ export async function getOverviewContent(category: string) {
     return entry.slug !== heroEntry?.slug;
   });
 
-  // Sort projects by filename prefix (number)
-  projects.sort((a: any, b: any) => {
-    const getNumber = (slug: string) => {
-      // Match number at start of slug, handling potential dot or no dot
-      const match = slug.match(/^(\d+)/);
-      return match ? parseInt(match[1], 10) : 999;
-    };
-    return getNumber(a.slug) - getNumber(b.slug);
-  });
-
   // 3. Fetch Abstracts from Abstracts Collection
   const allAbstracts = await getCollection("abstracts");
   const abstracts = allAbstracts.filter((entry) => {
     return entry.data.categories.some((cat: any) => cat.name === category);
   });
 
-  // Sort abstracts by order for the specific category
-  abstracts.sort((a, b) => {
-    const getOrder = (entry: any, category: string) => {
-      const categoryEntry = entry.data.categories.find((cat: any) => cat.name === category);
-      return categoryEntry?.order ?? 999;
-    };
-    return getOrder(a, category) - getOrder(b, category);
+  // Helper to get order for projects (from filename prefix)
+  const getProjectOrder = (entry: any) => {
+    const match = entry.slug.match(/^(\d+)/);
+    return match ? parseInt(match[1], 10) : 999;
+  };
+
+  // Helper to get order for abstracts (from category order)
+  const getAbstractOrder = (entry: any, category: string) => {
+    const categoryEntry = entry.data.categories.find((cat: any) => cat.name === category);
+    return categoryEntry?.order ?? 999;
+  };
+
+  // Merge projects and abstracts together
+  const allItems = [...projects, ...abstracts];
+
+  // Sort all items together by their unified order
+  allItems.sort((a, b) => {
+    const aOrder = a.collection === "abstracts" 
+      ? getAbstractOrder(a, category)
+      : getProjectOrder(a);
+    const bOrder = b.collection === "abstracts"
+      ? getAbstractOrder(b, category)
+      : getProjectOrder(b);
+    return aOrder - bOrder;
   });
 
   return {
     heroData: heroEntry?.data,
-    projects,
-    abstracts,
+    projects: allItems,
+    abstracts: [], // Return empty array since we've merged them into projects
   };
 }

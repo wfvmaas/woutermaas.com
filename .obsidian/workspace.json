@@ -1,0 +1,218 @@
+{
+  "main": {
+    "id": "ad2629b1d4912f2e",
+    "type": "split",
+    "children": [
+      {
+        "id": "4bd5e6425a7a56d8",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "09ea55521aeb371e",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "bd3b7556a2953945",
+    "type": "split",
+    "children": [
+      {
+        "id": "1ee76c78577b361b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "78e5e27d936257a1",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "973156dad3a40ee0",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "42947d986accdb54",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "838f2afba5f56273",
+    "type": "split",
+    "children": [
+      {
+        "id": "b32778dbd3a86348",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "30c92a37c7048e7e",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "b7344326d08e5583",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "e8ff5418d7bf851e",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "3f9857c2dccb1225",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "4121d1e7babfa64a",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "78e5e27d936257a1",
+  "lastOpenFiles": [
+    "test_file.txt",
+    "_tmp_116741_cbc039ae0abbd730593d56fe94189959",
+    "src/pages/storytelling/index.astro",
+    "src/pages/storytelling/[slug].astro",
+    "src/pages/software/index.astro",
+    "src/pages/software/[slug].astro",
+    "src/pages/philosophy/index.astro",
+    "src/pages/philosophy/[slug].astro",
+    "src/pages/hiking/index.astro",
+    "src/pages/hiking/[slug].astro",
+    "src/pages/art/index.astro",
+    "src/content/storytelling/1.storyforgers.md",
+    "src/content/storytelling/0.storytelling.md",
+    "src/content/software/5.thesis.md",
+    "src/content/software/4.stoor.md",
+    "src/content/software/3.planet-painter.md",
+    "src/content/software/0.software.md",
+    "src/content/philosophy/0.philosophy.md",
+    "src/content/hiking/0.hiking.md",
+    "src/content/art/1.espresso-expose.md",
+    "src/content/art/0.art.md",
+    "src/content/abstracts/workshops.md",
+    "src/content/abstracts/theatre.md",
+    "src/content/abstracts/storyforgers.md",
+    "src/content/abstracts/rereading-kafka.md",
+    "src/content/abstracts/inclusive-facilitation.md",
+    "src/content/abstracts/deconstructing_transformers.md",
+    "src/content/abstracts/anxiety_in_the_state_of_nature.md",
+    "woutermaas.com/content/storytelling/1.storyforgers.md",
+    "woutermaas.com/content/storytelling/0.storytelling.md",
+    "woutermaas.com/content/software/5.thesis.md",
+    "woutermaas.com/content/software/4.stoor.md",
+    "woutermaas.com/content/software/3.planet-painter.md",
+    "woutermaas.com/content/software/0.software.md",
+    "woutermaas.com/content/philosophy/0.philosophy.md",
+    "woutermaas.com/content/hiking/0.hiking.md"
+  ]
+}
