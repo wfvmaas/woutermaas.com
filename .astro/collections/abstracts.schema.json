@@ -30,7 +30,19 @@
           }
         },
         "heroImage": {
-          "type": "string"
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^\\/"
+            },
+            {
+              "type": "string",
+              "format": "uri"
+            },
+            {
+              "type": "string"
+            }
+          ]
         },
         "link": {
           "anyOf": [

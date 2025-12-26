@@ -7,7 +7,11 @@ const softwareCollection = defineCollection({
     introText: z.string().optional(), // Added for 0.[category].md
     abstract: z.string().optional(),
     publishDate: z.date().optional(),
-    heroImage: z.union([z.string(), image()]).optional(),
+    heroImage: z.union([
+      z.string().startsWith('/'), // Public folder assets
+      z.string().url(),           // Remote images
+      image()                     // Relative local assets
+    ]).optional(),
     tags: z.array(z.string()).optional(),
     link: z.string().url().optional(),
     order: z.number().optional(),
@@ -21,7 +25,11 @@ const projectCollection = defineCollection({
     introText: z.string().optional(), // Added for 0.[category].md
     abstract: z.string().optional(),
     publishDate: z.date().optional(),
-    heroImage: z.union([z.string(), image()]).optional(),
+    heroImage: z.union([
+      z.string().startsWith('/'), // Public folder assets
+      z.string().url(),           // Remote images
+      image()                     // Relative local assets
+    ]).optional(),
     tags: z.array(z.string()).optional(),
     link: z.string().url().optional(),
     order: z.number().optional(),
@@ -37,7 +45,11 @@ const abstractsCollection = defineCollection({
       name: z.string(),
       order: z.number(),
     })),
-    heroImage: z.union([z.string(), image()]).optional(),
+    heroImage: z.union([
+      z.string().startsWith('/'), // Public folder assets
+      z.string().url(),           // Remote images
+      image()                     // Relative local assets
+    ]).optional(),
     link: z.union([
       z.string().url(),
       z.string().refine((val) => val.startsWith('/'), {

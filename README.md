@@ -45,10 +45,17 @@ pnpm preview
 ## Project Structure
 
 ```
-├── public/           # Static assets
+├── public/           # Static assets (shared doodles, fonts, etc.)
 ├── src/
 │   ├── components/   # Reusable Vue/Astro components
 │   ├── content/      # Content Collections (Markdown files)
+│   │   ├── art/
+│   │   │   ├── images/  # Images co-located with content
+│   │   │   └── *.md
+│   │   ├── software/
+│   │   │   ├── images/
+│   │   │   └── *.md
+│   │   └── ...       # Other collections follow same pattern
 │   ├── layouts/      # Page layouts
 │   ├── pages/        # File-based routing
 │   ├── styles/       # Global styles (Less)
@@ -88,7 +95,7 @@ title: "Project Title"
 abstract: "A brief summary or abstract of the project."
 order: 1 # Optional: For manual sorting
 publishDate: 2023-01-01 # Optional
-heroImage: "/images/path/to/image.jpg" # Optional: Path matching public/ folder
+heroImage: "./images/image.jpg" # Optional: Relative path to image co-located with content
 link: "https://example.com" # Optional: External link
 ---
 
@@ -96,8 +103,11 @@ Your main content goes here using Markdown...
 ```
 
 **Note on Images:**
-- Place images in the `public/` directory (e.g., `public/images/software/`).
-- Reference them in the frontmatter as absolute paths string (e.g., `/images/software/image.jpg`).
+- Images are co-located with content files for better organization and CMS simplicity.
+- Place images in an `images/` subdirectory within each collection folder (e.g., `src/content/software/images/`).
+- Reference them in the frontmatter using relative paths (e.g., `./images/image.jpg`).
+- Astro will automatically process and optimize these images using the `image()` helper.
+- Shared assets like doodles remain in `public/doodles/` and can be referenced with absolute paths (e.g., `/doodles/software_factory.svg`).
 
 ### Abstracts Collection
 

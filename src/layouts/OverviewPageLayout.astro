@@ -1,4 +1,6 @@
 ---
+import { getImage } from "astro:assets"
+
 interface Props {
   category: string
   title: string
@@ -26,6 +28,21 @@ const isAbstract = (item: any) => {
 const cleanSlug = (slug: string) => {
   return slug.replace(/^\d+\.?/, "")
 }
+
+// Process project images before rendering
+// For content collection images, use .src directly (getImage may not be needed)
+const projectsWithProcessedImages = projects.map((project) => {
+  if (project.data.heroImage && typeof project.data.heroImage !== "string") {
+    return {
+      ...project,
+      data: {
+        ...project.data,
+        heroImage: (project.data.heroImage as any).src || "",
+      },
+    }
+  }
+  return project
+})
 ---
 
 <BaseLayout title={title}>
@@ -47,18 +64,14 @@ const cleanSlug = (slug: string) => {
 
       <div class="projects-list" id="projects-list">
         {
-          projects.map((project) => (
+          projectsWithProcessedImages.map((project) => (
             <article class="project-item">
               <h2 class="project-title">{project.data.title}</h2>
 
               {project.data.heroImage && (
                 <div class="project-image">
                   <img
-                    src={
-                      typeof project.data.heroImage === "string"
-                        ? project.data.heroImage
-                        : project.data.heroImage.src
-                    }
+                    src={project.data.heroImage}
                     alt={project.data.title}
                     loading="lazy"
                   />

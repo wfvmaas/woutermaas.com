@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content"
+import { getImage } from "astro:assets"
 import DetailPageLayout from "../../layouts/DetailPageLayout.astro"
 
 export const prerender = true
@@ -30,10 +31,12 @@ if (!project) {
 
 const { Content } = await project.render()
 
+import { getImage } from "astro:assets"
+
 const heroImage = project.data.heroImage
   ? typeof project.data.heroImage === "string"
     ? project.data.heroImage
-    : project.data.heroImage.src
+    : (project.data.heroImage as any).src
   : undefined
 ---
 

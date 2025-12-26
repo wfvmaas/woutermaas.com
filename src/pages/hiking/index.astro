@@ -1,5 +1,6 @@
 ---
 import { getOverviewContent } from "../../utils/contentHelpers"
+import { getImage } from "astro:assets"
 import OverviewPageLayout from "../../layouts/OverviewPageLayout.astro"
 
 const { heroData, projects, abstracts } = await getOverviewContent("hiking")
@@ -8,12 +9,19 @@ if (!heroData) throw new Error("Hiking overview not found")
 
 // Merge projects and abstracts
 const allProjects = [...projects, ...abstracts]
+
+// Handle heroImage - can be string or image object
+const heroImage = heroData.heroImage
+  ? typeof heroData.heroImage === "string"
+    ? heroData.heroImage
+    : (heroData.heroImage as any).src
+  : ""
 ---
 
 <OverviewPageLayout
   category="hiking"
   title={heroData.title}
   introText={heroData.introText ?? ""}
-  heroImage={heroData.heroImage ?? ""}
+  heroImage={heroImage}
   projects={allProjects}
 />
