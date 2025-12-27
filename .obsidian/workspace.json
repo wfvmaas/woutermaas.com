@@ -185,6 +185,8 @@
   },
   "active": "09ea55521aeb371e",
   "lastOpenFiles": [
+    "_tmp_186026_197e1c36dd807270584e1786b3e7d04d",
+    "src/components/PageTransition.astro",
     "_tmp_179311_f474baa1efc07530e2069d3cca073265",
     "_tmp_179155_bfe118b580d1609fbfad3fc2677949dc",
     "src/content/abstracts/secure_mpc_sortition.md",
@@ -214,8 +216,6 @@
     "src/content/abstracts/images/storyforgers_website_snapshot.jpg",
     "src/content/abstracts/images/stoor_website_snapshot.jpg",
     "src/content/abstracts/images/planet_painter_snapshot.jpg",
-    "_tmp_168606_bfe93d318b4262d81d0cc89db1ef2086",
-    "_tmp_166249_3286eb9572dced0cf3b5677914126109",
     "src/content/hiking/index.md",
     "src/content/philosophy/index.md",
     "src/content/storytelling/index.md",

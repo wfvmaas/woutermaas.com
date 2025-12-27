@@ -66,17 +66,34 @@ const { color = "currentColor", scale = 1, target } = Astro.props
 </style>
 
 <script>
-  const indicators = document.querySelectorAll(".scroll-indicator")
+  function initScrollIndicators() {
+    const indicators = document.querySelectorAll(".scroll-indicator")
 
-  indicators.forEach((indicator) => {
-    indicator.addEventListener("click", () => {
-      const targetId = indicator.getAttribute("data-target")
-      if (targetId) {
-        const targetElement = document.querySelector(targetId)
-        targetElement?.scrollIntoView({
-          behavior: "smooth",
-        })
-      }
+    indicators.forEach((indicator) => {
+      // Remove old listener by cloning
+      const newIndicator = indicator.cloneNode(true) as HTMLElement
+      indicator.parentNode?.replaceChild(newIndicator, indicator)
+      
+      // Add click listener to new element
+      newIndicator.addEventListener("click", () => {
+        const targetId = newIndicator.getAttribute("data-target")
+        if (targetId) {
+          const targetElement = document.querySelector(targetId)
+          targetElement?.scrollIntoView({
+            behavior: "smooth",
+          })
+        }
+      })
     })
-  })
+  }
+
+  // Run on initial load and after every page transition
+  document.addEventListener('astro:page-load', initScrollIndicators);
+  
+  // Also run on initial DOM ready if not using view transitions
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initScrollIndicators);
+  } else {
+    initScrollIndicators();
+  }
 </script>

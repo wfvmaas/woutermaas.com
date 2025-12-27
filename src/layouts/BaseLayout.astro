@@ -3,6 +3,7 @@ import WizardMenuButton from "../components/WizardMenuButton.astro"
 import MobileMenuModal from "../components/MobileMenuModal.astro"
 import Navigation from "../components/Navigation.astro"
 import CastleFooter from "../components/CastleFooter.astro"
+import PageTransition from "../components/PageTransition.astro"
 import "../styles/global.less"
 
 interface Props {
@@ -31,6 +32,7 @@ const {
     <link rel="icon" type="image/svg+xml" href="/doodles/wizard_cloud_1.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title} | Wouter Maas</title>
+    <PageTransition />
   </head>
   <body>
     {showNavigation && <Navigation />}

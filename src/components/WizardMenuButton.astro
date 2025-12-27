@@ -6,7 +6,7 @@ interface Props {
 const { isHomePage = false } = Astro.props
 ---
 
-<div class="wizard-menu-button" id="wizard-menu-btn" data-is-home={isHomePage}>
+<div class="wizard-menu-button" id="wizard-menu-btn" data-is-home={isHomePage} transition:name="wizard-button">
   <img src="/doodles/wizard_cloud_1.svg" alt="Menu" />
   <div class="wizard-menu-button__label" data-is-home={isHomePage}>Menu</div>
 </div>
@@ -64,6 +64,9 @@ const { isHomePage = false } = Astro.props
 </style>
 
 <script>
+  let scrollHandler = null;
+  let resizeHandler = null;
+
   function initWizardMenuButton() {
     const wizardButton = document.getElementById("wizard-menu-btn")
     if (!wizardButton) return
@@ -74,14 +77,32 @@ const { isHomePage = false } = Astro.props
     const isHomePage = wizardButton.dataset.isHome === "true"
     const isDesktop = window.innerWidth >= 1024
 
+    // Remove old event listeners if they exist
+    if (scrollHandler) {
+      window.removeEventListener("scroll", scrollHandler, { passive: true })
+      scrollHandler = null
+    }
+    if (resizeHandler) {
+      window.removeEventListener("resize", resizeHandler, { passive: true })
+      resizeHandler = null
+    }
+
+    // Remove old click listener by cloning the button
+    const newButton = wizardButton.cloneNode(true)
+    wizardButton.parentNode?.replaceChild(newButton, wizardButton)
+    const currentButton = document.getElementById("wizard-menu-btn")
+
     // Handle scroll to show/hide label on desktop (not home page)
     if (!isHomePage && isDesktop) {
-      const handleScroll = () => {
+      scrollHandler = () => {
         const scrollY = window.scrollY || window.pageYOffset
-        if (scrollY > 50) {
-          label.classList.add("wizard-menu-button__label--visible")
-        } else {
-          label.classList.remove("wizard-menu-button__label--visible")
+        const currentLabel = document.querySelector(".wizard-menu-button__label")
+        if (currentLabel) {
+          if (scrollY > 50) {
+            currentLabel.classList.add("wizard-menu-button__label--visible")
+          } else {
+            currentLabel.classList.remove("wizard-menu-button__label--visible")
+          }
         }
       }
       
@@ -89,28 +110,32 @@ const { isHomePage = false } = Astro.props
       label.classList.remove("wizard-menu-button__label--visible")
 
       // Check initial scroll position
-      handleScroll()
+      scrollHandler()
       
       // Listen for scroll events
-      window.addEventListener("scroll", handleScroll, { passive: true })
+      window.addEventListener("scroll", scrollHandler, { passive: true })
       
       // Handle window resize
-      window.addEventListener("resize", () => {
+      resizeHandler = () => {
         const isDesktopNow = window.innerWidth >= 1024
-        if (isDesktopNow && !isHomePage) {
-          handleScroll()
-        } else {
-          // On mobile, always show label
-          label.classList.add("wizard-menu-button__label--visible")
+        const currentLabel = document.querySelector(".wizard-menu-button__label")
+        if (currentLabel) {
+          if (isDesktopNow && !isHomePage) {
+            scrollHandler()
+          } else {
+            // On mobile, always show label
+            currentLabel.classList.add("wizard-menu-button__label--visible")
+          }
         }
-      }, { passive: true })
+      }
+      window.addEventListener("resize", resizeHandler, { passive: true })
     } else {
       // On home page or mobile, always show label
       label.classList.add("wizard-menu-button__label--visible")
     }
 
     // Click handler
-    wizardButton.addEventListener("click", () => {
+    currentButton.addEventListener("click", () => {
       const isDesktopNow = window.innerWidth >= 1024
 
       if (isDesktopNow) {
@@ -144,7 +169,10 @@ const { isHomePage = false } = Astro.props
     })
   }
 
-  // Run when DOM is ready
+  // Run on initial load and after every page transition
+  document.addEventListener('astro:page-load', initWizardMenuButton);
+  
+  // Also run on initial DOM ready if not using view transitions
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initWizardMenuButton)
   } else {

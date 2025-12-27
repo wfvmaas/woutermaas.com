@@ -130,26 +130,63 @@ const links = [
 </style>
 
 <script>
-  const modal = document.getElementById("mobile-menu-modal")
-  const backdrop = document.getElementById("mobile-menu-backdrop")
-  const closeBtn = document.getElementById("mobile-menu-close")
+  let openMenuHandler = null;
 
-  function openMenu() {
-    modal?.classList.add("mobile-menu-modal--open")
-    document.body.classList.add("overflow-hidden")
+  function initMobileMenuModal() {
+    const modal = document.getElementById("mobile-menu-modal")
+    const backdrop = document.getElementById("mobile-menu-backdrop")
+    const closeBtn = document.getElementById("mobile-menu-close")
+
+    function openMenu() {
+      const currentModal = document.getElementById("mobile-menu-modal")
+      currentModal?.classList.add("mobile-menu-modal--open")
+      document.body.classList.add("overflow-hidden")
+    }
+
+    function closeMenu() {
+      const currentModal = document.getElementById("mobile-menu-modal")
+      currentModal?.classList.remove("mobile-menu-modal--open")
+      document.body.classList.remove("overflow-hidden")
+    }
+
+    // Remove old event listeners
+    if (openMenuHandler) {
+      document.removeEventListener("open-mobile-menu", openMenuHandler)
+      openMenuHandler = null
+    }
+
+    // Remove old click listeners by cloning elements
+    if (backdrop && backdrop.parentNode) {
+      const newBackdrop = backdrop.cloneNode(true)
+      backdrop.parentNode.replaceChild(newBackdrop, backdrop)
+    }
+    if (closeBtn && closeBtn.parentNode) {
+      const newCloseBtn = closeBtn.cloneNode(true)
+      closeBtn.parentNode.replaceChild(newCloseBtn, closeBtn)
+    }
+
+    // Re-get elements after replacement
+    const currentBackdrop = document.getElementById("mobile-menu-backdrop")
+    const currentCloseBtn = document.getElementById("mobile-menu-close")
+
+    // Listen for open event from WizardMenuButton
+    openMenuHandler = openMenu
+    document.addEventListener("open-mobile-menu", openMenuHandler)
+
+    // Close on backdrop click
+    currentBackdrop?.addEventListener("click", closeMenu)
+
+    // Close on close button click
+    currentCloseBtn?.addEventListener("click", closeMenu)
   }
 
-  function closeMenu() {
-    modal?.classList.remove("mobile-menu-modal--open")
-    document.body.classList.remove("overflow-hidden")
+  // Run on initial load and after every page transition
+  document.addEventListener('astro:page-load', initMobileMenuModal);
+  
+  // Also run on initial DOM ready if not using view transitions
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMobileMenuModal);
+  } else {
+    initMobileMenuModal();
   }
-
-  // Listen for open event from WizardMenuButton
-  document.addEventListener("open-mobile-menu", openMenu)
-
-  // Close on backdrop click
-  backdrop?.addEventListener("click", closeMenu)
-
-  // Close on close button click
-  closeBtn?.addEventListener("click", closeMenu)
 </script>
