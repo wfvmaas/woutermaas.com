@@ -13,47 +13,49 @@ import ScrollIndicator from "../components/ScrollIndicator.astro"
 
 <BaseLayout title={title}>
   <div class="detail-page layout-outer-container">
-    <!-- Header Section -->
-    <div class="detail-page__header layout-allow-menu">
-      <div class={`detail-page__header-content ${!heroImage ? 'detail-page__header-content--no-hero-image' : ''}`}>
-        {
-          heroImage && (
-            <div class="detail-page__hero-image detail-page__hero-image--mobile">
-              <img
-                src={typeof heroImage === "string" ? heroImage : heroImage}
-                alt={title}
-              />
-            </div>
-          )
-        }
-        <div class="detail-page__text-content">
-          <h1>{title}</h1>
-          {hero_text && <p class="detail-page__abstract">{hero_text}</p>}
+    <div class="detail-page layout-content-container">
+      <!-- Header Section -->
+      <div class="detail-page__header">
+        <div class={`detail-page__header-content ${!heroImage ? 'detail-page__header-content--no-hero-image' : ''}`}>
+          {
+            heroImage && (
+              <div class="detail-page__hero-image detail-page__hero-image--mobile">
+                <img
+                  src={typeof heroImage === "string" ? heroImage : heroImage}
+                  alt={title}
+                />
+              </div>
+            )
+          }
+          <div class="detail-page__text-content">
+            <h1>{title}</h1>
+            {hero_text && <p class="detail-page__abstract">{hero_text}</p>}
+          </div>
+          {
+            heroImage && (
+              <div class="detail-page__hero-image detail-page__hero-image--desktop">
+                <img
+                  src={typeof heroImage === "string" ? heroImage : heroImage}
+                  alt={title} 
+                />
+              </div>
+            )
+          }
         </div>
-        {
-          heroImage && (
-            <div class="detail-page__hero-image detail-page__hero-image--desktop">
-              <img
-                src={typeof heroImage === "string" ? heroImage : heroImage}
-                alt={title} 
-              />
-            </div>
-          )
-        }
       </div>
-    </div>
 
-    <div class="detail-page__scroll-indicator-wrapper">
-      <ScrollIndicator scale={1.5} target="#detail-page__content" />
-    </div>
+      <div class="detail-page__scroll-indicator-wrapper">
+        <ScrollIndicator scale={1.5} target="#detail-page__content" />
+      </div>
 
-    <!-- Content Section -->
-    <article
-      class="detail-page__content layout-content-container layout-allow-menu"
-      id="detail-page__content"
-    >
-      <slot />
-    </article>
+      <!-- Content Section -->
+      <article
+        class="detail-page__content"
+        id="detail-page__content"
+      >
+        <slot />
+      </article>
+    </div>
   </div>
 </BaseLayout>
 

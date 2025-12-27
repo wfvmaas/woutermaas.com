@@ -32,7 +32,7 @@ const { isHomePage = false } = Astro.props
       height: auto;
       .transition(transform);
 
-      @media (min-width: @screen-md) {
+      @media (min-width: @screen-lg) {
         width: 6rem;
       }
     }
@@ -46,7 +46,7 @@ const { isHomePage = false } = Astro.props
     }
 
     // Hide label on desktop when not on home page (until scroll)
-    @media (min-width: @screen-md) {
+    @media (min-width: @screen-lg) {
       &[data-is-home="false"] &__label {
         opacity: 0;
         transform: translateY(-0.5rem);

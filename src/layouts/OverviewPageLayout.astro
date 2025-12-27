@@ -1,52 +1,56 @@
 ---
-import { getImage } from "astro:assets"
+import { getImage } from 'astro:assets';
 
 interface Props {
-  category: string
-  title: string
-  introText: string
-  heroImage: string
-  projects: any[]
+  category: string;
+  title: string;
+  introText: string;
+  heroImage: string;
+  projects: any[];
 }
 
-const { category, title, introText, heroImage, projects } = Astro.props
+const { category, title, introText, heroImage, projects } = Astro.props;
 
-import BaseLayout from "./BaseLayout.astro"
-import ScrollIndicator from "../components/ScrollIndicator.astro"
+import BaseLayout from './BaseLayout.astro';
+import ScrollIndicator from '../components/ScrollIndicator.astro';
 
 // Helper to check if project has a detail page (not overview-only)
 const hasDetailPage = (project: any) => {
-  return project.collection === category
-}
+  return project.collection === category;
+};
 
 // Helper to check if item is an abstract
 const isAbstract = (item: any) => {
-  return item.collection === "abstracts"
-}
+  return item.collection === 'abstracts';
+};
 
 // Process project images before rendering
 // For content collection images, use .src directly (getImage may not be needed)
 const projectsWithProcessedImages = projects.map((project) => {
-  if (project.data.heroImage && typeof project.data.heroImage !== "string") {
+  if (project.data.heroImage && typeof project.data.heroImage !== 'string') {
     return {
       ...project,
       data: {
         ...project.data,
-        heroImage: (project.data.heroImage as any).src || "",
+        heroImage: (project.data.heroImage as any).src || '',
       },
-    }
+    };
   }
-  return project
-})
+  return project;
+});
 ---
 
 <BaseLayout title={title}>
   <div class="overview-page-wrapper layout-outer-container">
-    <div class="overview-page layout-allow-menu">
+    <div class="overview-page layout-content-container">
       <div class="overview-page__header">
         <div class="overview-page__header-content">
           <div class="overview-page__illustration-container">
-            <img src={heroImage} alt={title} class="overview-page__header-illustration" />
+            <img
+              src={heroImage}
+              alt={title}
+              class="overview-page__header-illustration"
+            />
           </div>
           <div class="overview-page__text-content">
             <h1>{title}</h1>
@@ -57,7 +61,10 @@ const projectsWithProcessedImages = projects.map((project) => {
         </div>
       </div>
 
-      <div class="overview-page__projects-list" id="overview-page__projects-list">
+      <div
+        class="overview-page__projects-list"
+        id="overview-page__projects-list"
+      >
         {
           projectsWithProcessedImages.map((project) => (
             <article class="overview-page__project-item">
@@ -89,8 +96,16 @@ const projectsWithProcessedImages = projects.map((project) => {
                   <a
                     href={project.data.link}
                     class="overview-page__learn-more-btn"
-                    target={project.data.link.startsWith('http') ? '_blank' : undefined}
-                    rel={project.data.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    target={
+                      project.data.link.startsWith('http')
+                        ? '_blank'
+                        : undefined
+                    }
+                    rel={
+                      project.data.link.startsWith('http')
+                        ? 'noopener noreferrer'
+                        : undefined
+                    }
                   >
                     Learn more
                   </a>
@@ -109,8 +124,9 @@ const projectsWithProcessedImages = projects.map((project) => {
 </BaseLayout>
 
 <style lang="less">
-  @import "../styles/variables.less";
-  @import "../styles/mixins.less";
+  @import '../styles/variables.less';
+  @import '../styles/mixins.less';
+  @import '../styles/global.less';
 
   .overview-page-wrapper {
     position: relative;
@@ -123,7 +139,6 @@ const projectsWithProcessedImages = projects.map((project) => {
     padding-bottom: @spacing-24;
     max-width: 600px;
     margin: 0 auto;
-    // Horizontal padding handled by layout-outer-container and layout-allow-menu
 
     @media (min-width: @screen-lg) {
       max-width: @container-max-width;

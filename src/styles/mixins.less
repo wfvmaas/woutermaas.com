@@ -42,6 +42,14 @@
   }
 }
 
+// Layout content container mixin (no padding, just centering)
+.layout-content-container() {
+  width: 100%;
+  max-width: @container-max-width;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 // Transition mixin
 .transition(@property: all, @duration: 300ms, @timing: ease) {
   transition: @property @duration @timing;

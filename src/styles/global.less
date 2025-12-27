@@ -146,11 +146,15 @@ a {
   max-width: @container-max-width;
   margin-left: auto;
   margin-right: auto;
+
+  .layout-allow-menu();
 }
 
 .layout-allow-menu {
+  padding-right: @layout-outer-padding-sm;
+  
   @media (min-width: @screen-md) {
-    padding-right: @layout-menu-allowance;
+    padding-right: @layout-outer-padding-lg;
   }
 }
 
