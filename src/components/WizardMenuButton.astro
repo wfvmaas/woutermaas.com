@@ -72,7 +72,7 @@ const { isHomePage = false } = Astro.props
     if (!label) return
 
     const isHomePage = wizardButton.dataset.isHome === "true"
-    const isDesktop = window.innerWidth >= 768
+    const isDesktop = window.innerWidth >= 1024
 
     // Handle scroll to show/hide label on desktop (not home page)
     if (!isHomePage && isDesktop) {
@@ -96,7 +96,7 @@ const { isHomePage = false } = Astro.props
       
       // Handle window resize
       window.addEventListener("resize", () => {
-        const isDesktopNow = window.innerWidth >= 768
+        const isDesktopNow = window.innerWidth >= 1024
         if (isDesktopNow && !isHomePage) {
           handleScroll()
         } else {
@@ -111,7 +111,7 @@ const { isHomePage = false } = Astro.props
 
     // Click handler
     wizardButton.addEventListener("click", () => {
-      const isDesktopNow = window.innerWidth >= 768
+      const isDesktopNow = window.innerWidth >= 1024
 
       if (isDesktopNow) {
         // On desktop
