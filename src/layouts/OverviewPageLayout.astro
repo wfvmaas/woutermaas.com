@@ -137,11 +137,9 @@ const projectsWithProcessedImages = projects.map((project) => {
   .overview-page {
     padding-top: 0;
     padding-bottom: @spacing-24;
-    max-width: 600px;
     margin: 0 auto;
 
     @media (min-width: @screen-lg) {
-      max-width: @container-max-width;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -176,8 +174,6 @@ const projectsWithProcessedImages = projects.map((project) => {
         justify-content: space-between;
         text-align: left;
         gap: @spacing-16;
-        max-width: 1200px;
-        padding: 0 @spacing-16;
       }
     }
 
@@ -233,11 +229,10 @@ const projectsWithProcessedImages = projects.map((project) => {
       display: flex;
       flex-direction: column;
       gap: @spacing-24;
-      max-width: 900px;
       margin: 0 auto;
 
       @media (min-width: @screen-lg) {
-        padding: @spacing-24 @spacing-16;
+        padding: @spacing-24 0;
         gap: @spacing-32;
       }
     }

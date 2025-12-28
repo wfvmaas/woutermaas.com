@@ -143,11 +143,15 @@ a {
 
 .layout-content-container {
   width: 100%;
-  max-width: @container-max-width;
+  max-width: @container-max-width-sm;
   margin-left: auto;
   margin-right: auto;
 
   .layout-allow-menu();
+
+  @media (min-width: @screen-lg) {
+    max-width: @container-max-width-lg;
+  }
 }
 
 .layout-allow-menu {
