@@ -15,8 +15,8 @@ import ScrollIndicator from "../components/ScrollIndicator.astro"
   <div class="detail-page layout-outer-container">
     <div class="detail-page layout-content-container">
       <!-- Header Section -->
-      <div class="detail-page__header">
-        <div class={`detail-page__header-content ${!heroImage ? 'detail-page__header-content--no-hero-image' : ''}`}>
+      <div class="detail-page__hero">
+        <div class={`detail-page__hero-content ${!heroImage ? 'detail-page__hero-content--no-hero-image' : ''}`}>
           {
             heroImage && (
               <div class="detail-page__hero-image detail-page__hero-image--mobile">
@@ -67,7 +67,7 @@ import ScrollIndicator from "../components/ScrollIndicator.astro"
     min-height: 100vh;
     // Padding is now handled by layout-outer-container
 
-    &__header {
+    &__hero {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -85,11 +85,12 @@ import ScrollIndicator from "../components/ScrollIndicator.astro"
       }
     }
 
-    &__header-content {
+    &__hero-content {
       display: flex;
       flex-direction: column;
       gap: @spacing-8;
       justify-content: space-between;
+      margin: auto;
 
       @media (max-width: (@screen-lg - 1px)) {
         align-items: center;
@@ -221,6 +222,10 @@ import ScrollIndicator from "../components/ScrollIndicator.astro"
       transform: translateX(-50%);
       width: fit-content;
       z-index: 20;
+
+      @media (min-width: @screen-lg) {
+        top: 85vh;
+      }
     }
 
     &__content {

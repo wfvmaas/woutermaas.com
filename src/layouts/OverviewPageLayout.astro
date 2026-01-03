@@ -43,13 +43,13 @@ const projectsWithProcessedImages = projects.map((project) => {
 <BaseLayout title={title}>
   <div class="overview-page-wrapper layout-outer-container">
     <div class="overview-page layout-content-container">
-      <div class="overview-page__header">
-        <div class="overview-page__header-content">
+      <div class="overview-page__hero">
+        <div class="overview-page__hero-content">
           <div class="overview-page__illustration-container">
             <img
               src={heroImage}
               alt={title}
-              class="overview-page__header-illustration"
+              class="overview-page__hero-illustration"
             />
           </div>
           <div class="overview-page__text-content">
@@ -145,7 +145,7 @@ const projectsWithProcessedImages = projects.map((project) => {
       flex-direction: column;
     }
 
-    &__header {
+    &__hero {
       min-height: 100vh;
       display: flex;
       align-items: center;
@@ -160,7 +160,7 @@ const projectsWithProcessedImages = projects.map((project) => {
       }
     }
 
-    &__header-content {
+    &__hero-content {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -172,21 +172,25 @@ const projectsWithProcessedImages = projects.map((project) => {
       @media (min-width: @screen-lg) {
         flex-direction: row-reverse;
         justify-content: space-between;
+        align-items: flex-start;
         text-align: left;
         gap: @spacing-16;
+        max-width: 100%;
+        width: 100%;
       }
     }
 
     &__illustration-container {
       width: 100%;
-      max-width: 250px;
+      flex-shrink: 0;
+      margin-right: @spacing-4;
 
       @media (min-width: @screen-sm) {
         min-width: 250px;
-        max-width: 350px;
       }
       @media (min-width: @screen-lg) {
         max-width: 400px;
+        width: 400px;
       }
 
       img {
@@ -197,12 +201,21 @@ const projectsWithProcessedImages = projects.map((project) => {
 
     &__text-content {
       flex: 1;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+
+      @media (min-width: @screen-lg) {
+        max-width: 600px;
+        min-width: 0;
+      }
 
       h1 {
         font-size: @text-5xl;
         font-weight: 700;
         margin: 0 0 @spacing-6 0;
         text-align: left;
+        width: 100%;
 
         @media (min-width: @screen-lg) {
           font-size: @text-8xl;
@@ -216,12 +229,14 @@ const projectsWithProcessedImages = projects.map((project) => {
       line-height: 1.4;
       color: @color-gray-900;
       max-width: 40ch;
-      margin: 0 auto;
+      margin: 0;
       text-align: left;
+      width: 100%;
 
       @media (min-width: @screen-lg) {
         font-size: @text-xl;
         margin: 0;
+        max-width: 100%;
       }
     }
 
@@ -287,6 +302,7 @@ const projectsWithProcessedImages = projects.map((project) => {
     &__learn-more-btn {
       display: block;
       width: 100%;
+      max-width: 350px;
       padding: @spacing-3 @spacing-6;
       margin-top: @spacing-4;
       margin-left: auto;
@@ -316,6 +332,10 @@ const projectsWithProcessedImages = projects.map((project) => {
       transform: translateX(-50%);
       width: fit-content;
       z-index: 20;
+
+      @media (min-width: @screen-lg) {
+        top: 85vh;
+      }
     }
   }
 </style>
