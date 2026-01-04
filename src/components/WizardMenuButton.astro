@@ -24,18 +24,18 @@ const { isHomePage = false } = Astro.props
     position: sticky;
     top: 1rem;
     right: 0.5rem;
-    z-index: 100;
+    z-index: 80;
     float: right;
     cursor: pointer;
     text-align: center;
-
-    // Visible on all screen sizes
+    pointer-events: auto;
     display: block;
 
     img {
       width: 4rem;
       height: auto;
       .transition(transform);
+      pointer-events: none;
 
       @media (min-width: @screen-lg) {
         width: 6rem;
@@ -54,6 +54,7 @@ const { isHomePage = false } = Astro.props
       margin-top: 0.25rem;
       color: @color-black;
       transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+      pointer-events: none;
     }
 
     // Hide label on desktop when not on home page (until scroll)
@@ -64,7 +65,7 @@ const { isHomePage = false } = Astro.props
         pointer-events: none;
       }
 
-      // Show when scrolled - needs higher specificity
+      // Show when scrolled
       &[data-is-home="false"] &__label--visible {
         opacity: 1 !important;
         transform: translateY(0) !important;
@@ -146,7 +147,7 @@ const { isHomePage = false } = Astro.props
     }
 
     // Click handler
-    currentButton.addEventListener("click", () => {
+    currentButton?.addEventListener("click", () => {
       const isDesktopNow = window.innerWidth >= 1024
 
       if (isDesktopNow) {
