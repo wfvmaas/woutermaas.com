@@ -23,9 +23,10 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
         />
 
         <img
-          src="/doodles/spell_attack_purple_animation_6fps.webp"
-          alt="Wizard"
+          data-src="/doodles/spell_attack_purple_animation_6fps.webp"
+          alt=""
           class="home-page__spell-attack"
+          loading="lazy"
         />
       </div>
 
@@ -33,9 +34,10 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
         <WizardMenuButton isHomePage={true} hasMenuLabel={false} />
 
         <img
-          src="/doodles/shield_animation_6fps.webp"
-          alt="Shield"
+          data-src="/doodles/shield_animation_6fps.webp"
+          alt=""
           class="home-page__shield"
+          loading="lazy"
         />
       </div>
     </div>
@@ -133,7 +135,7 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
       top: -120px;
       right: 10px;
       width: 7.5rem;
-
+      opacity: 1;
       @media (min-width: @screen-md) {
         width: 10rem;
       }
@@ -149,7 +151,7 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
     // Dragon animation
     &__dragon-container {
       position: absolute;
-      top: 30%;
+      top: 29%;
       left: 40%;
       
       // Start at exact bottom left corner of screen
@@ -179,6 +181,7 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
       top: -80px;
       left: 255px;
       width: 10rem;
+      opacity: 1;
 
       @media (min-width: @screen-md) {
         width: 13.333333333333333rem;
@@ -424,4 +427,36 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
       transform: translateX(0) translateY(0) rotate(-360deg);
     }
   }
+
 </style>
+
+<script>
+  // Load animated images immediately after dragon animation completes (2s delay + 3.5s duration = 5.5s)
+  function initAnimatedImages() {
+    const animatedImages = document.querySelectorAll('.home-page__shield[data-src], .home-page__spell-attack[data-src]');
+    
+    if (animatedImages.length === 0) return;
+
+    // Dragon animation completes at 5.5s (2s delay + 3.5s duration)
+    const dragonAnimationComplete = 5500;
+
+    setTimeout(() => {
+      animatedImages.forEach(img => {
+        const imageElement = img as HTMLImageElement;
+        if (imageElement.dataset.src) {
+          // Set src from data-src to start loading and animation
+          imageElement.src = imageElement.dataset.src;
+          imageElement.removeAttribute('data-src');
+        }
+      });
+    }, dragonAnimationComplete);
+  }
+
+  // Run on page load and after view transitions
+  document.addEventListener('astro:page-load', initAnimatedImages);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAnimatedImages);
+  } else {
+    initAnimatedImages();
+  }
+</script>
