@@ -24,6 +24,17 @@ const isAbstract = (item: any) => {
   return item.collection === 'abstracts';
 };
 
+// Helper to get the link URL for a project
+const getProjectLink = (project: any) => {
+  if (hasDetailPage(project)) {
+    return `/${category}/${project.slug}`;
+  }
+  if (isAbstract(project) && project.data.cta_link) {
+    return project.data.cta_link;
+  }
+  return null;
+};
+
 // Process project images before rendering
 // For content collection images, use .src directly (getImage may not be needed)
 // Abstracts use 'img_url', regular projects use 'heroImage'
@@ -78,17 +89,44 @@ const projectsWithProcessedImages = projects.map((project) => {
               {(isAbstract(project)
                 ? project.data.img_url
                 : project.data.heroImage) && (
-                <div class="overview-page__project-image">
-                  <img
-                    src={
-                      isAbstract(project)
-                        ? project.data.img_url
-                        : project.data.heroImage
-                    }
-                    alt={project.data.title}
-                    loading="lazy"
-                  />
-                </div>
+                (() => {
+                  const projectLink = getProjectLink(project);
+                  const imageContent = (
+                    <div class="overview-page__project-image">
+                      <img
+                        src={
+                          isAbstract(project)
+                            ? project.data.img_url
+                            : project.data.heroImage
+                        }
+                        alt={project.data.title}
+                        loading="lazy"
+                      />
+                    </div>
+                  );
+                  
+                  if (projectLink) {
+                    return (
+                      <a
+                        href={projectLink}
+                        class="overview-page__project-image-link"
+                        target={
+                          projectLink.startsWith('http')
+                            ? '_blank'
+                            : undefined
+                        }
+                        rel={
+                          projectLink.startsWith('http')
+                            ? 'noopener noreferrer'
+                            : undefined
+                        }
+                      >
+                        {imageContent}
+                      </a>
+                    );
+                  }
+                  return imageContent;
+                })()
               )}
 
               <div class="overview-page__project-info">
@@ -279,6 +317,22 @@ const projectsWithProcessedImages = projects.map((project) => {
       }
     }
 
+    &__project-image-link {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      pointer-events: none;
+
+      @media (min-width: @screen-lg) {
+        pointer-events: auto;
+        cursor: pointer;
+
+        &:hover .overview-page__project-image img {
+          filter: grayscale(0%);
+        }
+      }
+    }
+
     &__project-image {
       width: 100%;
       overflow: hidden;
@@ -292,6 +346,21 @@ const projectsWithProcessedImages = projects.map((project) => {
         display: block;
         object-fit: cover;
         object-position: top;
+
+        @media (min-width: @screen-lg) {
+          filter: grayscale(100%);
+          .transition(filter, 0.5s, ease-in-out);
+
+          &:hover {
+            filter: grayscale(0%);
+          }
+        }
+      }
+
+      @media (min-width: @screen-lg) {
+        &:hover img {
+          filter: grayscale(0%);
+        }
       }
     }
 

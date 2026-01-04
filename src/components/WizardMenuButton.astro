@@ -130,8 +130,13 @@ const { isHomePage = false, hasMenuLabel = false } = Astro.props
         wizardButton.style.pointerEvents = "none"
         wizardButton.style.cursor = "default"
       }
+    } else if (!isHomePage && !isDesktop) {
+      // On mobile/tablet, always show label and enable clicks for non-home pages
+      label.classList.add("wizard-menu-button__label--visible")
+      wizardButton.style.pointerEvents = "auto"
+      wizardButton.style.cursor = "pointer"
     } else {
-      // If hasMenuLabel is false and not using scroll behavior, hide the label
+      // On home page, hide the label
       label.classList.remove("wizard-menu-button__label--visible")
       // Disable pointer events
       wizardButton.style.pointerEvents = "none"
@@ -176,16 +181,16 @@ const { isHomePage = false, hasMenuLabel = false } = Astro.props
       
       // Listen for scroll events
       window.addEventListener("scroll", scrollHandler, { passive: true } as AddEventListenerOptions)
-      
-      // Handle window resize
-      resizeHandler = () => {
-        updateLabelVisibility()
-      }
-      window.addEventListener("resize", resizeHandler, { passive: true } as AddEventListenerOptions)
     } else {
       // Update visibility based on hasMenuLabel and page context
       updateLabelVisibility()
     }
+    
+    // Always handle window resize to update visibility (handles mobile/tablet orientation changes)
+    resizeHandler = () => {
+      updateLabelVisibility()
+    }
+    window.addEventListener("resize", resizeHandler, { passive: true } as AddEventListenerOptions)
 
     // Click handler
     currentButton?.addEventListener("click", () => {

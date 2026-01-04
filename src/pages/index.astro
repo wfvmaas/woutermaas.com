@@ -115,7 +115,7 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
     &__wizard-container {
       position: absolute;
       top: 120px;
-      right: 0px;
+      right: -10px;
       pointer-events: auto;
 
       // Start completely off-screen to the right
@@ -183,13 +183,13 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
     // Dragon animation
     &__dragon-container {
       position: absolute;
-      top: 100px;
-      right: 348px;
+      top: 95px;
+      right: 338px;
 
       // Start at exact bottom left corner of screen
       transform: translateX(-100vw) translateY(100vh) rotate(0deg);
       opacity: 1;
-      animation: rollercoasterLoop 3.5s linear forwards;
+      animation: rollercoasterLoopMobile 3.5s linear forwards;
       animation-delay: 2s;
 
       @media (min-width: @screen-md) {
@@ -200,6 +200,7 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
       @media (min-width: @screen-lg) {
         top: 195px;
         right: 845px;
+        animation-name: rollercoasterLoop;
       }
     }
 
@@ -444,6 +445,28 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
 
   // Rollercoaster animation for dragon container - adapted from smooth roller coaster pattern
   // Based on: https://github.com/blank-yt/Smooth-Roller-Coaster-Loading-Animation
+
+  // Mobile version - tighter loop (closer to center)
+  @keyframes rollercoasterLoopMobile {
+    0% {
+      // Start at exact bottom left corner of screen
+      transform: translateX(-40vw) translateY(200vh) rotate(-35deg);
+    }
+    40% {
+      // Reach loop position
+      transform: translateX(-6vw) translateY(-10vh) rotate(-50deg);
+    }
+    80% {
+      // Stay at loop position and rotate
+      transform: translateX(-4vw) translateY(-20vh) rotate(-360deg);
+    }
+    100% {
+      // Final position
+      transform: translateX(0) translateY(0) rotate(-360deg);
+    }
+  }
+
+  // Desktop version - less wide loop (closer to center than original)
   @keyframes rollercoasterLoop {
     0% {
       // Start at exact bottom left corner of screen
@@ -458,16 +481,16 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
       transform: translateX(-20vw) translateY(20vh) rotate(0deg);
     }
     30% {
-      // Reach loop position
-      transform: translateX(0%) translateY(-20vh) rotate(0deg);
+      // Reach loop position - less wide (closer to center)
+      transform: translateX(0) translateY(-15vh) rotate(0deg);
     }
     60% {
-      // Stay at loop position and rotate
-      transform: translateX(0%) translateY(-20vh) rotate(-360deg);
+      // Stay at loop position and rotate - less wide
+      transform: translateX(0) translateY(-15vh) rotate(-360deg);
     }
     70% {
       // Exit loop
-      transform: translateX(5%) translateY(-10vh) rotate(-360deg);
+      transform: translateX(-1%) translateY(-10vh) rotate(-360deg);
     }
     100% {
       // Final position
@@ -494,7 +517,7 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
     // Preload both images first
     const shieldPreload = new Image();
     const spellAttackPreload = new Image();
-    
+
     let shieldLoaded = false;
     let spellAttackLoaded = false;
 
