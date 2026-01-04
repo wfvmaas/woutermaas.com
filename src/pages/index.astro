@@ -30,7 +30,7 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
       </div>
 
       <div class="home-page__wizard-container">
-        <WizardMenuButton isHomePage={true} />
+        <WizardMenuButton isHomePage={true} hasMenuLabel={false} />
 
         <img
           src="/doodles/shield_animation_6fps.webp"
@@ -101,7 +101,7 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
     &__sticky-illustrations {
       pointer-events: none;
       z-index: 10;
-      
+
       @media (max-width: @screen-md) {
         position: absolute;
       }
@@ -155,8 +155,6 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
       left: 255px;
       width: 20rem;
     }
-
-
 
     &__scrollable-content {
       position: relative;

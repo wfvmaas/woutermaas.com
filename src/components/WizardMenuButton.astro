@@ -1,19 +1,26 @@
 ---
 interface Props {
   isHomePage?: boolean
+  hasMenuLabel?: boolean
 }
 
-const { isHomePage = false } = Astro.props
+const { isHomePage = false, hasMenuLabel = false } = Astro.props
 ---
 
 <div 
   class={`wizard-menu-button ${isHomePage ? 'wizard-menu-button__home-page' : ''}`} 
   id="wizard-menu-btn" 
-  data-is-home={isHomePage} 
+  data-is-home={isHomePage.toString()}
+  data-has-menu-label={hasMenuLabel.toString()}
   transition:name="wizard-button"
 >
   <img src="/doodles/wizard_cloud_1.svg" alt="Menu" />
-  <div class="wizard-menu-button__label" data-is-home={isHomePage}>Menu</div>
+  <div 
+    class={`wizard-menu-button__label ${hasMenuLabel ? 'wizard-menu-button__label--visible' : ''}`} 
+    data-is-home={isHomePage}
+  >
+    Menu
+  </div>
 </div>
 
 <style lang="less">
@@ -30,6 +37,12 @@ const { isHomePage = false } = Astro.props
     text-align: center;
     pointer-events: auto;
     display: block;
+
+    // Disable pointer events and cursor when hasMenuLabel is false
+    &[data-has-menu-label="false"] {
+      pointer-events: none;
+      cursor: default;
+    }
 
     img {
       width: 4rem;
@@ -57,27 +70,62 @@ const { isHomePage = false } = Astro.props
       pointer-events: none;
     }
 
-    // Hide label on desktop when not on home page (until scroll)
-    @media (min-width: @screen-lg) {
-      &[data-is-home="false"] &__label {
-        opacity: 0;
-        transform: translateY(-0.5rem);
-        pointer-events: none;
-      }
+    // Hide label when hasMenuLabel is false (default state)
+    // The --visible class will override this with !important when needed
+    &[data-has-menu-label="false"] &__label {
+      opacity: 0;
+      transform: translateY(-0.5rem);
+      pointer-events: none;
+    }
 
-      // Show when scrolled
-      &[data-is-home="false"] &__label--visible {
-        opacity: 1 !important;
-        transform: translateY(0) !important;
-        pointer-events: auto;
-      }
+    // Show label when hasMenuLabel is true
+    &[data-has-menu-label="true"] &__label {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    // Show label when --visible class is added (overrides everything with !important)
+    &__label--visible {
+      display: block !important;
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+      pointer-events: auto;
     }
   }
 </style>
 
 <script>
-  let scrollHandler = null;
-  let resizeHandler = null;
+  let scrollHandler: (() => void) | null = null;
+  let resizeHandler: (() => void) | null = null;
+
+  function updateLabelVisibility() {
+    const wizardButton = document.getElementById("wizard-menu-btn")
+    if (!wizardButton) return
+
+    const label = wizardButton.querySelector(".wizard-menu-button__label")
+    if (!label) return
+
+    const hasMenuLabel = wizardButton.dataset.hasMenuLabel === "true"
+    const isHomePage = wizardButton.dataset.isHome === "true"
+    const isDesktop = window.innerWidth >= 1024
+
+    if (hasMenuLabel) {
+      // If hasMenuLabel is true, always show the label
+      label.classList.add("wizard-menu-button__label--visible")
+    } else if (!isHomePage && isDesktop) {
+      // Use scroll-based visibility for non-home pages on desktop
+      const scrollY = window.scrollY || window.pageYOffset
+      if (scrollY > 50) {
+        label.classList.add("wizard-menu-button__label--visible")
+      } else {
+        label.classList.remove("wizard-menu-button__label--visible")
+      }
+    } else {
+      // If hasMenuLabel is false and not using scroll behavior, hide the label
+      label.classList.remove("wizard-menu-button__label--visible")
+    }
+  }
 
   function initWizardMenuButton() {
     const wizardButton = document.getElementById("wizard-menu-btn")
@@ -87,15 +135,16 @@ const { isHomePage = false } = Astro.props
     if (!label) return
 
     const isHomePage = wizardButton.dataset.isHome === "true"
+    const hasMenuLabel = wizardButton.dataset.hasMenuLabel === "true"
     const isDesktop = window.innerWidth >= 1024
 
     // Remove old event listeners if they exist
     if (scrollHandler) {
-      window.removeEventListener("scroll", scrollHandler, { passive: true })
+      window.removeEventListener("scroll", scrollHandler, { passive: true } as AddEventListenerOptions)
       scrollHandler = null
     }
     if (resizeHandler) {
-      window.removeEventListener("resize", resizeHandler, { passive: true })
+      window.removeEventListener("resize", resizeHandler, { passive: true } as AddEventListenerOptions)
       resizeHandler = null
     }
 
@@ -104,50 +153,36 @@ const { isHomePage = false } = Astro.props
     wizardButton.parentNode?.replaceChild(newButton, wizardButton)
     const currentButton = document.getElementById("wizard-menu-btn")
 
-    // Handle scroll to show/hide label on desktop (not home page)
-    if (!isHomePage && isDesktop) {
+    // Handle scroll to show/hide label on desktop (not home page, and only if hasMenuLabel is false)
+    if (!isHomePage && isDesktop && !hasMenuLabel) {
       scrollHandler = () => {
-        const scrollY = window.scrollY || window.pageYOffset
-        const currentLabel = document.querySelector(".wizard-menu-button__label")
-        if (currentLabel) {
-          if (scrollY > 50) {
-            currentLabel.classList.add("wizard-menu-button__label--visible")
-          } else {
-            currentLabel.classList.remove("wizard-menu-button__label--visible")
-          }
-        }
+        updateLabelVisibility()
       }
       
-      // Set initial state - hidden
-      label.classList.remove("wizard-menu-button__label--visible")
-
-      // Check initial scroll position
-      scrollHandler()
+      // Set initial state
+      updateLabelVisibility()
       
       // Listen for scroll events
-      window.addEventListener("scroll", scrollHandler, { passive: true })
+      window.addEventListener("scroll", scrollHandler, { passive: true } as AddEventListenerOptions)
       
       // Handle window resize
       resizeHandler = () => {
-        const isDesktopNow = window.innerWidth >= 1024
-        const currentLabel = document.querySelector(".wizard-menu-button__label")
-        if (currentLabel) {
-          if (isDesktopNow && !isHomePage) {
-            scrollHandler()
-          } else {
-            // On mobile, always show label
-            currentLabel.classList.add("wizard-menu-button__label--visible")
-          }
-        }
+        updateLabelVisibility()
       }
-      window.addEventListener("resize", resizeHandler, { passive: true })
+      window.addEventListener("resize", resizeHandler, { passive: true } as AddEventListenerOptions)
     } else {
-      // On home page or mobile, always show label
-      label.classList.add("wizard-menu-button__label--visible")
+      // Update visibility based on hasMenuLabel and page context
+      updateLabelVisibility()
     }
 
     // Click handler
     currentButton?.addEventListener("click", () => {
+      // Don't execute if hasMenuLabel is false
+      const hasMenuLabel = currentButton.dataset.hasMenuLabel === "true"
+      if (!hasMenuLabel) {
+        return
+      }
+
       const isDesktopNow = window.innerWidth >= 1024
 
       if (isDesktopNow) {
@@ -180,6 +215,41 @@ const { isHomePage = false } = Astro.props
       }
     })
   }
+
+  // Expose function to update hasMenuLabel on the client side
+  function setHasMenuLabel(value: boolean) {
+    const wizardButton = document.getElementById("wizard-menu-btn")
+    if (!wizardButton) return
+
+    wizardButton.dataset.hasMenuLabel = value.toString()
+    updateLabelVisibility()
+    
+    // Re-initialize scroll handler if needed
+    const isHomePage = wizardButton.dataset.isHome === "true"
+    const isDesktop = window.innerWidth >= 1024
+    
+    if (!isHomePage && isDesktop && !value) {
+      // Re-enable scroll handler if we're disabling hasMenuLabel
+      if (!scrollHandler) {
+        scrollHandler = () => {
+          updateLabelVisibility()
+        }
+        window.addEventListener("scroll", scrollHandler, { passive: true } as AddEventListenerOptions)
+      }
+    } else if (scrollHandler) {
+      // Remove scroll handler if we're enabling hasMenuLabel
+      window.removeEventListener("scroll", scrollHandler, { passive: true } as AddEventListenerOptions)
+      scrollHandler = null
+    }
+  }
+
+  // Make function globally available
+  (window as any).setWizardMenuLabel = setHasMenuLabel
+
+  // Listen for custom event to update hasMenuLabel
+  document.addEventListener("update-wizard-menu-label", ((e: CustomEvent) => {
+    setHasMenuLabel(e.detail.hasMenuLabel)
+  }) as EventListener)
 
   // Run on initial load and after every page transition
   document.addEventListener('astro:page-load', initWizardMenuButton);
