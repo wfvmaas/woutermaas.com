@@ -7,6 +7,25 @@ const links = [
   { href: '/hiking', label: 'Hiking' },
   { href: '/contact', label: 'Contact' },
 ];
+
+// Get current pathname
+const currentPath = Astro.url.pathname;
+
+// Helper function to check if a link is active
+function isActive(href: string): boolean {
+  // For exact matches (like /contact)
+  if (currentPath === href) return true;
+  
+  // For paths with sub-routes (like /software/planet-painter)
+  // Only match if pathname starts with href and the next character is / or end of string
+  if (currentPath.startsWith(href)) {
+    // Ensure it's not just a partial match (e.g., /art shouldn't match /artwork)
+    const nextChar = currentPath[href.length];
+    return nextChar === '/' || nextChar === undefined;
+  }
+  
+  return false;
+}
 ---
 
 <nav class="main-nav" id="main-nav">
@@ -40,7 +59,10 @@ const links = [
     <div class="main-nav__desktop-menu">
       {
         links.map((link) => (
-          <a href={link.href} class="main-nav__link">
+          <a 
+            href={link.href} 
+            class:list={['main-nav__link', { 'main-nav__link--active': isActive(link.href) }]}
+          >
             <span class="main-nav__link-text">{link.label}</span>
             <span class="main-nav__link-underline" />
           </a>
@@ -74,7 +96,14 @@ const links = [
         d="M6 18L18 6M6 6l12 12"></path>
     </svg>
   </button>
-  {links.map((link) => <a href={link.href}>{link.label}</a>)}
+  {links.map((link) => (
+    <a 
+      href={link.href}
+      class:list={['mobile-menu__link', { 'mobile-menu__link--active': isActive(link.href) }]}
+    >
+      {link.label}
+    </a>
+  ))}
 </div>
 
 <style lang="less">
@@ -209,6 +238,13 @@ const links = [
           transform: scale(1.05);
         }
 
+        .main-nav__link-underline {
+          width: 100%;
+          opacity: 1;
+        }
+      }
+
+      &--active {
         .main-nav__link-underline {
           width: 100%;
           opacity: 1;
@@ -377,7 +413,8 @@ const links = [
       }
     }
 
-    a {
+    a,
+    &__link {
       font-size: @text-3xl;
       font-weight: 400;
       color: @color-gray-900;
@@ -468,13 +505,25 @@ const links = [
         }
       }
 
+      &--active {
+        &::before {
+          height: 60%;
+          opacity: 1;
+        }
+
+        &::after {
+          opacity: 1;
+        }
+      }
+
       &:active {
         transform: translateX(0) scale(1);
       }
     }
 
     // Animate menu items when menu opens
-    &--open a {
+    &--open a,
+    &--open &__link {
       opacity: 1;
       transform: translateX(0);
     }

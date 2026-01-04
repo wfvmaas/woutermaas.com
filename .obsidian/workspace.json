@@ -185,6 +185,9 @@
   },
   "active": "09ea55521aeb371e",
   "lastOpenFiles": [
+    "src/content/abstracts/images/imagine_me_snapshot.png",
+    "src/content/abstracts/Untitled",
+    "src/content/abstracts/imagine-me.md",
     "public/downloads/Anxiety in the state of nature.pdf",
     "public/downloads/Freedom, suicide, and martyrdom - Wouter Maas.pdf",
     "src/content/abstracts/images/digital_natives_snapshot.png",
@@ -223,13 +226,10 @@
     "src/content/abstracts/inclusive-facilitation.md",
     "src/content/abstracts/rereading-kafka.md",
     "_tmp_171337_36338919c1b10a672fe0a2775560bff9",
-    "public/downloads/deconstructing_transformers.pdf",
-    "src/pages/api/download/[file].ts",
     "src/content/abstracts/deconstructing-transformers.md",
     "src/content/philosophy/index.md",
     "src/content/storytelling/index.md",
     "src/content/art/index.md",
-    "src/content/software/thesis.md",
-    "src/content/abstracts/thesis.md"
+    "src/content/software/thesis.md"
   ]
 }
