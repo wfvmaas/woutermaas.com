@@ -117,8 +117,8 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
     // Wizard animation
     &__wizard-container {
       position: absolute;
-      top: 33%;
-      right: 18%;
+      top: 240px;
+      right: 130px;
       pointer-events: auto;
       
       // Start completely off-screen to the right
@@ -128,6 +128,26 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
         slideInFromRight 1.5s cubic-bezier(0.25, 0.46, 0.45, 1) forwards,
         hoverUpDown 3s ease-in-out infinite;
       animation-delay: 0.2s, 1.7s;
+
+      // Wizard button styles when on home page
+      .wizard-menu-button__home-page {
+        position: relative;
+        top: 0;
+        right: 0;
+
+        img {
+          width: 4rem;
+          height: auto;
+
+          @media (min-width: @screen-md) {
+            width: 6rem;
+          }
+
+          @media (min-width: @screen-lg) {
+            width: 8rem;
+          }
+        }
+      }
     }
 
     &__shield {
@@ -136,6 +156,7 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
       right: 10px;
       width: 7.5rem;
       opacity: 1;
+      
       @media (min-width: @screen-md) {
         width: 10rem;
       }
@@ -151,8 +172,8 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
     // Dragon animation
     &__dragon-container {
       position: absolute;
-      top: 29%;
-      left: 40%;
+      top: 200px;
+      right: 850px;
       
       // Start at exact bottom left corner of screen
       transform: translateX(-100vw) translateY(100vh) rotate(0deg);
