@@ -45,18 +45,19 @@ const abstractsCollection = defineCollection({
   schema: ({ image }) => z.object({
     title: z.string(),
     abstract: z.string(),
-    heroImage: z.union([
+    img_url: z.union([
       z.string().startsWith('/'), // Public folder assets
       z.string().url(),           // Remote images
       image()                     // Relative local assets
     ]).optional(),
-    link: z.union([
+    cta_link: z.union([
       z.string().url(),
       z.string().refine((val) => val.startsWith('/'), {
-        message: "Link must be a valid URL or start with '/' for relative paths",
+        message: "cta_link must be a valid URL or start with '/' for relative paths",
       }),
       z.literal(''),
     ]).optional(),
+    cta_label: z.string().optional(),
   }),
 });
 

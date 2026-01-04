@@ -10,7 +10,7 @@
         "abstract": {
           "type": "string"
         },
-        "heroImage": {
+        "img_url": {
           "anyOf": [
             {
               "type": "string",
@@ -25,7 +25,7 @@
             }
           ]
         },
-        "link": {
+        "cta_link": {
           "anyOf": [
             {
               "type": "string",
@@ -39,6 +39,9 @@
               "const": ""
             }
           ]
+        },
+        "cta_label": {
+          "type": "string"
         },
         "$schema": {
           "type": "string"

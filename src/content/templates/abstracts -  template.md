@@ -1,7 +1,8 @@
 ---
 title: ""
 abstract: ""
-heroImage: ""
-link: ""
+img_url: ""
+cta_link: ""
+cta_label: ""
 ---
 

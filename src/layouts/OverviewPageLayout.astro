@@ -26,13 +26,18 @@ const isAbstract = (item: any) => {
 
 // Process project images before rendering
 // For content collection images, use .src directly (getImage may not be needed)
+// Abstracts use 'img_url', regular projects use 'heroImage'
 const projectsWithProcessedImages = projects.map((project) => {
-  if (project.data.heroImage && typeof project.data.heroImage !== 'string') {
+  const isAbstractItem = isAbstract(project);
+  const imageField = isAbstractItem ? 'img_url' : 'heroImage';
+  const imageValue = project.data[imageField];
+  
+  if (imageValue && typeof imageValue !== 'string') {
     return {
       ...project,
       data: {
         ...project.data,
-        heroImage: (project.data.heroImage as any).src || '',
+        [imageField]: (imageValue as any).src || '',
       },
     };
   }
@@ -70,10 +75,10 @@ const projectsWithProcessedImages = projects.map((project) => {
             <article class="overview-page__project-item">
               <h2 class="overview-page__project-title">{project.data.title}</h2>
 
-              {project.data.heroImage && (
+              {(isAbstract(project) ? project.data.img_url : project.data.heroImage) && (
                 <div class="overview-page__project-image">
                   <img
-                    src={project.data.heroImage}
+                    src={isAbstract(project) ? project.data.img_url : project.data.heroImage}
                     alt={project.data.title}
                     loading="lazy"
                   />
@@ -92,22 +97,22 @@ const projectsWithProcessedImages = projects.map((project) => {
                     Learn more
                   </a>
                 )}
-                {isAbstract(project) && project.data.link && (
+                {isAbstract(project) && project.data.cta_link && (
                   <a
-                    href={project.data.link}
+                    href={project.data.cta_link}
                     class="overview-page__learn-more-btn"
                     target={
-                      project.data.link.startsWith('http')
+                      project.data.cta_link.startsWith('http')
                         ? '_blank'
                         : undefined
                     }
                     rel={
-                      project.data.link.startsWith('http')
+                      project.data.cta_link.startsWith('http')
                         ? 'noopener noreferrer'
                         : undefined
                     }
                   >
-                    Learn more
+                    {project.data.cta_label || 'Learn more'}
                   </a>
                 )}
               </div>

@@ -38,10 +38,16 @@ const { isHomePage = false, hasMenuLabel = false } = Astro.props
     pointer-events: auto;
     display: block;
 
-    // Disable pointer events and cursor when hasMenuLabel is false
+    // Disable pointer events and cursor when hasMenuLabel is false AND label is not visible
     &[data-has-menu-label="false"] {
       pointer-events: none;
       cursor: default;
+      
+      // Re-enable pointer events when label becomes visible via scroll
+      &:has(.wizard-menu-button__label--visible) {
+        pointer-events: auto;
+        cursor: pointer;
+      }
     }
 
     img {
@@ -107,17 +113,29 @@ const { isHomePage = false, hasMenuLabel = false } = Astro.props
     if (hasMenuLabel) {
       // If hasMenuLabel is true, always show the label
       label.classList.add("wizard-menu-button__label--visible")
+      // Enable pointer events
+      wizardButton.style.pointerEvents = "auto"
+      wizardButton.style.cursor = "pointer"
     } else if (!isHomePage && isDesktop) {
       // Use scroll-based visibility for non-home pages on desktop
       const scrollY = window.scrollY || window.pageYOffset
       if (scrollY > 50) {
         label.classList.add("wizard-menu-button__label--visible")
+        // Enable pointer events when label is visible
+        wizardButton.style.pointerEvents = "auto"
+        wizardButton.style.cursor = "pointer"
       } else {
         label.classList.remove("wizard-menu-button__label--visible")
+        // Disable pointer events when label is hidden
+        wizardButton.style.pointerEvents = "none"
+        wizardButton.style.cursor = "default"
       }
     } else {
       // If hasMenuLabel is false and not using scroll behavior, hide the label
       label.classList.remove("wizard-menu-button__label--visible")
+      // Disable pointer events
+      wizardButton.style.pointerEvents = "none"
+      wizardButton.style.cursor = "default"
     }
   }
 
@@ -171,9 +189,13 @@ const { isHomePage = false, hasMenuLabel = false } = Astro.props
 
     // Click handler
     currentButton?.addEventListener("click", () => {
-      // Don't execute if hasMenuLabel is false
+      // Check if label is visible (either via hasMenuLabel or via scroll)
       const hasMenuLabel = currentButton.dataset.hasMenuLabel === "true"
-      if (!hasMenuLabel) {
+      const label = currentButton.querySelector(".wizard-menu-button__label")
+      const isLabelVisible = hasMenuLabel || label?.classList.contains("wizard-menu-button__label--visible")
+      
+      // Don't execute if label is not visible
+      if (!isLabelVisible) {
         return
       }
 
@@ -182,17 +204,17 @@ const { isHomePage = false, hasMenuLabel = false } = Astro.props
       if (isDesktopNow) {
         // On desktop
         if (isHomePage) {
-          // Scroll to menu section on home page (restore previous behavior)
+          // Scroll to menu section on home page
           const menuSection = document.getElementById("home-page__menu-section")
           if (menuSection) {
             menuSection.scrollIntoView({ behavior: "smooth" })
           }
         } else {
-          // Scroll to top on other pages
+          // Scroll to top on non-home pages - nav bar will show and label will hide automatically
           window.scrollTo({ top: 0, behavior: "smooth" })
         }
       } else {
-        // On mobile, keep current behavior
+        // On mobile
         if (isHomePage) {
           // Scroll to menu section on home page
           const menuSection = document.getElementById("home-page__menu-section")
@@ -203,7 +225,7 @@ const { isHomePage = false, hasMenuLabel = false } = Astro.props
             document.dispatchEvent(new CustomEvent("open-mobile-menu"))
           }
         } else {
-          // Open modal on other pages
+          // Open mobile menu on non-home pages
           document.dispatchEvent(new CustomEvent("open-mobile-menu"))
         }
       }

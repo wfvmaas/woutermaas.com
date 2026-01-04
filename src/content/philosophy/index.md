@@ -6,4 +6,5 @@ abstracts:
   - deconstructing_transformers
   - anxiety_in_the_state_of_nature
   - rereading-kafka
+  - secure_mpc_sortition
 ---
