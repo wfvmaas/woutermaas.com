@@ -115,45 +115,82 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
     // Wizard animation
     &__wizard-container {
       position: absolute;
-      top: 100px;
-      right: 100px;
+      top: 33%;
+      right: 18%;
       pointer-events: auto;
+      
+      // Start completely off-screen to the right
+      transform: translateX(400%);
+      transition: transform 1.5s ease-in-out;
+      animation: 
+        slideInFromRight 1.5s cubic-bezier(0.25, 0.46, 0.45, 1) forwards,
+        hoverUpDown 3s ease-in-out infinite;
+      animation-delay: 0.2s, 1.7s;
     }
 
     &__shield {
-      display: none;
       position: absolute;
       top: -120px;
       right: 10px;
-      width: 15rem;
+      width: 7.5rem;
+
+      @media (min-width: @screen-md) {
+        width: 10rem;
+      }
+      @media (min-width: @screen-lg) {
+        width: 15rem;
+      }
+
+      &--hidden {
+        display: none;
+      }
     }
 
     // Dragon animation
     &__dragon-container {
       position: absolute;
-      top: 15%;
-      left: 20%;
+      top: 30%;
+      left: 40%;
+      
+      // Start at exact bottom left corner of screen
+      transform: translateX(-100vw) translateY(100vh) rotate(0deg);
+      opacity: 1;
+      animation: rollercoasterLoop 3.5s linear forwards;
+      animation-delay: 2s;
     }
 
     &__dragon {
       position: absolute;
       top: 0;
       left: 0;
-      width: 20rem;
+      width: 10rem;
 
       @media (min-width: @screen-md) {
+        width: 13.333333333333333rem;
       }
 
       @media (min-width: @screen-lg) {
+        width: 20rem;
       }
     }
 
     &__spell-attack {
-      display: none;
       position: absolute;
       top: -80px;
       left: 255px;
-      width: 20rem;
+      width: 10rem;
+
+      @media (min-width: @screen-md) {
+        width: 13.333333333333333rem;
+      }
+
+      @media (min-width: @screen-lg) {
+        width: 20rem;
+      }
+
+      &--hidden {
+        display: none;
+      }
     }
 
     &__scrollable-content {
@@ -287,6 +324,104 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
           }
         }
       }
+    }
+  }
+
+  // Keyframe animation for wizard container - smooth sine wave motion
+  // Vertical movement follows true sine curve, horizontal follows easing
+  @keyframes slideInFromRight {
+    0% {
+      transform: translateX(400%) translateY(0);
+    }
+    6.25% {
+      transform: translateX(350%) translateY(-5.8px);
+    }
+    12.5% {
+      transform: translateX(300%) translateY(-10.6px);
+    }
+    18.75% {
+      transform: translateX(250%) translateY(-13.9px);
+    }
+    25% {
+      transform: translateX(200%) translateY(-15px);
+    }
+    31.25% {
+      transform: translateX(150%) translateY(-13.9px);
+    }
+    37.5% {
+      transform: translateX(100%) translateY(-10.6px);
+    }
+    43.75% {
+      transform: translateX(60%) translateY(-5.8px);
+    }
+    50% {
+      transform: translateX(30%) translateY(0);
+    }
+    56.25% {
+      transform: translateX(15%) translateY(5.8px);
+    }
+    62.5% {
+      transform: translateX(8%) translateY(10.6px);
+    }
+    68.75% {
+      transform: translateX(4%) translateY(13.9px);
+    }
+    75% {
+      transform: translateX(2%) translateY(15px);
+    }
+    81.25% {
+      transform: translateX(1%) translateY(13.9px);
+    }
+    87.5% {
+      transform: translateX(0.5%) translateY(10.6px);
+    }
+    93.75% {
+      transform: translateX(0.25%) translateY(5.8px);
+    }
+    100% {
+      transform: translateX(0) translateY(0);
+    }
+  }
+
+  @keyframes hoverUpDown {
+    0%, 100% {
+      transform: translateX(0) translateY(0);
+    }
+    50% {
+      transform: translateX(0) translateY(-15px);
+    }
+  }
+
+  // Rollercoaster animation for dragon container - adapted from smooth roller coaster pattern
+  // Based on: https://github.com/blank-yt/Smooth-Roller-Coaster-Loading-Animation
+  @keyframes rollercoasterLoop {
+    0% {
+      // Start at exact bottom left corner of screen
+      transform: translateX(-100vw) translateY(100vh) rotate(0deg);
+    }
+    12% {
+      // Fly in at 45-degree angle (equal X and Y movement for true 45°)
+      transform: translateX(-60vw) translateY(60vh) rotate(0deg);
+    }
+    25% {
+      // Continue 45-degree approach
+      transform: translateX(-20vw) translateY(20vh) rotate(0deg);
+    }
+    30% {
+      // Reach loop position
+      transform: translateX(0%) translateY(-20vh) rotate(0deg);
+    }
+    60% {
+      // Stay at loop position and rotate
+      transform: translateX(0%) translateY(-20vh) rotate(-360deg);
+    }
+    70% {
+      // Exit loop
+      transform: translateX(5%) translateY(-10vh) rotate(-360deg);
+    }
+    100% {
+      // Final position
+      transform: translateX(0) translateY(0) rotate(-360deg);
     }
   }
 </style>
