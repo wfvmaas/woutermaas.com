@@ -1,0 +1,14 @@
+# Project Rules and Context
+
+## Responsive Design Breakpoints
+
+**Important**: In general, mobile design begins at the lg breakpoint (1024px). This means:
+- Styles below `@screen-lg` (1024px) are for mobile/tablet
+- Styles at `@screen-lg` and above are for desktop/large screens
+- When making responsive changes, preserve mobile/tablet layouts and only modify desktop layouts
+
+## Breakpoints Reference
+- `@screen-sm`: 640px
+- `@screen-md`: 768px  
+- `@screen-lg`: 1024px (desktop starts here)
+- `@screen-xl`: 1280px

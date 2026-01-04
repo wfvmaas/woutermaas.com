@@ -1,26 +1,46 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro"
-import WizardMenuButton from "../components/WizardMenuButton.astro"
-import ScrollIndicator from "../components/ScrollIndicator.astro"
+import BaseLayout from '../layouts/BaseLayout.astro';
+import WizardMenuButton from '../components/WizardMenuButton.astro';
+import ScrollIndicator from '../components/ScrollIndicator.astro';
 ---
 
-<BaseLayout title="Home" showFooter={true} showWizardMenu={false} showNavigation={false}>
+<BaseLayout
+  title="Home"
+  showFooter={true}
+  showWizardMenu={false}
+  showNavigation={false}
+>
   <div class="home-page layout-outer-container">
     <!-- Sticky Illustrations Container -->
     <div class="home-page__sticky-illustrations">
-      <!-- Wizard (Top Right) -->
-      <img
-        src="/doodles/wizard_cloud_1.svg"
-        alt="Wizard on a cloud"
-        class="home-page__wizard"
-      />
-
       <!-- Dragon (Center/Right) -->
-      <img src="/doodles/dragon_1.svg" alt="Dragon" class="home-page__dragon" />
+
+      <div class="home-page__dragon-container">
+        <img
+          src="/doodles/flying_dragon_animation.webp"
+          alt="Dragon"
+          class="home-page__dragon"
+        />
+
+        <img
+          src="/doodles/spell_attack_purple_animation_6fps.webp"
+          alt="Wizard"
+          class="home-page__spell-attack"
+        />
+      </div>
+
+      <div class="home-page__wizard-container">
+        <WizardMenuButton isHomePage={true} />
+
+        <img
+          src="/doodles/shield_animation_6fps.webp"
+          alt="Shield"
+          class="home-page__shield"
+        />
+      </div>
     </div>
 
     <!-- Mobile Wizard Menu Button -->
-    <WizardMenuButton isHomePage={true} />
 
     <!-- Scrollable Content -->
     <div class="home-page__scrollable-content">
@@ -74,8 +94,8 @@ import ScrollIndicator from "../components/ScrollIndicator.astro"
 </BaseLayout>
 
 <style lang="less">
-  @import "../styles/variables.less";
-  @import "../styles/mixins.less";
+  @import '../styles/variables.less';
+  @import '../styles/mixins.less';
 
   .home-page {
     // Padding handled by layout-outer-container
@@ -96,33 +116,53 @@ import ScrollIndicator from "../components/ScrollIndicator.astro"
       }
     }
 
-    &__wizard {
-      display: none;
+    // Wizard animation
+    &__wizard-container {
+      position: absolute;
+      top: 100px;
+      right: 100px;
+    }
+
+    &__shield {
+      position: absolute;
+      top: -120px;
+      right: 10px;
+      width: 15rem;
+    }
+
+    // Dragon animation
+    &__dragon-container {
+      position: absolute;
+      top: 15%;
+      left: 20%;
     }
 
     &__dragon {
       position: absolute;
-      top: 25%;
-      left: 5%;
-      width: 8rem;
+      top: 0;
+      left: 0;
+      width: 20rem;
 
       @media (min-width: @screen-md) {
-        top: 30%;
-        left: auto;
-        right: 25%;
-        width: 10rem;
       }
 
       @media (min-width: @screen-lg) {
-        width: 12rem;
-        right: 30%;
       }
     }
+
+    &__spell-attack {
+      display: none;
+      position: absolute;
+      top: -80px;
+      left: 255px;
+      width: 20rem;
+    }
+
+
 
     &__scrollable-content {
       position: relative;
       z-index: 10;
-      // Remove manual padding, layout-outer-container handles it
     }
 
     &__scroll-indicator-wrapper {
@@ -229,7 +269,7 @@ import ScrollIndicator from "../components/ScrollIndicator.astro"
               }
 
               &::before {
-                content: "";
+                content: '';
                 // Hide on mobile
                 display: none;
 

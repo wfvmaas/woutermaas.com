@@ -6,7 +6,12 @@ interface Props {
 const { isHomePage = false } = Astro.props
 ---
 
-<div class="wizard-menu-button" id="wizard-menu-btn" data-is-home={isHomePage} transition:name="wizard-button">
+<div 
+  class={`wizard-menu-button ${isHomePage ? 'wizard-menu-button__home-page' : ''}`} 
+  id="wizard-menu-btn" 
+  data-is-home={isHomePage} 
+  transition:name="wizard-button"
+>
   <img src="/doodles/wizard_cloud_1.svg" alt="Menu" />
   <div class="wizard-menu-button__label" data-is-home={isHomePage}>Menu</div>
 </div>
@@ -35,6 +40,12 @@ const { isHomePage = false } = Astro.props
       @media (min-width: @screen-lg) {
         width: 6rem;
       }
+    }
+
+    &__home-page {
+      position: relative;
+      top: 0;
+      right: 0;
     }
 
     &__label {
