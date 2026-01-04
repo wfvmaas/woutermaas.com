@@ -101,14 +101,11 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
     // Padding handled by layout-outer-container
 
     &__sticky-illustrations {
+      position: relative;
       pointer-events: none;
       z-index: 10;
 
-      @media (max-width: @screen-md) {
-        position: absolute;
-      }
-
-      @media (min-width: @screen-md) {
+      @media (min-width: @screen-lg) {
         position: fixed;
         inset: 0;
       }
@@ -117,34 +114,44 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
     // Wizard animation
     &__wizard-container {
       position: absolute;
-      top: 240px;
-      right: 130px;
+      top: 120px;
+      right: 0px;
       pointer-events: auto;
-      
+
       // Start completely off-screen to the right
       transform: translateX(400%);
       transition: transform 1.5s ease-in-out;
-      animation: 
+      animation:
         slideInFromRight 1.5s cubic-bezier(0.25, 0.46, 0.45, 1) forwards,
         hoverUpDown 3s ease-in-out infinite;
       animation-delay: 0.2s, 1.7s;
 
+      @media (min-width: @screen-md) {
+        top: 160px;
+        right: 86.67px;
+      }
+
+      @media (min-width: @screen-lg) {
+        top: 240px;
+        right: 155px;
+      }
+
       // Wizard button styles when on home page
-      .wizard-menu-button__home-page {
+      :global(.wizard-menu-button.wizard-menu-button__home-page) {
         position: relative;
         top: 0;
         right: 0;
 
-        img {
-          width: 4rem;
+        :global(img) {
+          width: 3.5rem;
           height: auto;
 
           @media (min-width: @screen-md) {
-            width: 6rem;
+            width: 5rem;
           }
 
           @media (min-width: @screen-lg) {
-            width: 8rem;
+            width: 6rem;
           }
         }
       }
@@ -152,15 +159,19 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
 
     &__shield {
       position: absolute;
-      top: -120px;
-      right: 10px;
+      top: -60px;
+      right: 0px;
       width: 7.5rem;
       opacity: 1;
-      
+
       @media (min-width: @screen-md) {
-        width: 10rem;
+        top: -90px;
+        right: 0px;
+        width: 12rem;
       }
       @media (min-width: @screen-lg) {
+        top: -120px;
+        right: 0px;
         width: 15rem;
       }
 
@@ -172,14 +183,24 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
     // Dragon animation
     &__dragon-container {
       position: absolute;
-      top: 200px;
-      right: 850px;
-      
+      top: 100px;
+      right: 348px;
+
       // Start at exact bottom left corner of screen
       transform: translateX(-100vw) translateY(100vh) rotate(0deg);
       opacity: 1;
       animation: rollercoasterLoop 3.5s linear forwards;
       animation-delay: 2s;
+
+      @media (min-width: @screen-md) {
+        top: 115px;
+        right: 700px;
+      }
+
+      @media (min-width: @screen-lg) {
+        top: 195px;
+        right: 845px;
+      }
     }
 
     &__dragon {
@@ -189,7 +210,7 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
       width: 10rem;
 
       @media (min-width: @screen-md) {
-        width: 13.333333333333333rem;
+        width: 18rem;
       }
 
       @media (min-width: @screen-lg) {
@@ -199,16 +220,20 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
 
     &__spell-attack {
       position: absolute;
-      top: -80px;
-      left: 255px;
+      top: -40px;
+      left: 127.5px;
       width: 10rem;
       opacity: 1;
 
       @media (min-width: @screen-md) {
-        width: 13.333333333333333rem;
+        top: -70px;
+        left: 235px;
+        width: 18rem;
       }
 
       @media (min-width: @screen-lg) {
+        top: -80px;
+        left: 255px;
         width: 20rem;
       }
 
@@ -408,7 +433,8 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
   }
 
   @keyframes hoverUpDown {
-    0%, 100% {
+    0%,
+    100% {
       transform: translateX(0) translateY(0);
     }
     50% {
@@ -448,28 +474,82 @@ import ScrollIndicator from '../components/ScrollIndicator.astro';
       transform: translateX(0) translateY(0) rotate(-360deg);
     }
   }
-
 </style>
 
 <script>
   // Load animated images immediately after dragon animation completes (2s delay + 3.5s duration = 5.5s)
   function initAnimatedImages() {
-    const animatedImages = document.querySelectorAll('.home-page__shield[data-src], .home-page__spell-attack[data-src]');
-    
-    if (animatedImages.length === 0) return;
+    const shieldImg = document.querySelector(
+      '.home-page__shield[data-src]'
+    ) as HTMLImageElement | null;
+    const spellAttackImg = document.querySelector(
+      '.home-page__spell-attack[data-src]'
+    ) as HTMLImageElement | null;
+
+    if (!shieldImg || !spellAttackImg) return;
 
     // Dragon animation completes at 5.5s (2s delay + 3.5s duration)
     const dragonAnimationComplete = 5500;
 
-    setTimeout(() => {
-      animatedImages.forEach(img => {
-        const imageElement = img as HTMLImageElement;
-        if (imageElement.dataset.src) {
-          // Set src from data-src to start loading and animation
-          imageElement.src = imageElement.dataset.src;
-          imageElement.removeAttribute('data-src');
+    // Preload both images first
+    const shieldPreload = new Image();
+    const spellAttackPreload = new Image();
+    
+    let shieldLoaded = false;
+    let spellAttackLoaded = false;
+
+    const startAnimations = () => {
+      // Use requestAnimationFrame to ensure both animations start in the exact same frame
+      requestAnimationFrame(() => {
+        // Set both src attributes synchronously to start animations at the same time
+        if (shieldImg.dataset.src) {
+          shieldImg.src = shieldImg.dataset.src;
+          shieldImg.removeAttribute('data-src');
+        }
+        if (spellAttackImg.dataset.src) {
+          spellAttackImg.src = spellAttackImg.dataset.src;
+          spellAttackImg.removeAttribute('data-src');
         }
       });
+    };
+
+    shieldPreload.onload = () => {
+      shieldLoaded = true;
+      if (shieldLoaded && spellAttackLoaded) {
+        startAnimations();
+      }
+    };
+
+    spellAttackPreload.onload = () => {
+      spellAttackLoaded = true;
+      if (shieldLoaded && spellAttackLoaded) {
+        startAnimations();
+      }
+    };
+
+    // Handle errors - start anyway if one fails
+    shieldPreload.onerror = () => {
+      shieldLoaded = true;
+      if (shieldLoaded && spellAttackLoaded) {
+        startAnimations();
+      }
+    };
+
+    spellAttackPreload.onerror = () => {
+      spellAttackLoaded = true;
+      if (shieldLoaded && spellAttackLoaded) {
+        startAnimations();
+      }
+    };
+
+    setTimeout(() => {
+      // Start preloading both images
+      if (shieldImg.dataset.src) {
+        shieldPreload.src = shieldImg.dataset.src;
+      }
+      if (spellAttackImg.dataset.src) {
+        spellAttackPreload.src = spellAttackImg.dataset.src;
+      }
     }, dragonAnimationComplete);
   }
 
